@@ -2,7 +2,7 @@
 title: Sonarr Settings
 description: Documentation of Sonarr Settings Page. Needs work to reflect v4 changes.
 published: true
-date: 2024-03-28T17:54:37.206Z
+date: 2024-12-07T17:38:22.195Z
 tags: sonarr, needs-love, settings
 editor: markdown
 dateCreated: 2021-06-11T23:29:12.300Z
@@ -637,6 +637,13 @@ The timer period can be different for Usenet and Torrents. Each profile can be a
 - (Advanced Option) Additional Parameters - Additional Newznab parameters to add to the query link
 - (Advanced Option) Indexer Priority - Priority of this indexer to prefer one indexer over another in release tiebreaker scenarios. 1 is highest priority and 50 is lowest priority.
 - (Advanced Option) Download Client - Select and specify which download client is used for grabs from this indexer
+- (Advanced Option) Fail Downloads - Mark the download are failed if the specified file extensions are encountered.
+  {#indexer-fail-extension-details-usenet}
+  - Dangerous Extensions can be found by searching the [source code](https://github.com/search?q=repo%3ASonarr%2FSonarr%20_dangerousExtensions&type=code). As of 2024-12-07 they are: `.lnk`,`.ps1`,`.vbs`, and `.zipx`
+  - Executable Extensions can be found by searching the [source code](https://github.com/search?q=repo%3ASonarr%2FSonarr%20_executableExtensions&type=code). As of 2024-12-07 they are: `.bat`,`.cmd`,`.exe`, and `.sh`
+
+> Sonarr also detects [**archived extensions**](https://github.com/search?q=repo%3ASonarr%2FSonarr%20_archiveExtensions&type=code). As of 2024-12-07 they are: `.7z` `.bz2` `.gz` `.r00` `.rar` `.tar.bz2` `.tar.gz` `.tar` `.tb2` `.tbz2` `.tgz` `.zip`  These are not Failureable and Unpackerr ([website](https://unpackerr.zip/)|[Github](https://github.com/Unpackerr/unpackerr)) can be used to handle these.
+{.is-info}
 - Tags - Only use this indexer for series with at least one matching tag. Leave blank to use with all series.
 
 ### Torrent Tracker Configuration
@@ -662,6 +669,13 @@ The timer period can be different for Usenet and Torrents. Each profile can be a
 - (Advanced Option) Seed Time - If empty, use the download client default. Otherwise, the minimum seed time in minutes required for your download client to meet for releases from this indexer prior to it being paused by your client and removed by Sonarr (Requires Completed Download Handling - Remove enabled)
 - (Advanced Option) Indexer Priority - Priority of this indexer to prefer one indexer over another in release tiebreaker scenarios. 1 is highest priority and 50 is lowest priority.
 - (Advanced Option) Download Client - Select and specify which download client is used for grabs from this indexer
+- (Advanced Option) Fail Downloads - Mark the download are failed if the specified file extensions are encountered.
+  {#indexer-fail-extension-details-torrent}
+  - Dangerous Extensions can be found by searching the [source code](https://github.com/search?q=repo%3ASonarr%2FSonarr%20_dangerousExtensions&type=code). As of 2024-12-07 they are: `.lnk`,`.ps1`,`.vbs`, and `.zipx`
+  - Executable Extensions can be found by searching the [source code](https://github.com/search?q=repo%3ASonarr%2FSonarr%20_executableExtensions&type=code). As of 2024-12-07 they are: `.bat`,`.cmd`,`.exe`, and `.sh`
+
+> Sonarr also detects [**archived extensions**](https://github.com/search?q=repo%3ASonarr%2FSonarr%20_archiveExtensions&type=code). As of 2024-12-07 they are: `.7z` `.bz2` `.gz` `.r00` `.rar` `.tar.bz2` `.tar.gz` `.tar` `.tb2` `.tbz2` `.tgz` `.zip`  These are not Failureable and Unpackerr ([website](https://unpackerr.zip/)|[Github](https://github.com/Unpackerr/unpackerr)) can be used to handle these.
+{.is-info}
 - Tags - Only use this indexer for series with at least one matching tag. Leave blank to use with all series.
 
 ## Options
@@ -795,12 +809,12 @@ If you download using a BitTorrent client, the process is slightly different:
 
 ### Failed Download Handling
 
-- Failed Download Handling is only compatible with SABnzbd and NZBGet.
-- Failed Downloading Handling does not apply to Torrents nor are there plans to add such functionality.
+- Failed Download Handling is only compatible with SABnzbd and NZBGet by default.
 
 - There are several components that make up the failed download handling process:
 
 - Check Downloader:
+  - Indexer Settings for "Fail Downloads"
   - Queue - Check your downloader's queue for password-protected (encrypted) releases marked as a failure
   - History - Check your downloader's history for failure (e.g. not enough blocks to repair, or extraction failed)
 - When Sonarr finds a failed download it starts processing them and does a few things:
