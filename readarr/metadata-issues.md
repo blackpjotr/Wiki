@@ -2,13 +2,16 @@
 title: Readarr Metadata Issues
 description: Summary of Readarr metadata issues
 published: true
-date: 2024-10-07T21:10:59.838Z
+date: 2024-12-20T23:50:02.751Z
 tags: 
 editor: markdown
 dateCreated: 2024-08-23T18:20:51.850Z
 ---
 
 # Readarr Metadata Server Updates
+
+> The Servarr dev team would like another dev/team to take over the readarr project. Otherwise it's probably just going to atrophy until it's unusable.
+{.is-danger}
 
 Below are the summarized issues of the Readarr Metadata Server.
 For the latest updates please refer to the pinned messages in the [Readarr Discord](https://readarr.com/discord)
@@ -24,20 +27,24 @@ Due to continuous GoodReads issues - work has begun by a [community member](http
 
 Per the community user:
 
+> for anyone coming here for the first time, what needs to be done has mostly been laid out in the [GitHub issues of the repo](https://github.com/Saghen/open-library-proxy/issues)
+{.is-info}
+
 > The replacement metadata server is close to completion which should resolve the issue for everyone in the meantime. If you're referring to switching to book-based instead of author-based, I don't think that's blocking.
 {.is-info}
 
 Per the Servarr Team:
 
 > Our priority is definitely trying to do this in a way that we do not lose any of the existing libraries - there is a mapping exercise we need to do in the back end to map between goodreads ID and the openlibrary IDs which I believe ISBN is the only solution to at the moment. However this will take a lot of work not just at the metadata server end, but also on the client app end as a migration will be required there for all users to make use of it. This is not a small piece of work due to this.
+{.is-info}
 
 #### Why can we not just use OpenLibrary Directly?
 
-As per docs you are not allowed to do that, that’s why they provide data dumps.
+- As per docs you are not allowed to do that, that’s why they provide data dumps.
 
 ### Why can we not just use the Metadata Provider Directly?
 
-If you throw all that directly at the source, it's either against their policy, or going to be very expensive
+- If you throw all that directly at the source, it's either against their policy, or going to be very expensive
 
 ### BookInfo
 
@@ -48,7 +55,14 @@ BookInfo is the Servarr Readarr GoodReads Metadata Proxy. Similar to Skyhook for
 - Why is the meta server not OSS?
   - It is due to the fact that we use goodreads, and they have killed off access to their API, so even if it was OS no one could run it as goodreads will not provide new access to their API
 
-## Metadata Server Issues
+# Metadata Server Issues
+
+## 2024-12 Issues
+
+> The metadata server is having issues. The devs are aware. I will say there are currently some issues with the metadata server where it appears to be under load and throwing 522's.
+{.is-danger}
+
+## Other Updates
 
 > The metadata issue was fixed on 9/17. We are still seeing a couple of 429 rate limits and a couple of failed searches, presumably while things get re-cached again and they will continue to improve as time goes on. I have not seen any issues with imports, only with searches to add authors or books. This does not fix the large author issue below, or the 3 month metadata delay. Both of those issues are being worked on with a change to OpenLibrary as the source of data, but that work is long and ongoing (you can self-apply a `!tester` role to yourself and follow along in the [#readarr-ol](https://discord.com/channels/264387956343570434/1278408662188036156) channel to see how that project is coming along, if you're curious). These are 2 separate, concurrent issues that are being solved that do not interconnect. As always, the metadata server is not open source, and there is nothing you can do to help with that part of the issue except to be patient. Dev help is not being solicited/accepted on the metadata server side of things. There are 900+ open issues on the readarr github if you're anxious to help us out. Please start there. This pin will be updated with current information. If you're reading this pin, this is the most current, accurate information about the metadata server, and there is no need to ask in the channel if things have changed.
 {.is-info}
