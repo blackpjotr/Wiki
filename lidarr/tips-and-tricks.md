@@ -2,8 +2,8 @@
 title: Lidarr Tips and Tricks
 description: Advanced tips, optimization techniques, and workflow improvements for experienced Lidarr users
 published: true
-date: 2026-04-20T13:06:59.333Z
-tags: lidarr, tips, tricks, optimization, workflow, advanced
+date: 2026-04-20T13:09:31.684Z
+tags: lidarr, tips, tricks, optimization, workflow, advanced, advanced tips
 editor: markdown
 dateCreated: 2021-08-14T15:15:51.656Z
 ---
