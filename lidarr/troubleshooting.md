@@ -2,7 +2,7 @@
 title: Lidarr Troubleshooting
 description: Common issues, error codes, and solutions for troubleshooting Lidarr installation, configuration, and operational problems
 published: true
-date: 2026-02-01T14:30:50.235Z
+date: 2026-04-20T14:17:37.726Z
 tags: lidarr, troubleshooting, support, issues, debugging, errors
 editor: markdown
 dateCreated: 2021-06-14T21:36:46.193Z
@@ -365,6 +365,37 @@ This can also be caused by:
 
 You can also review some common permissions and networking troubleshooting commands [in our guide](/permissions-and-networking). Otherwise please discuss with the support team on discord. If this is something that may be a common problem, please suggest adding it to the wiki.
 
+# UI and Filesystem Issues
+
+Problems that don't fall under downloads/imports or indexer searches — mostly library- and filesystem-level edge cases, plus browser-side UI quirks.
+
+## Weird UI issues
+
+If the Library page doesn't render anything, a view or sort seems broken, or the UI looks stale or inconsistent after an upgrade, test first in a **Chrome Incognito** or **Firefox Private Browsing** window. If the UI works cleanly there, the problem is cached assets or cookies for your Lidarr URL in your main browser profile.
+
+Fix by clearing browser cache, cookies, and local storage scoped to the Lidarr origin. The dev-tools *Application* tab in Chromium-based browsers lets you do this targeted at a single origin without signing you out of everything else. See [Clear Cache, Cookies, and Local Storage](/useful-tools#clearing-cookies-and-local-storage) for the full walkthrough.
+
+> Older cached JavaScript is the most common cause of "new UI features aren't showing up after I updated Lidarr." Hard-refresh (Ctrl+Shift+R / Cmd+Shift+R) is usually faster than a full cache purge.
+{.is-info}
+
+## Windows folder access after Lidarr rename
+
+Lidarr supports limiting the length of `{Tag Length}` or similar truncation-sensitive tokens in the naming format. When a truncated name ends with a space or period, Lidarr writes the folder but the [Windows naming rules](https://learn.microsoft.com/windows/win32/fileio/naming-a-file#naming-conventions) leave the resulting folder in a state the Windows shell refuses to traverse:
+
+> Do not end a file or directory name with a space or a period. Although the underlying file system may support such names, the Windows shell and user interface does not.
+
+The folder exists on NTFS, but Explorer, `dir`, and most Windows applications will report it as inaccessible or not found.
+
+**Recovery — WSL:**
+
+```console
+mv <foldername...> <foldername>
+```
+
+(Replace `<foldername...>` with the actual name including its trailing dots/spaces. Tab-completion inside WSL works even when the Windows shell can't see the folder.)
+
+**Prevention:** adjust the naming format to avoid truncation that could land on a trailing space or period. A common pattern is to trim whitespace from the end of the truncated segment in the naming template.
+
 # Searches Indexers and Trackers
 
 - If you use [Prowlarr](/prowlarr), then you can view the [History](/prowlarr/history) of all queries Prowlarr received and how they were sent to the sites. Ensure that `Parameters` is enabled in Prowlarr History => Options. The (i) icon provides additional details.
@@ -462,6 +493,9 @@ If you run your through a VPN or proxy, you may be competing with 10s or 100s or
 Similarly to rate limits, certain indexers - such as Nyaa - may outright ban an IP address. This is typically semi-permanent and the solution is to  to get a new IP from your ISP or VPN provider.
 
 ### Using the Jackett /all endpoint
+
+{#jacketts-all-endpoint}
+{#jackett-all-endpoint}
 
 The Jackett `/all` endpoint is convenient, but that is its only benefit. Everything else is potential problems, so adding each tracker individually is required. Alternatively, you may wish to check out the Jackett & NZBHydra2 alternative [Prowlarr](/prowlarr)
 
