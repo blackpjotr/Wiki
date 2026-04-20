@@ -2,603 +2,298 @@
 title: Lidarr FAQ
 description: Frequently asked questions and common issues with solutions for Lidarr music management
 published: true
-date: 2026-03-17T17:33:54.181Z
+date: 2026-04-20T13:01:59.678Z
 tags: lidarr, troubleshooting, faq, questions, help, common-issues
 editor: markdown
 dateCreated: 2021-06-14T14:33:41.344Z
 ---
 
-# Table of Contents
+# Lidarr FAQ
 
-- [Table of Contents](#table-of-contents)
-  - [How does Lidarr work?](#how-does-lidarr-work)
-  - [How does Lidarr find releases?](#how-does-lidarr-find-releases)
-  - [Forced Authentication](#forced-authentication)
-    - [Authentication Method](#authentication-method)
-    - [Authentication Required](#authentication-required)
-  - [How are possible downloads compared?](#how-are-possible-downloads-compared)
-  - [Lidarr stopped working after updating to Ubuntu 22.04](#lidarr-stopped-working-after-updating-to-ubuntu-2204)
-  - [Why can I not add a new release or artist to Lidarr?](#why-can-i-not-add-a-new-release-or-artist-to-lidarr)
-  - [Why can I not add a various artists album?](#why-can-i-not-add-a-various-artists-album)
-  - [Why does Lidarr only show studio albums, How do I find singles or EPs?](#why-does-lidarr-only-show-studio-albums-how-do-i-find-singles-or-eps)
-  - [Can I add just an album?](#can-i-add-just-an-album)
-  - [Can I download single tracks?](#can-i-download-single-tracks)
-  - [Why doesn't artist X show up in search?](#why-doesnt-artist-x-show-up-in-search)
-  - [How can I find a MusicBrainz ID?](#how-can-i-find-a-musicbrainz-id)
-  - [Lidarr matched an album with too many tracks. How can I change the Album to the correct Release?](#lidarr-matched-an-album-with-too-many-tracks-how-can-i-change-the-album-to-the-correct-release)
-  - [I cannot find a release in Lidarr but it is on MusicBrainz](#i-cannot-find-a-release-in-lidarr-but-it-is-on-musicbrainz)
-  - [How often do Lidarr's and MusicBrainz databases sync?](#how-often-do-lidarrs-and-musicbrainz-databases-sync)
-  - [How can I add missing artist images?](#how-can-i-add-missing-artist-images)
-  - [How can I get missing album images? (Cover Art)](#how-can-i-get-missing-album-images-cover-art)
-  - [I'm having trouble importing my artists, what could it be?](#im-having-trouble-importing-my-artists-what-could-it-be)
-  - [How can I rename my artist folders?](#how-can-i-rename-my-artist-folders)
-  - [Why Does Lidarr Keep Trying To Rename the Same Folders?](#why-does-lidarr-keep-trying-to-rename-the-same-folders)
-  - [Why Can’t I Access a Folder in Windows After Lidarr Rename](#why-cant-i-access-a-folder-in-windows-after-lidarr-rename)
-  - [How can I mass delete artists from the wanted list?](#how-can-i-mass-delete-artists-from-the-wanted-list)
-  - [Why doesn't Lidarr work behind a reverse proxy](#why-doesnt-lidarr-work-behind-a-reverse-proxy)
-  - [How do I update Lidarr?](#how-do-i-update-lidarr)
-    - [Can I update Lidarr inside my Docker container?](#can-i-update-lidarr-inside-my-docker-container)
-    - [Installing a newer version](#installing-a-newer-version)
-      - [Native](#native)
-      - [Docker](#docker)
-  - [Can I switch from `nightly` back to `develop`?](#can-i-switch-from-nightly-back-to-develop)
-  - [Can I switch between branches?](#can-i-switch-between-branches)
-  - [I am getting an error: Database disk image is malformed](#i-am-getting-an-error-database-disk-image-is-malformed)
-  - [How do I Backup/Restore my Lidarr?](#how-do-i-backuprestore-my-lidarr)
-    - [Backing up Lidarr](#backing-up-lidarr)
-      - [Using built-in backup](#using-built-in-backup)
-      - [Using file system directly](#using-file-system-directly)
-    - [Restoring from Backup](#restoring-from-backup)
-      - [Using zip backup](#using-zip-backup)
-      - [Using file system backup](#using-file-system-backup)
-      - [File System Restore on Synology NAS](#file-system-restore-on-synology-nas)
-  - [I use Lidarr on a Mac and it suddenly stopped working. What happened?](#i-use-lidarr-on-a-mac-and-it-suddenly-stopped-working-what-happened)
-  - [I am using a Pi and Raspbian and Lidarr will not launch](#i-am-using-a-pi-and-raspbian-and-lidarr-will-not-launch)
-  - [Why are lists sync times so long and can I change it?](#why-are-lists-sync-times-so-long-and-can-i-change-it)
-  - [Can I disable the refresh releases task](#can-i-disable-the-refresh-releases-task)
-  - [Why can Lidarr not see my files on a remote server?](#why-can-lidarr-not-see-my-files-on-a-remote-server)
-    - [Lidarr runs under the LocalService account by default which doesn't have access to protected remote file shares](#lidarr-runs-under-the-localservice-account-by-default-which-doesnt-have-access-to-protected-remote-file-shares)
-    - [You're using a mapped network drive (not a UNC path)](#youre-using-a-mapped-network-drive-not-a-unc-path)
-  - [Help I have locked myself out](#help-i-have-locked-myself-out)
-  - [How do I stop the browser from launching on startup?](#how-do-i-stop-the-browser-from-launching-on-startup)
-  - [Weird UI Issues](#weird-ui-issues)
-  - [VPNs, Jackett, and the \*ARRs](#vpns-jackett-and-the-arrs)
-    - [Use of a VPN](#use-of-a-vpn)
-  - [Jackett's /all Endpoint](#jacketts-all-endpoint)
-    - [Jackett /All Solutions](#jackett-all-solutions)
-  - [Why are there two files? | Why is there a file left in downloads?](#why-are-there-two-files--why-is-there-a-file-left-in-downloads)
-  - [I keep getting warnings from my cloud storage about API limits](#i-keep-getting-warnings-from-my-cloud-storage-about-api-limits)
-
-## How does Lidarr work
-
-Lidarr does *not* regularly search for album files that are missing or have not met their quality goals. Instead, it fairly frequently queries your indexers and trackers for *all* the newly posted releases, then compares that with its list of albums that are missing or need to be upgraded. Any matches are downloaded. This lets Lidarr cover a library of *any size* with just 24-100 queries per day (RSS interval of 15-60 minutes). If you understand this, you will realize that it only covers the *future* though.
-
-So how do you deal with the present and past? When you're adding an album, you will need to set the correct path, profile and monitoring status then use the Start search for missing album checkbox. If the album hasn't been released yet, you do not need to initiate a search.
-
-Put another way, Lidarr will only find releases that are newly uploaded to your indexers. It will not actively try to find releases uploaded in the past.
-
-If you've already added the album, but now you want to search for it, you have a few choices. You can go to the album's page and use the search button, which will do a search and then automatically pick one. You can search individual albums automatically or manually. Or you can go to the Wanted tab and search from there using the Missing or Cutoff Unmet filters.
-
-If Lidarr has been offline for an extended period of time, Lidarr will attempt to page back to find the last release it processed in an attempt to avoid missing a release. As long as your indexer supports paging and it hasn't been too long Lidarr will be able to process the releases it would have missed and avoid you needing to perform a search for the missed releases.
-
-### Instances When Auto Searching Does Occur
-
-Active searching (via the indexer's API) is only done in the below situations. Note that the same rules as normal apply: artist + album must be monitored and albums without a release date are skipped.
-
-- **Triggered Automatic or Manual Search**
-  - User or API triggered search. Typically executed by clicking the Automatic or Manual Search buttons on a specific album or artist.
-- **Adding an artist using the Add and Search button**
-- **Using Wanted => Missing or Wanted => Cutoff Unmet to do one or more searches**
-- **Recently Added Albums**
-  - Albums discovered and monitored during artist metadata refresh will be automatically searched. This covers albums added to MusicBrainz after the artist was added to Lidarr.
-
-## How does Lidarr find releases
-
-This is a legacy entry. Please see [How does Lidarr work?](#how-does-lidarr-work).
-
-## Forced Authentication
-
-If Lidarr is exposed so that the UI can be accessed from outside your local network then you should have some form of authentication method enabled in order to access the UI. This is also increasingly required by Trackers and Indexers.
-
-As of Lidarr v2, Authentication is Mandatory.
-
-- `AuthenticationType` and `AuthenticationMethod` are mandatory required attributes in the configuration file.
-
-### Authentication Method
-
-- `Basic` (Browser pop-up) - This option when accessing your Lidarr will show a small pop-up allowing you to input a Username and Password. Note this is not recommended and will be removed in the next major version.
-- `Forms` (Login Page) - This option will have a familiar looking login screen much like other websites have to allow you to log onto your Lidarr. This is recommended.
-- `External` - Configurable via Config File Only
-  - Disables app authentication completely. *Use at your own risk especially if exposed to the internet* Suggested only if you use an **external authentication** such as Authelia, Authetik, NGINX Basic auth, etc. you can prevent needing to double authenticate by shutting down the app, setting `<AuthenticationMethod>External</AuthenticationMethod>` in the [config file](/lidarr/appdata-directory), and restarting the app. **Note that multiple `AuthenticationMethod` entries in the file are not supported and only the topmost value will be used**
-
-### Authentication Required
-
-- If you do not expose the app externally and/or do not wish to have auth required for local (e.g. LAN) access then change in Settings => General Security => Authentication Required to `Disabled For Local Addresses`
-  - The config file equivalent of this is `<AuthenticationType>DisabledForLocalAddresses</AuthenticationType>`
-- `<AuthenticationType>Enabled</AuthenticationType>` is also a valid value
-
-## How are possible downloads compared
-
-> Generally Quality Trumps All. If you wish to have Quality not be the main priority - you can merge your qualities together. [See TRaSH's Guide](https://trash-guides.info/merge-quality)***
+> This page answers the questions that come up most often in the Lidarr help channel, Reddit, and forums. Longer troubleshooting flows and conceptual material live on dedicated pages — the FAQ links out to those when a full walkthrough is warranted.
 {.is-info}
 
-- The current logic [can be found here](https://github.com/Lidarr/Lidarr/blob/develop/src/NzbDrone.Core/DecisionEngine/DownloadDecisionComparer.cs).
+If you don't find your question here, the most common landing spots are [Metadata Troubleshooting](/lidarr/metadata-troubleshooting) (anything about missing or out-of-date MusicBrainz data), [Import Troubleshooting](/lidarr/import-troubleshooting) (downloads that finish but do not import), [Troubleshooting](/lidarr/troubleshooting) (general runtime issues), and [Tips and Tricks](/lidarr/tips-and-tricks) (power-user recipes). Ask in [Discord](https://lidarr.audio/discord) or on the [subreddit](https://reddit.com/r/lidarr) if the wiki doesn't answer it — recurring questions feed back into this FAQ.
 
-- As of 2022-01-23 the logic is as follows:
+## Basics
 
-1. Quality
-1. Preferred Word Score
-1. Protocol (as configured in the relevant Delay Profile)
-1. Indexer Priority
-1. Seeds/Peers (If Torrent)
-1. Album Count
-1. Age (If Usenet)
-1. Size
+### How does Lidarr work?
 
-## Lidarr stopped working after updating to Ubuntu 22.04
+Lidarr does *not* regularly search for album files that are missing or have not met their quality goals. Instead, it queries your indexers and trackers at a steady cadence for *all* newly-posted releases, then compares that feed with the list of albums it's monitoring and downloads what matches. At an RSS interval of 15–60 minutes this amounts to 24–100 queries per day, which covers a library of any size — but only going forward.
 
-- Lidarr v0.8 is not compatible and not supported on Ubuntu 22.04
-- Only Lidarr v1 supports Ubuntu 22.04
-- [See this FAQ entry for the branches and versions](#how-do-i-update-lidarr)
+For albums released in the past, use **Wanted → Missing** or **Wanted → Cutoff Unmet**, or use the search button on the album's page. Adding an album with the *Start search for missing album* checkbox ticked does the same thing at add-time.
 
-## Why can I not add a new release or artist to Lidarr
+If Lidarr has been offline for a while, it pages back through each indexer to find the last release it processed so that nothing is missed, provided the indexer supports paging and the outage wasn't too long.
 
-- Please see the [I cannot find a release in Lidarr but it is on MusicBrainz](#i-cannot-find-a release-in-Lidarr-but-it-is-on-musicbrainz) entry.
+**When Lidarr does search actively** (as opposed to passively watching the RSS feed):
 
-## Why can I not add a various artists album
+- User- or API-triggered search from the album/artist page, or from Wanted → Missing / Cutoff Unmet.
+- Adding an artist or album with *Add and Search*.
+- Albums discovered during an artist metadata refresh (for example, a new album MusicBrainz adds after you've already added the artist).
 
-- Various Artists and other meta artists on Musicbrainz are due to the number of entries they provide.
+### How do I update Lidarr?
 
-## Why does Lidarr only show studio albums, How do I find singles or EPs
+Lidarr runs on one of three release branches. Pick one under **Settings → General → Updates** (show advanced):
 
-- Lidarr defaults to only bringing in studio albums for each artist. However, you can expand the album types per an artist or for your entire library by utilizing Metadata Profiles.
-- A single is a type of album with one, sometimes more, tracks (recordings).
-- An album (release) is part of a release group. A release group is a grouping of the same album that was released multiple times, eg. on a CD, on Vinyl, digitally and can contain versions such as a deluxe version.
-- Lidarr tracks albums (release groups) and can only have one version (release) of an album (release group).
-- You can **manually import** a single track (recording) from an album.
+- `master` — default, stable. Updated roughly monthly after testing in `develop` and `nightly`.
+- `develop` — beta. New features and fixes land here after `nightly`. Updated weekly or biweekly and tagged `pre-release` on GitHub.
+- `nightly` — alpha. Built on every commit that passes CI. Required branch for plugin support (see [Plugins](/lidarr/plugins)). Expect occasional breakage and be prepared to recover a failed update yourself.
 
-## Can I add just an album
+> **Switching from `nightly` or `develop` back to `master` may not be possible without restoring an older database backup.** Database schema migrations are one-way — if a newer branch introduced columns `master` does not know about, the older version will refuse to start with errors like *Error parsing column N*. If you already switched and need to go back, restore from a pre-switch backup.
+{.is-danger}
 
-- Yes, but when adding an album you also be prompted to add the artist. Changing both monitoring options to `none` will add only the current album.
+**Installing the update:**
 
-## Can I download single tracks
+- **Native installs** — System → Updates. Any available update has an Install button.
+- **Docker** — repull your image tag and recreate the container. Do *not* run the in-app updater inside a Docker container; that is a primary Docker anti-pattern and can put the image and the mounted data out of sync.
 
-- Unlikely, Lidarr works by searching for and downloading full releases, therefore individual tracks cannot be downloaded unless they were released as a single by the artist.
+Docker tag-to-branch mapping:
 
-## Why doesn't artist X show up in search
+|                                                                    | `master` (stable) | `develop` (beta) | `nightly` (alpha) |
+| ------------------------------------------------------------------ | ----------------- | ---------------- | ----------------- |
+| [hotio](https://hotio.dev/containers/lidarr)                       | `release`         | `testing`        | `nightly`         |
+| [LinuxServer.io](https://docs.linuxserver.io/images/docker-lidarr) | `latest`          | `develop`        | `nightly`         |
 
-- Artists that do not show up in search may be added by searching for `lidarr:mbid` where `mbid` is the Musicbrainz ID of the artist.
+> **Branch-switching caveat.** Identical-version branch swaps are safe. Swapping forward (e.g. `master` → `develop`) is typically safe. Swapping backward (e.g. `develop` → `master`) is the path that can fail. If in doubt, check in Discord with the development team before switching, and take a backup either way.
+{.is-warning}
 
-## How can I find a MusicBrainz ID
+## Finding music and MusicBrainz
 
-1. [Search for your desired artist or album](https://musicbrainz.org/search) (use `Release Group` type for albums)
-2. The MusicBrainz ID can be found under the "Details" tab:
+### Why doesn't artist X show up in search?
+
+A few common causes:
+
+- **Name variant mismatch.** Lidarr searches by the artist's *primary* MusicBrainz name. If you're searching by an alias, a translation, or a stylisation that differs from the primary name, the result may not appear. Search by the MusicBrainz ID instead — prepend `lidarr:` to the MBID, for example `lidarr:9255f594-b912-4bdf-87a2-ada04502a459` for Muse. See [How can I find a MusicBrainz ID?](#how-can-i-find-a-musicbrainz-id) below.
+- **Not in MusicBrainz.** Lidarr only knows about artists MusicBrainz knows about. If the artist is absent from MB entirely, the fix is to add them there — see [Metadata Troubleshooting → Updating MusicBrainz](/lidarr/metadata-troubleshooting#updating-musicbrainz). New additions can take a refresh cycle (up to ~1 hour) to reach Lidarr.
+- **Unknown release type on every album.** An artist with nothing but releases MB has catalogued as `unknown` will appear to be "missing" relative to most metadata profiles. The artist is there; the metadata profile is filtering everything out. See [Why does Lidarr only show studio albums, how do I find singles or EPs?](#why-does-lidarr-only-show-studio-albums-how-do-i-find-singles-or-eps) and [Metadata Troubleshooting](/lidarr/metadata-troubleshooting).
+
+Release groups work the same way — `lidarr:<release-group-mbid>` looks up a specific album directly.
+
+### Why does Lidarr only show studio albums, how do I find singles or EPs?
+
+Lidarr filters what to track on each artist through a **Metadata Profile** (Settings → Profiles → Metadata Profiles). The default profile includes only *Studio* albums, which is why singles, EPs, live albums, compilations, and remix collections are absent on a fresh install.
+
+Adjust the profile rather than per-artist settings for a library-wide change:
+
+- **Album Types** — pick which MusicBrainz release-group types (Album, Single, EP, Live, Compilation, Remix, Soundtrack, Other) to include.
+- **Release Statuses** — Official is included by default; Promotion, Bootleg, and Pseudo-Release are opt-in. Most releases that appear missing are catalogued as `official`; if nothing is showing up for an artist and you know they've released music, check whether the releases in MB have an `unknown` status and fix that upstream.
+
+> **A single is not a "short album"** — singles are their own release-group type in MusicBrainz. Enabling "Single" in your Metadata Profile doesn't show you short albums; it adds single-type release groups (usually one track each) to your library.
+{.is-info}
+
+To apply a changed profile to existing artists, go to Library, select the artists, and use Edit → Metadata Profile. You can also manually import a specific recording from an album that *is* in your library.
+
+### How can I find a MusicBrainz ID?
+
+1. Search the artist, release group, or release on [MusicBrainz](https://musicbrainz.org/search). For albums, set the search type to **Release Group**.
+2. Open the entity page. The MBID appears under the **Details** tab, or at the end of the URL (the UUID after the last slash).
+
 ![musicbrainz_id_detail_tab.png](/images/musicbrainz_id_detail_tab.png)
-3. Or at the end of the URL:
-![musicbrainz_id_url.png](/images/musicbrainz_id_url.png)
 
-## Lidarr matched an album with too many tracks. How can I change the Album to the correct Release
+> **Release vs Release Group is the single most common mistake.** Lidarr's *album* = MusicBrainz's *release group*, not its *release*. A release group is "the 2005 album"; a release is "the 2005 US CD pressing" or "the 2005 UK vinyl." The **Release Group** MBID is what Lidarr wants. If you paste a release MBID, either the lookup fails or you get unexpected results.
+{.is-warning}
 
-- Open the Album details page and select the Edit Icon in the top nav. There you can find a dropdown of all releases tied to that Album.
+### I cannot find a release in Lidarr but it is on MusicBrainz
 
-## I cannot find a release in Lidarr but it is on MusicBrainz
+Three common causes:
 
-- This is likely due to the release having an `unknown` release status. Update MusicBrainz - typically to `official`
-- Other statuses may be available based on your metadata profile
-  - Official
-  - Promotion
-  - Bootleg
-  - Pseudo-Release
+- **Propagation lag.** Lidarr's copy of MusicBrainz refreshes on an hourly cycle via the Servarr metadata server. If you edited MB in the last hour, wait a refresh cycle before troubleshooting further.
+- **Unknown release type.** If the MB release group has `Type: Unknown` or `Status: Unknown`, most metadata profiles filter it out. Fix the type at MusicBrainz.
+- **Metadata server cache needs busting.** Rare but it happens — especially after big MB edits. The full flow, including the `!refresh` bot command, is on [Metadata Troubleshooting](/lidarr/metadata-troubleshooting).
 
-## How often do Lidarr's and MusicBrainz databases sync
+If none of those apply, the full troubleshooting flow lives on the [Metadata Troubleshooting](/lidarr/metadata-troubleshooting) page.
 
-- Every hour at 5 after the hour.
-- Note that some Metadata server caching issues exist and require manual cache busting by a Servarr Team Member or Servarr Donatarr.
+## Importing and renaming
 
-## How can I add missing artist images
+### I'm having trouble importing my artists, what could it be?
 
-- Add art to fanart.tv and wait ~7+ days for it to clear through the cache. Then refresh the metadata.
-- Fallback logic for TheAudioDB exists as a source as well.
+Imports fail in one of a few ways:
 
-## How can I get missing album images? (Cover Art)
+- **The download finished but Lidarr won't import it.** This is almost always a match-quality rejection — Lidarr couldn't find a MusicBrainz release that resembles the file closely enough. See [Import Troubleshooting](/lidarr/import-troubleshooting) for the match-quality rules, the fingerprinting fallback, when manual import is the expected path, and how to drive it.
+- **You're importing an existing library and the match fails.** See [Importing an Existing Library](/lidarr/importing-existing-library) for the fresh-install walkthrough and the lenience rules that apply to library imports.
+- **Lidarr can't read or write the folder.** The user account Lidarr runs as must have read and write access to both the download folder and the destination root folder. On Linux this is usually a UID/GID/permissions issue on a mount; on Windows this is usually Lidarr running as `LocalService` which can't reach a network share. See [Why can't Lidarr see my files on a remote server](#why-cant-lidarr-see-my-files-on-a-remote-server) for the Windows case.
+- **Untagged or badly-tagged files.** Files with generic filenames like `track01.mp3` and no tags give Lidarr nothing to match on. Run a tagger — [MusicBrainz Picard](https://picard.musicbrainz.org/) or [Harmony](https://harmony.pulsewidth.org.uk/) — before importing. See [Import Troubleshooting → Untagged or badly-tagged files](/lidarr/import-troubleshooting#untagged-or-badly-tagged-files).
 
-- Add coverart to musicbrainz and wait ~1hr+ for it to clear through the cache. Then refresh the metadata.
-
-## I'm having trouble importing my artists, what could it be
-
-- The artist import process just imports the Artist names and path locations, which are then stored in the database so that a) metadata can be retrieved and b) downloaded content can be put in the same location in future. To this end, the user account that Lidarr runs under needs both read and write to your data directory.
-
-## How can I rename my artist folders
+### How can I rename my artist folders?
 
 {#rename-folders}
 
-> The same process applies for moving/changing Artist paths as well.
+> The same process applies for moving or changing artist paths.
 {.is-info}
 
-1. Library
-1. Click on "Select Artists"
-1. Select what artists need their folder renamed
-1. Click on "Edit"
-1. Change Root Folder to the same Root Folder that the artists currently exist in
-1. Select "Yes, move the files"
+For a handful of artists:
 
-## Why Does Lidarr Keep Trying To Rename the Same Folders
+1. Open the artist page.
+2. Click the Edit button in the top nav.
+3. Change the path (or the root folder, which moves the folder under a different root).
+4. Select *Yes, move the files* if prompted.
 
-- During rename operations, Lidarr will attempt to rename folders to the correct case. On Windows, this operation will appear to succeed but no changes are made. The current solution is to manually correct these paths.
+For a bulk rename:
 
-## Why Can’t I Access a Folder in Windows After Lidarr Rename
+1. Library → **Select Artists**.
+2. Tick the artists that need their folders renamed.
+3. Click **Edit**.
+4. Set the **Root Folder** to the same root folder those artists already use (this is the trigger that causes Lidarr to re-evaluate each artist's folder name against the current naming settings).
+5. Select *Yes, move the files*.
 
-Newer builds of Lidarr support limiting the tag length to an arbitrary integer. The tag is truncated and a three periods are added to the end of the folder name. [Windows](https://learn.microsoft.com/windows/win32/fileio/naming-a-file#naming-conventions) does support some characters at the end of folder names, and the folder will become inaccessible.
+If a rename appears to have happened in Lidarr but the folder name on disk is unchanged, see [Why does Lidarr keep trying to rename the same folders?](#why-does-lidarr-keep-trying-to-rename-the-same-folders) below — that is usually a case-only rename on Windows, which is a filesystem-level no-op.
 
-> Do not end a file or directory name with a space or a period. Although the underlying file system may support such names, the Windows shell and user interface does not.
-
-When this occurs, you must rename the folder using WSL to make it accessible again.
-
-```console
-mv <foldername...> <foldername>
-```
-
-## How can I mass delete artists from the wanted list
-
-- Use Mass Editor => Select artists you want to delete => Delete
-
-## Why doesn't Lidarr work behind a reverse proxy
-
-- Lidarr uses .NET and a new webserver. In order for SignalR to work, the UI buttons to work, database changes to take, and other items. It requires the following addition to the location block for Lidarr:
- proxy_http_version 1.1;
- proxy_set_header Upgrade $http_upgrade;
- proxy_set_header Connection $http_connection;
-
-- Make sure you `do not` include `proxy_set_header Connection "Upgrade";` as suggested by the nginx documentation. `THIS WILL NOT WORK`
-- [See this ASP.NET Core issue](https://github.com/aspnet/AspNetCore/issues/17081)
-- If you are using a CDN like Cloudflare ensure websockets are enabled to allow websocket connections.
-
-## How do I update Lidarr
-
-- Go to Settings and then the General tab and show advanced settings (use the toggle by the save button).
-
-1. Under the Updates section change the branch name to `master` or `develop`
-1. Save
-
-*This will not install the bits from that branch immediately, it will happen during the next update.*
-
-- `master` - ![Current Master/Stable](https://img.shields.io/badge/dynamic/json?color=f5f5f5&style=flat-square&label=Master&query=%24%5B0%5D.version&url=https://lidarr.servarr.com/v1/update/master/changes) - (Default/Stable): It has been tested by users on the develop and nightly branches and it’s not known to have any major issues. This version will receive updates approximately monthly. On GitHub, this is the `master` branch.
-
-- `develop` - ![Current Develop/Beta](https://img.shields.io/badge/dynamic/json?color=f5f5f5&style=flat-square&label=Develop&query=%24%5B0%5D.version&url=https://lidarr.servarr.com/v1/update/develop/changes) - (Beta): This is the testing edge. Released after tested in nightly to ensure no immediate issues. New features and bug fixes released here first after nightly. It can be considered semi-stable, but is still `beta`. This version will receive updates either weekly or biweekly depending on development and will be tagged as `pre-release`.
-
-> **Warning: You may not be able to go back to `master` after switching to this branch.** On GitHub, this is a snapshot of the `develop` branch at a specific point in time and is tagged as pre-release.
+> **Renaming outside Lidarr breaks the link between Lidarr's database and the files on disk.** Lidarr tracks files by path. If you rename a folder at the OS level, Lidarr will regard the files as missing and may re-download them. Always rename through the Lidarr UI when possible.
 {.is-warning}
 
-- `nightly` - ![Current Nightly/Unstable](https://img.shields.io/badge/dynamic/json?color=f5f5f5&style=flat-square&label=Nightly&query=%24%5B0%5D.version&url=https://lidarr.servarr.com/v1/update/nightly/changes) - (Alpha/Unstable): This is the bleeding edge. It is released as soon as code is committed and passes all automated tests. This build may have not been used by us or other users yet. There is no guarantee that it will even run in some cases. This branch is only recommended for advanced users. Issues and self investigation are expected in this branch.  ***Use this branch only if you know what you are doing and are willing to get your hands dirty to recover a failed update.*** This version is updated immediately.
+### Why does Lidarr keep trying to rename the same folders?
 
-> **Warning: You may not be able to go back to `master` after switching to this branch.** On GitHub, this is the `develop` branch.
-{.is-danger}
+Almost always a case-only rename on Windows. Windows filesystems treat `Artist` and `artist` as the same path — so when Lidarr attempts to rename `ARTIST` to `Artist`, the operation reports success but the folder name on disk does not change. Lidarr then sees the folder still needs renaming, and the cycle continues.
 
-- Note: If your install is through Docker append `:release`, `:latest`, `:testing`, or `:develop` to the end of your container tag depending on who makes your builds. Please note that `nightly` branches are intentionally not listed below.
+The fix is to rename the folder manually using a two-step rename (`Artist` → `Artist_tmp` → `Artist`) so the filesystem actually commits the case change. On Linux and macOS this is not an issue — those filesystems are case-sensitive.
 
-|                                                                    | `master` (stable) ![Current Master/Latest](https://img.shields.io/badge/dynamic/json?color=f5f5f5&style=flat-square&label=Master&query=%24%5B0%5D.version&url=https://lidarr.servarr.com/v1/update/master/changes) | `develop` (beta) ![Current Develop/Beta](https://img.shields.io/badge/dynamic/json?color=f5f5f5&style=flat-square&label=Develop&query=%24%5B0%5D.version&url=https://lidarr.servarr.com/v1/update/develop/changes) | `nightly` (alpha) ![Current Nightly/Alpha](https://img.shields.io/badge/dynamic/json?color=f5f5f5&style=flat-square&label=Nightly&query=%24%5B0%5D.version&url=https://lidarr.servarr.com/v1/update/nightly/changes) |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [hotio](https://hotio.dev/containers/lidarr)                       | `release`                                                                                                                                                                                                          | `testing`                                                                                                                                                                                                          | `nightly`                                                                                                                                                                                                            |
-| [LinuxServer.io](https://docs.linuxserver.io/images/docker-lidarr) | `latest`                                                                                                                                                                                                           | `develop`                                                                                                                                                                                                          | `nightly`                                                                                                                                                                                                            |
+## Lists and automation
 
-### Can I update Lidarr inside my Docker container
+### Why are lists sync times so long and can I change it?
 
-- *Technically, yes.* **But you absolutely should not.** It is a primary philosophy of Docker. Database issues can arise if you upgrade your installation inside to the most recent `nightly`, but then update the Docker container itself (possibly downgrading to an older version).
+List sync is intentionally slow. Lists are a *"add eventually"* tool, not an *"add now"* tool — the original sync cadence caused the upstream Servarr metadata server to be overwhelmed by users running 10-minute list refreshes.
 
-### Installing a newer version
+If you need faster feedback for a specific list:
 
-#### Native
+- Trigger a list refresh manually (Settings → Import Lists → the list → **Refresh**).
+- Script the refresh via the API — `POST /api/v1/command` with body `{"name": "ImportListSync", "definitionId": <list-id>}` using your Lidarr API key. See [API Docs](https://lidarr.audio/docs/api) for the full command reference. Typical pattern: a cron on your own side that polls the source (Spotify playlist, Last.fm top-tracks, etc.) and pokes Lidarr when something changed.
+- Add the releases directly in Lidarr rather than going through a list.
 
-1. Go to System and then the Updates tab
-1. Newer versions that are not yet installed will have an update button next to them, clicking that button will install the update.
-
-#### Docker
-
-1. Repull your tag and update your container
-
-## Can I switch from `nightly` back to `develop`
-
-## Can I switch between branches
-
-- If version is identical you can switch, otherwise check with the development team to see if you can switch from `nightly` to `master`; `nightly` to `develop`; or `develop` to `master` for your given build.
-- Failure to follow these instructions may result in your Lidarr becoming unusable or throwing errors. You have been warned
-  - The most common error is something like `Error parsing column 45 (Language=31 - Int64)` or other similar database errors around missing columns or tables.
-
-## I am getting an error: Database disk image is malformed
-
-- **Errors of `Error creating log database` indicate issues with logs.db**
-  - This can quickly be resolved by renaming or removing the database. The logs database contains unimportant information regarding commands history and update install history, and Info, Warn, and Error entries
-- **Errors of `Error creating main database` or generic `database disk image is malformed` with no specified database indicate issues with lidarr.db**
-  - Continue with the steps noted below
-- This means your SQLite database that stores most of the information for Lidarr is corrupt. Your options are to try (a) backup(s), try recovering the existing database, try recovering the backup(s), or if all else fails starting over with a fresh new database.
-- This error may show if the database file is not writable by the user/group \*Arr is running as. Permissions being the cause will likely only be an issue for new installs, migrated installs to a new server, if you recently modified your appdata directory permissions, or if you changed the user and group \*Arr run as.
-- Your best and first option is to [try restoring from a backup](#how-do-i-backuprestore-my-lidarr)
-- You can also try recovering your database. This is typically the only option for when this issue occurs after an update. Try the [sqlite3 `.recover` command](/useful-tools#recovering-a-corrupt-db)
-  - If your sqlite does not have `.recover` or you wish a more GUI (i.e. Windows) friendly way then follow [our instructions on this wiki.](/useful-tools#recovering-a-corrupt-db-ui)
-- Another possible cause of you getting an error with your Database is that you're placing your database on a network drive (nfs or smb or something else not local). **SQLite is designed for situations where the data and application coexist on the same machine.** Thus your \*Arr AppData Folder (/config mount for docker) MUST be on local storage. [SQLite and network drives not play nice together and will cause a malformed database eventually](https://www.sqlite.org/draft/useovernet.html).
-- If you are using mergerFS you need to remove `direct_io` as SQLite uses mmap which isn’t supported by `direct_io` as explained in the mergerFS [docs here](https://github.com/trapexit/mergerfs#plex-doesnt-work-with-mergerfs)
-
-## How do I Backup/Restore my Lidarr
-
-### Backing up Lidarr
-
-#### Using built-in backup
-
-- Go to System => Backup in the Lidarr UI
-- Click the Backup button
-- Download the zip after the backup is created for safekeeping
-
-#### Using file system directly
-
-- Find the location of the AppData directory for Lidarr
-  - Via the Lidarr UI go to System => About
-  - [Lidarr Appdata Directory](/lidarr/appdata-directory)
-- Stop Lidarr - This will prevent the database from being corrupted
-- Copy the contents to a safe location
-
-### Restoring from Backup
-
-> Restoring to an OS that uses different paths will not work (Windows to Linux, Linux to Windows, Windows to OS X or OS X to Windows), moving between OS X and Linux may work, since both use paths containing `/` instead of `\` that Windows uses, but is not supported. You'll need to manually edit all paths in the database.
-{.is-warning}
-
-#### Using zip backup
-
-- Re-install Lidarr (if applicable / not already installed)
-- Run Lidarr
-- Navigate to System => Backup
-- Select Restore Backup
-- Select Choose File
-- Select your backup zip file
-- Select Restore
-
-#### Using file system backup
-
-- Re-install Lidarr (if applicable / not already installed)
-- Find the location of the AppData directory for Lidarr
-  - Running Lidarr once and via the UI go to System => About
-  - [Lidarr Appdata Directory](/lidarr/appdata-directory)
-- Stop Lidarr
-- Delete the contents of the AppData directory **(Including the .db-wal/.db-journal files if they exist)**
-- Restore from your backup
-- Start Lidarr
-- As long as the paths are the same, everything will pick up where it left off
-
-#### File System Restore on Synology NAS
-
-> CAUTION: Restoring on a Synology requires knowledge of Linux and Root SSH access to the Synology Device.
-{.is-warning}
-
-- Re-install Lidarr (if applicable / not already installed)
-- Find the location of the AppData directory for Lidarr
-  - Running Lidarr once and via the UI go to System => About
-  - [Lidarr Appdata Directory](/lidarr/appdata-directory)
-- Stop Lidarr
-- Connect to the Synology NAS through SSH and log in as root
-
-> On some installations, the user is different than the below commands: `chown -R sc-Lidarr:Lidarr *` {.is-info}
-
-- Execute the following commands:
-
-```shell
-rm -r /usr/local/Lidarr/var/.config/Lidarr/Lidarr.db
-cp -f /tmp/Lidarr_backup/* /usr/local/Lidarr/var/.config/Lidarr/
-```
-
-- Update permissions on the files:
-
- ```shell
-cd /usr/local/Lidarr/var/.config/Lidarr/
-chown -R Lidarr:users *
-chmod -R 0644 *
-```
-
-- Start Lidarr
-
-## I use Lidarr on a Mac and it suddenly stopped working. What happened
-
-- Most likely this is due to a MacOS bug which caused one of the databases to be corrupted.
-
-- See the above database is malformed entry.
-
-- Then attempt to launch and see if it works. If it does not work, you will need further support. Post in our [subreddit /r/lidarr](http://reddit.com/r/lidarr) or hop on [our discord](https://lidarr.audio/discord) for help.
-
-## Lidarr won't start on Debian 11 or older systems due to SQLite version
-
-> This workaround is only for older end-of-standard-support systems with outdated GLIBC/SQLite versions. This is not applicable to systems with SQLite corruption issues.
-{.is-warning}
-
-Lidarr v3+ uses SQLite from SourceGear.sqlite3, which requires newer GLIBC versions and may cause compatibility issues on older end-of-standard-support systems including Debian 10, Debian 11, Synology DSM, Ubuntu 18, and Ubuntu 20. If you encounter SQLite-related errors (not corruption) on these platforms, you can force Lidarr to use your system's native SQLite library instead, which is compatible with your GLIBC version.
-
-### Solution
-
-Create a symlink from your system's SQLite library to the expected library name in Lidarr's directory:
-
-```bash
-# First, ensure libsqlite3-0 is installed (not just sqlite3)
-sudo apt update
-sudo apt install libsqlite3-0
-
-# Navigate to Lidarr installation directory
-cd /opt/Lidarr/
-
-# Backup the original bundled library
-mv libe_sqlite3.so libe_sqlite3.so.backup 2>/dev/null || true
-
-# Create symlink to system SQLite library
-# The path varies by architecture:
-# - amd64/x64: /usr/lib/x86_64-linux-gnu/libsqlite3.so.0
-# - arm64: /usr/lib/aarch64-linux-gnu/libsqlite3.so.0
-# - armhf: /usr/lib/arm-linux-gnueabihf/libsqlite3.so.0
-
-# For amd64 systems (most common):
-ln -s /usr/lib/x86_64-linux-gnu/libsqlite3.so.0 libe_sqlite3.so
-
-# For arm64 systems:
-# ln -s /usr/lib/aarch64-linux-gnu/libsqlite3.so.0 libe_sqlite3.so
-
-# For armhf systems:
-# ln -s /usr/lib/arm-linux-gnueabihf/libsqlite3.so.0 libe_sqlite3.so
-
-# Verify the symlink was created
-ls -la libe_sqlite3.so
-```
-
-After creating the symlink, restart Lidarr. It will now use the system's SQLite library which is compatible with your GLIBC version.
-
-> **Note:** You will need to recreate this symlink after each Lidarr update, as updates replace the application directory contents.
+> **Spotify import lists are subject to Spotify's own API rate limits.** Large playlists (thousands of tracks) or many concurrent lists can take time to resolve. If a Spotify list appears to be stuck, check the Lidarr log at the Debug level — you'll see the 429s from Spotify if that's the cause. Waiting out the rate-limit window resolves it.
 {.is-info}
 
-### When to use this workaround
+### Does Lidarr download lyrics, liner notes, or other extras?
 
-- You're running an older end-of-life system (Debian 10, Debian 11, Synology DSM, Ubuntu 18, or Ubuntu 20)
-- Lidarr fails to start with SQLite initialization errors
-- The error is **not** related to database corruption
-- Your system's SQLite version is at least 3.9.0
+No — by design. Lidarr's job is to fetch the release audio files and tag/organise them; it does not bundle lyrics, liner notes, or other secondary files.
 
-### When NOT to use this workaround
+For lyrics, use a tag-aware companion tool:
 
-- You have a database corruption issue (see the section above instead)
-- You're on a modern, supported Linux distribution
-- Lidarr starts normally
+- [beets](https://beets.io/) — a music tagger and library manager; its `lyrics` plugin fetches lyrics into tag fields during beets import.
+- [MusicBrainz Picard](https://picard.musicbrainz.org/) — has community plugins for lyrics and extra tag sources.
 
-## I am using a Pi and Raspbian and Lidarr will not launch
+These can run alongside Lidarr against the same library; they just need to be sequenced so they don't fight over file ownership.
 
-Raspbian has a version of libseccomp2 that is too old to support running a docker container based on Ubuntu 20.04, which both hotio and LinuxServer use as their base. You either need to use `--privileged`, update libseccomp2 from Ubuntu or get a better OS (We recommend Ubuntu 20.04 arm64)
+### What about Custom Scripts / Custom Formats / post-processing?
 
-**Possible Solution:**
+Lidarr supports two distinct extension points:
 
-Managed to fix the issue by installing the backport from debian repo. Generally not recommended to use backport in blanket upgrade mode. Installation of a single package may be ok but may also cause issues. So got to understand what you are doing.
+- **Custom Scripts** — hook scripts that fire on Lidarr events (on-grab, on-import, on-rename, etc.). Useful for external notifications, custom file copies, or integration with a local library manager. See [Custom Scripts](/lidarr/custom-scripts) for setup and the list of events.
+- **Custom Formats** — rules for scoring and filtering releases based on release-name patterns, indexer flags, source, language, etc. Used to prefer (or reject) specific sources, encoders, or quality profiles beyond what the base quality definitions allow. See [Settings → Custom Formats](/lidarr/settings#custom-formats-2).
 
-Steps to fix:
+Custom Formats are scored; Custom Scripts are event-driven. They don't overlap in scope.
 
-First ensure you are running Raspbian buster e.g using `lsb_release -a`
+## Integrations and external tools
 
-> Distributor ID: Raspbian
-> Description: Raspbian GNU/Linux 10 (buster)
-> Release: 10
-> Codename: buster
+### Does Lidarr support Deemix, slskd, or similar tools?
 
-- If you are using buster:
-  - Run the following to add the backports to your sources
+Deemix and slskd are third-party tools, not Lidarr plugins per se — Deemix is a Deezer downloader, slskd is a Soulseek daemon. Historically there was no built-in way to integrate them with Lidarr, and people would cobble together import scripts.
 
-  ```shell
-   echo "deb <http://deb.debian.org/debian> buster-backports main" | sudo tee /etc/apt/sources.list.d/buster-backports.list
-   ```
+**This changed with the plugin architecture.** As of the `nightly` branch, Lidarr supports third-party plugins that add indexers and download clients for streaming services, peer-to-peer networks, and other sources. This is the fully-supported way to extend Lidarr's source coverage — not a workaround. See [Plugins](/lidarr/plugins) for install instructions and the current compatibility notes.
 
-  - Install the backport of libseccomp2
+Common community plugins at time of writing cover exactly this ground — Soulseek, Deezer, Tidal, and similar — and are linked from the Plugins page. Plugin names and availability shift faster than this FAQ can track, so the Plugins page is the current reference.
 
-  ```shell
-  sudo apt update && sudo apt-get -t buster-backports install libseccomp2
-  ```
+Running the plugin branch requires switching to `nightly` (see [How do I update Lidarr?](#how-do-i-update-lidarr)). Database schema migrations mean you cannot easily switch back to `master` or `develop` afterwards without restoring a pre-switch backup.
 
-## Why are lists sync times so long and can I change it
+### Which download clients does Lidarr support?
 
-Lists never were nor are intended to be `add it now` they are `hey I want this, add it eventually` tools.
+Usenet (NZB): SABnzbd, NZBGet, NZBVortex, Pneumatic, usenet blackhole.
 
-You can trigger a list refresh manually, script it and trigger it via the API, or add the releases directly to Lidarr.
+Torrent: qBittorrent, Transmission, Deluge, rTorrent / ruTorrent, uTorrent, Vuze, Flood, Hadouken, torrent blackhole.
 
-This change was due to not have our server get killed by people updating lists every 10 minutes.
+Additional clients are available via [Plugins](/lidarr/plugins) on the `nightly` branch — primarily streaming-service and P2P-network clients not covered by the built-in list.
 
-## Can I disable the refresh releases task
+For setup recipes, the [TRaSH Guides — Downloaders](https://trash-guides.info/Downloaders/) section covers the common clients in more depth than the Lidarr wiki does.
 
-No, nor should you through any SQL hackery. The refresh releases task queries the upstream Servarr proxy and checks to see if the metadata for each release (ids, cast, summary, rating, translations, alt titles, etc.) has updated compared to what is currently in Lidarr. If necessary, it will then update the applicable releases.
+### Does Lidarr integrate with Plex, Emby, or Jellyfin?
 
-A common complaint is the Refresh task causes heavy I/O usage. One setting that can cause issues is "Rescan Artist Folder after Refresh". If your disk I/O usage spikes during a Refresh then you may want to change the Rescan setting to `Manual`. Do not change this to `Never` unless all changes to your library (new releases, upgrades, deletions etc) are done through Lidarr. If you delete release files manually or a third party program, do not set this to `Never`.
+Not directly. Lidarr manages the library on disk; media servers read that library and serve it to clients. The common setup pattern is to share the root folder:
 
-## Why can Lidarr not see my files on a remote server
+1. Lidarr writes files to `/media/music` (or your preferred path).
+2. Plex / Emby / Jellyfin have a music library configured against the same `/media/music`.
+3. Lidarr fires an on-import / on-rename Custom Script (optional) that pokes the media server's API to refresh the affected folder, avoiding a full library rescan.
 
-- For all OSes ensure the user/group you're running \*Arr as has read and write access to the mounted drive.
-- For Linux ensure:
-  - If you're using an NFS mount ensure `nolock` is enabled for your mount.
-  - If you're using an SMB mount ensure `nobrl` is enabled for your mount.
-- For Windows: In short: the user \*Arr is running as (if service) or under (if tray app) cannot access the file path on the remote server. This can be for various reasons, but the most common is \*Arr  is running as a service, which causes the issues described below.
+There is no Lidarr plugin for any media server. The integration is at the filesystem level, and the Custom Script for library-refresh on import is the only wiring required.
 
-### Lidarr runs under the LocalService account by default which doesn't have access to protected remote file shares
+### VPNs, Jackett, and the *ARRs
 
-- Run Lidarr's service as another user that has access to that share
-- Open the Administrative Tools \> Services window on your Windows server.
-- Stop the Lidarr service.
-- Open the Properties \> Log On dialog.
-- Change the service user account to the target user account.
-- Run Lidarr.exe using the Startup Folder
+See the dedicated [VPN Guide](/vpn). Short version: only your BitTorrent client needs to be behind a VPN in most jurisdictions; the *Arr apps themselves should not be, because shared VPN endpoints cause rate limits, captchas, and Cloudflare blocks for metadata lookups.
 
-### You're using a mapped network drive (not a UNC path)
+## Errors and authentication
 
-- Change your paths to UNC paths (`\\server\share`)
-- Run Lidarr.exe via the Startup Folder
+### Forced Authentication
 
-## Help I have locked myself out
+If Lidarr is reachable from outside your LAN you should have authentication enabled. Trackers and indexers increasingly require it.
+
+As of Lidarr v2, **authentication is mandatory** — `AuthenticationType` and `AuthenticationMethod` are required in the config file.
+
+#### Authentication Method
+
+- `Basic` — browser-native username/password pop-up. Deprecated and will be removed in a future major version.
+- `Forms` — login page. Recommended for all UI-exposed installs.
+- `External` — disables app authentication entirely. Only for installs behind an external authentication layer (Authelia, Authentik, nginx auth). Configurable via the config file only. Do not use this unless the external auth is actually enforced on the request path.
+
+#### Authentication Required
+
+If the UI only needs auth on remote access (not on LAN), set **Settings → General → Security → Authentication Required** to *Disabled For Local Addresses*. The config-file equivalent is `<AuthenticationType>DisabledForLocalAddresses</AuthenticationType>`. The other valid value is `Enabled`.
+
+### Help I have locked myself out
 
 {#help-i-have-forgotten-my-password}
 
-To disable authentication (to reset your forgotten username or password) you will need need to edit `config.xml` which will be inside the [Lidarr Appdata Directory](/lidarr/appdata-directory)
+To reset a forgotten username or password, disable authentication by editing `config.xml` in your [Lidarr Appdata Directory](/lidarr/appdata-directory):
 
-1. Stop Lidarr
-1. Open config.xml in a text editor
-1. Find the authentication method line - will be
-`<AuthenticationMethod>Basic</AuthenticationMethod>` or `<AuthenticationMethod>Forms</AuthenticationMethod>`
-***(Be sure you do not have two AuthenticationMethod entries in your file!)***
-1. Remove the entire `AuthenticationMethod` line
-1. Start Lidarr
-1. Lidarr will now be accessible without a password. When you open the Web UI, you should be prompted to set a new password and authentication method
+1. Stop Lidarr.
+2. Open `config.xml` in a text editor.
+3. Find the `<AuthenticationMethod>…</AuthenticationMethod>` line (it will say `Basic` or `Forms`). **If there are two entries in the file, delete both.**
+4. Remove the entire line.
+5. Start Lidarr.
 
-## How do I stop the browser from launching on startup
+The UI will now open without a password, and prompt you to set a new password and authentication method on first access.
 
-Depending on your OS, there are multiple possible ways.
+### I am getting an error: Database disk image is malformed
 
-- In `Settings` => `General` on some OS'es, there is a checkbox to launch the browser on startup.
-- When invoking Lidarr, you can add `-nobrowser` (*nix) or `/nobrowser` (Windows) to the arguments.
-- Stop Lidarr and edit the config.xml file, and change `<LaunchBrowser>True</LaunchBrowser>` to `<LaunchBrowser>False</LaunchBrowser>`.
+- **Error says *Error creating log database*** — the corruption is in `logs.db`. Rename or delete that file; it only contains command history and log entries, none of which are load-bearing. Lidarr recreates it on next start.
+- **Error says *Error creating main database* or just *database disk image is malformed*** — the corruption is in `lidarr.db`, which is the real database. Do *not* delete it. Follow the recovery steps below.
 
-## Weird UI Issues
+Your options, in order of increasing effort:
 
-- If you experience any weird UI issues like the Library page not listing anything or a certain view or sort not working, try viewing in a Chrome Incognito Window or Firefox Private Window. If it works fine there, clear your browser cache and cookies for your specific ip/domain. For more information, see the [Clear Cache Cookies and Local Storage](/useful-tools#clearing-cookies-and-local-storage) wiki article.
+1. **Restore from backup.** See [Tips and Tricks → Backup/Restore](/lidarr/tips-and-tricks#backup-restore). This is always the best first move.
+2. **Try the SQLite `.recover` command.** See [Useful Tools → Recovering a corrupt DB](/useful-tools#recovering-a-corrupt-db) for the CLI path, or [Recovering a corrupt DB (GUI)](/useful-tools#recovering-a-corrupt-db-ui) for the Windows / GUI path.
+3. **Start fresh.** Delete `lidarr.db` (and the `.db-wal` / `.db-journal` siblings) and let Lidarr recreate from scratch. You will lose your library metadata and have to re-add artists.
 
-## VPNs, Jackett, and the \*ARRs
+Common causes and their preventable forms:
 
-> For comprehensive VPN guidance, see the dedicated [VPN Guide](/vpn) page.
-{.is-info}
+- **Running the database on a network drive (NFS, SMB, or other non-local storage).** SQLite is not designed for this and will corrupt sooner or later — see the [SQLite upstream warning](https://www.sqlite.org/draft/useovernet.html). The AppData folder (Docker: `/config` mount) must be on local storage. This is the single most common root cause.
+- **Permissions.** If the Lidarr user cannot write to the database file, SQLite can leave it in a corrupt state. Usually only bites new installs, migrated installs, or systems where the running user/group was recently changed.
+- **mergerFS with `direct_io` enabled.** SQLite uses mmap, which mergerFS `direct_io` does not support — see [mergerFS docs](https://github.com/trapexit/mergerfs#plex-doesnt-work-with-mergerfs). Remove `direct_io` from the mergerFS options.
 
-- Unless you're in a repressive country like China, Australia, your BitTorrent client is typically the only thing that needs to be behind a VPN. Usenet does not require VPN protection as it uses encrypted SSL connections. For most countries including the UK, using secure DNS (like Cloudflare's 1.1.1.1 or Google's 8.8.8.8) is sufficient to resolve access issues without requiring a VPN. Other *Arr apps not connecting to trackers should not be behind a VPN. Because the VPN endpoint is shared by many users, you can and will experience rate limiting, DDOS protection, and ip bans from various services each software uses.
+### I use Lidarr on a Mac and it suddenly stopped working. What happened?
 
-> **To be clear it is not a matter if VPNs will cause issues with the \*Arrs, but when: image providers will block you and cloudflare is in front of most of \*Arr servers (updates, metadata, etc.) and liable to block you too**
-{.is-warning}
+Most likely one of the databases is corrupt — a known macOS issue when the system sleeps or crashes during a database write. See [I am getting an error: Database disk image is malformed](#i-am-getting-an-error-database-disk-image-is-malformed) above for recovery.
 
-- **Many private trackers will ban you for using or accessing them (i.e. using Jackett or Prowlarr) via a VPN.**
+If the database is not the cause and Lidarr still won't start, post in the [subreddit](https://reddit.com/r/lidarr) or [Discord](https://lidarr.audio/discord) with the logs.
 
-## Jackett's /all Endpoint
+### Why can't Lidarr see my files on a remote server
 
-{#jackett-all-endpoint}
+{#why-can-lidarr-not-see-my-files-on-a-remote-server}
 
-- **April 2022 Update: \*Arr support has been removed out for the jackett `/all` due to the fact it only causes issues.**
-- The Jackett /all endpoint is convenient, but that is its only benefit. Everything else is potential problems, so adding each tracker individually is now required. Alternatively, you may wish to check out the Jackett & NZBHydra2 alternative [Prowlarr](/prowlarr)
-- [Even Jackett's Devs says it should be avoided and should not be used.](https://github.com/Jackett/Jackett#aggregate-indexers)
-- Using the /all endpoint has no advantages, only disadvantages:
-  - you lose control over indexer specific settings (categories, search modes, etc.)
-  - mixing search modes (IMDB, query, etc.) might cause low-quality results
-  - indexer specific categories (\>= 100000) cannot be used.
-  - slow indexers will slow down the overall result
-  - total results are limited to 1000
-  - if one of the trackers in /all returns an error, \*Arr will disable it and now you do not get any results.
+For all operating systems, the user Lidarr runs as must have both read and write access to the remote share.
 
-### Jackett /All Solutions
+**Linux mount flags:**
 
-- Add each tracker in Jackett manually as an indexer in \*Arr
-- Check out [Prowlarr](/prowlarr) which can sync indexers to \*Arr and from the Lidarr/Radarr/Readarr development team.
-- Check out [NZBHydra2](https://github.com/theotherp/nzbhydra2) which can sync indexers to \*Arr. But do not use their single aggregate endpoint and use `multi` if sync will be used.
+- NFS mounts — ensure `nolock` is set in the mount options.
+- SMB mounts — ensure `nobrl` is set in the mount options.
 
-## Why are there two files? | Why is there a file left in downloads
+**Windows — the common cause is the service account:**
 
-This is expected. With a setup that supports [hardlinks](https://trash-guides.info/hardlinks), double space will not be used. Below is how the Torrent Process works.
+Lidarr installed as a service runs under `LocalService` by default. `LocalService` does not have access to protected remote file shares, which is almost always why a networked path appears empty or permission-denied in the Lidarr UI.
 
-1. Lidarr will send a download request to your client, and associate it with a label or category name that you have configured in the download client settings. Examples: movies, tv, series, music, etc.
-1. Lidarr will monitor your download clients active downloads that use that category name. This monitoring occurs via your download client's API.
-1. Completed files are left in their original location to allow you to seed the file (ratio or time can be adjusted in the download client or from within under the specific download client). When files are imported to your media folder will hardlinkthe file if supported by your setup or copy if not hard links are not supported.
-1. If the "Completed Download Handling - Remove Completed" option is enabled in Lidarr's settings, Lidarr will delete the original file and torrent from your download client, but only if the download client reports that seeding is complete and torrent is stopped (i.e. paused). See [TRaSH's Download Client Guides](https://trash-guides.info/Downloaders/) for how to configure your download client optimally.
+Two fixes:
 
-> Hard links are enabled by default. [A hard link will not use any additional disk space.](https://trash-guides.info/Hardlinks/Hardlinks-and-Instant-Moves/) The file system and mounts must be the same for your completed download directory and your media library. If the hard link creation fails or your setup does not support hard links then will fall back and copy the file.
-{.is-info}
+1. **Run the Lidarr service as a user that has share access.**
+   - Administrative Tools → Services → stop the Lidarr service.
+   - Right-click → Properties → Log On tab.
+   - Change the service user to a domain or local account with access to the share.
+   - Start the service.
 
-## I keep getting warnings from my cloud storage about API limits
-
-Lidarr is not like the other Arrs. It uses tags instead of file names for operation. If you keep Lidarr files on cloud storage, it has to download the file to read the tags. This will very quickly blow through any API limits you have on your storage provider. We very much discourage you from keeping your Lidarr library on a cloud storage provider, and any issues you may be experiencing are likely due to that setup.
+2. **Use a UNC path instead of a mapped drive.** Mapped drives are a per-user construct; `LocalService` cannot see `Z:` even if your desktop session can. Configure Lidarr paths as `\\server\share\path` instead, and make sure the share permits access to whichever user the service runs as.
