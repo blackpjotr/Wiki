@@ -2,8 +2,8 @@
 title: Lidarr Linux Installation
 description: Linux installation guide for Lidarr
 published: true
-date: 2024-04-05T19:17:19.275Z
-tags: installation, lidarr, linux
+date: 2026-04-20T14:18:55.254Z
+tags: lidarr, installation, linux
 editor: markdown
 dateCreated: 2023-07-03T20:10:49.328Z
 ---
@@ -135,7 +135,7 @@ If Lidarr did not appear to start, then check the status of the service:
 sudo journalctl --since today -u lidarr
 ```
 
-> If Lidarr v3+ fails to start on older end-of-life systems (Debian 10, Debian 11, Synology DSM, Ubuntu 18, Ubuntu 20) due to SQLite/GLIBC compatibility issues, see the [FAQ entry for the workaround](/lidarr/faq#lidarr-wont-start-on-debian-11-or-older-systems-due-to-sqlite-version).
+> If Lidarr v3+ fails to start on older end-of-life systems (Debian 10, Debian 11, Synology DSM, Ubuntu 18, Ubuntu 20) due to SQLite/GLIBC compatibility issues, see the [SQLite version workaround](#sqlite-version-workaround) below.
 {.is-info}
 
 ---
@@ -161,3 +161,59 @@ sudo rm -rf /opt/Lidarr
 sudo rm -rf /etc/systemd/system/lidarr.service
 sudo systemctl -q daemon-reload
 ```
+
+# Troubleshooting
+
+## SQLite version workaround on older systems
+
+{#sqlite-version-workaround}
+
+> This workaround is only for older end-of-standard-support systems with outdated GLIBC / SQLite. It is **not** a fix for SQLite corruption errors — those have a completely different recovery path; see [FAQ → Database disk image is malformed](/lidarr/faq#i-am-getting-an-error-database-disk-image-is-malformed).
+{.is-warning}
+
+Lidarr v3 and later uses a bundled SQLite build that requires newer GLIBC than ships with end-of-standard-support distributions. Affected systems include Debian 10, Debian 11, Ubuntu 18.04, Ubuntu 20.04, and some Synology DSM versions. If Lidarr fails to start with SQLite initialisation errors (as opposed to corruption errors), you can force it to link against the distribution's own SQLite library instead.
+
+### Solution
+
+Symlink the system SQLite library into Lidarr's install directory under the name Lidarr expects:
+
+```bash
+# First, ensure libsqlite3-0 is installed (not just sqlite3):
+sudo apt update
+sudo apt install libsqlite3-0
+
+# Navigate to Lidarr installation directory
+cd /opt/Lidarr/
+
+# Backup the bundled library
+mv libe_sqlite3.so libe_sqlite3.so.backup 2>/dev/null || true
+
+# Create the symlink. The library path depends on your architecture:
+# - amd64/x64: /usr/lib/x86_64-linux-gnu/libsqlite3.so.0
+# - arm64:     /usr/lib/aarch64-linux-gnu/libsqlite3.so.0
+# - armhf:     /usr/lib/arm-linux-gnueabihf/libsqlite3.so.0
+
+# For amd64:
+ln -s /usr/lib/x86_64-linux-gnu/libsqlite3.so.0 libe_sqlite3.so
+
+# Verify the symlink
+ls -la libe_sqlite3.so
+```
+
+Restart Lidarr after creating the symlink.
+
+> Every Lidarr update replaces the files in `/opt/Lidarr/`, so the symlink has to be recreated after each update. If you're using this workaround, script the symlink into your update procedure.
+{.is-info}
+
+### When to use this workaround
+
+- You are running an older end-of-life distribution (Debian 10, Debian 11, Ubuntu 18.04, Ubuntu 20.04, older Synology DSM).
+- Lidarr fails to start with SQLite initialisation errors at startup.
+- The error is not related to an existing database file being corrupt.
+- Your system SQLite is at least version 3.9.0.
+
+### When NOT to use this workaround
+
+- You have database corruption — see [FAQ → Database disk image is malformed](/lidarr/faq#i-am-getting-an-error-database-disk-image-is-malformed).
+- You are on a modern, supported distribution. Upgrade the distribution instead; older distributions accumulate other issues beyond SQLite and this workaround does not address them.
+- Lidarr starts normally. The workaround replaces a working library with another working library; there is no benefit.
