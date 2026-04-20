@@ -2,8 +2,8 @@
 title: Lidarr Installation
 description: Instructions and Guides for Installation of Lidarr
 published: true
-date: 2023-07-03T20:25:07.129Z
-tags: installation, setup, docker, scripts, lidarr, guide
+date: 2026-04-20T14:18:20.581Z
+tags: lidarr, docker, installation, guide, scripts, setup
 editor: markdown
 dateCreated: 2021-05-24T05:12:27.036Z
 ---
@@ -16,3 +16,19 @@ dateCreated: 2021-05-24T05:12:27.036Z
 
 - [Setup Reverse Proxy *Complete guide for reverse proxy setup with Nginx or Apache*](/lidarr/installation/reverse-proxy)
 {.links-list}
+
+# Post-install configuration
+
+Small configuration tweaks that apply regardless of platform. For installation itself, use the platform links above.
+
+## Disable browser-on-startup
+
+{#disable-browser-launch}
+
+By default Lidarr opens a browser window to its UI when it starts. Three ways to turn that off — pick whichever fits your setup:
+
+- **Settings UI** — on most platforms, Settings → General has a **Launch Browser on Start** checkbox. Uncheck it and save. The checkbox is not present on every platform (notably headless server builds), in which case use one of the options below.
+- **Command-line flag** — add `-nobrowser` (Linux/macOS) or `/nobrowser` (Windows) to the Lidarr invocation. For systemd services, add the flag to the `ExecStart=` line in the unit file; for Windows services, edit the service command via `sc config` or directly in the registry. Docker containers never open a browser, so this flag is irrelevant there.
+- **Config file** — stop Lidarr, open `config.xml` in the [AppData directory](/lidarr/appdata-directory), and set `<LaunchBrowser>False</LaunchBrowser>`. Start Lidarr.
+
+Any of the three is sufficient; they do not need to be combined.
