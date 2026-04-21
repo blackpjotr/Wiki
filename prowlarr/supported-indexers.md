@@ -2,15 +2,15 @@
 title: Prowlarr Supported Indexers
 description: Indexers currently named as supported in the current nightly build of Prowlarr. Other indexers may be available via either Generic Newznab or Generic Torznab.
 published: true
-date: 2026-04-19T02:36:58.767793
+date: 2026-04-21T02:32:57.397329
 tags: prowlarr, indexers, reference
 editor: markdown
-dateCreated: 2026-04-19T02:36:58.767793
+dateCreated: 2026-04-21T02:32:57.397329
 ---
 
 - Supported Trackers and Indexers as of
   - Prowlarr Build `2.3.6.5351` / [Commit: 46ce8e270138e757b14cc1b42b259419a2fac979](https://github.com/Prowlarr/Prowlarr/commit/46ce8e270138e757b14cc1b42b259419a2fac979)
-  - [Prowlarr Indexers Commit: 62394f8ef38cec6eb969cc164c42150de89de5c3](https://github.com/Prowlarr/Indexers/commit/62394f8ef38cec6eb969cc164c42150de89de5c3)
+  - [Prowlarr Indexers Commit: 4adae2f46fd7297efaa3951d46f225d873978d8d](https://github.com/Prowlarr/Indexers/commit/4adae2f46fd7297efaa3951d46f225d873978d8d)
 
 ---
 
@@ -137,7 +137,6 @@ dateCreated: 2026-04-19T02:36:58.767793
 |[BookTracker](https://booktracker.org/){#booktracker}|BookTracker is a RUSSIAN Semi-Private Torrent Tracker for EBOOKS|Russian (Russia)|
 |[BootyTape](https://ssl.bootytape.com/){#bootytape}|BootyTape is a Semi-Private Torrent Tracker for 3X|English (United States)|
 |[comicat](https://www.comicat.org/){#comicat}|comicat is a CHINESE Semi-Private tracker for Anime / Hentai / Manga|Chinese (China)|
-|[DarkiWorld (API)](https://darkiworld16.com/){#darkiworld-api}|DarkiWorld is a FRENCH Semi-Private Torrent Tracker for MOVIES / TV / GENERAL|French (France)|
 |[Deildu](https://deildu.net/){#deildu}|Deildu is an ICELANDIC Semi-Private Torrent Tracker for MOVIES / TV / GENERAL|Icelandic (Iceland)|
 |[Devil-Torrents](https://devil-torrents.pl/){#devil-torrents}|Devil-Torrents is a POLISH Semi-Private Torrent Tracker for MOVIES / TV / GENERAL|Polish (Poland)|
 |[DreamingTree](https://dreamingtree.org/){#dreamingtree}|DreamingTree is a Semi-Private Torrent Tracker for DAVE MATHEWS MUSIC / BOOTLEGS|English (United States)|
@@ -153,6 +152,7 @@ dateCreated: 2026-04-19T02:36:58.767793
 |[HDGalaKtik](https://www.trackerpmr.com/){#hdgalaktik}|HDGalaKtik is a RUSSIAN Semi-Private tracker for MOVIES / TV / GENERAL|Russian (Russia)|
 |[HellTorrents](https://helltorrents.com/){#helltorrents}|HellTorrents is a POLISH Semi-Private PAY2DL Torrent Tracker for MOVIES / TV / GENERAL|Polish (Poland)|
 |[HunTorrent](https://huntorrent.org/){#huntorrent}|HunTorrent is a HUNGARIAN Semi-Private Torrent Tracker for MOVIES / TV / GENERAL|Hungarian (Hungary)|
+|[Hydracker (API)](https://hydracker.com/){#hydracker-api}|Hydracker is a FRENCH Semi-Private Torrent Tracker for MOVIES / TV / GENERAL|French (France)|
 |[Il Corsaro Blu](https://ilcorsaroblu.org/){#ilcorsaroblu}|il CorSaRo Blu is an ITALIAN Semi-Private Torrent Tracker for MOVIES / TV / GENERAL|Italian (Italy)|
 |[Kinorun](http://kinorun.top/){#kinorun}|Kinorun is a RUSSIAN Semi-Private Torrent Tracker for 3X|Russian (Russia)|
 |[Kinozal](https://kinozal.tv/){#kinozal}|Kinozal is a RUSSIAN Semi-Private Torrent Tracker for MOVIES / TV / MUSIC\. This indexer uses torrents|Russian (Russia)|
@@ -263,7 +263,7 @@ dateCreated: 2026-04-19T02:36:58.767793
 |[BrasilTracker](https://brasiltracker.org/){#brasiltracker}|BrasilTracker is a BRAZILIAN Private Torrent Tracker for MOVIES / TV / GENERAL|Portuguese (Brazil)|
 |[BroadcasTheNet](https://api.broadcasthe.net/){#broadcasthenet}|BroadcasTheNet (BTN) is an invite-only torrent tracker focused on TV shows|English (United States)|
 |[BrokenStones](https://brokenstones.is/){#brokenstones}|Broken Stones is a Private site for MacOS and iOS APPS / GAMES|English (United States)|
-|[The Brothers](https://the-brothers.bounceme.net/){#thebrothers}|The Brothers is a Private GERMAN tracker for MOVIES / TV / GENERAL|German (Germany)|
+|[The Brothers](https://leo-test.store/){#thebrothers}|The Brothers is a Private GERMAN tracker for MOVIES / TV / GENERAL|German (Germany)|
 |[BTArg](https://www.btarg.com.ar/){#btarg}|BTArg is an ARGENTINIAN Private Torrent Tracker for MOVIES / TV / GENERAL|Spanish (Argentina)|
 |[BTNext](https://tracker.btnext.com/){#btnext}|BTNext (BTNT) is a PORTUGUESE Private Torrent Tracker for 0DAY / GENERAL|Portuguese (Portugal)|
 |[BTSCHOOL](https://pt.btschool.club/){#btschool}|BTSCHOOL is a CHINESE Private Torrent Tracker for HD MOVIES / TV|Chinese (China)|
