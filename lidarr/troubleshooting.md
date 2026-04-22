@@ -2,6 +2,16 @@
 title: Lidarr Troubleshooting
 description: Common issues, error codes, and solutions for troubleshooting Lidarr installation, configuration, and operational problems
 published: true
+date: 2026-04-22T19:51:46.753Z
+tags: lidarr, troubleshooting, support, issues, debugging, errors
+editor: markdown
+dateCreated: 2021-06-14T21:36:46.193Z
+---
+
+---
+title: Lidarr Troubleshooting
+description: Common issues, error codes, and solutions for troubleshooting Lidarr installation, configuration, and operational problems
+published: true
 date: 2026-04-20T17:02:02.378Z
 tags: lidarr, troubleshooting, support, issues, debugging, errors
 editor: markdown
@@ -479,6 +489,27 @@ If you have results on the site you can find that are not showing in Lidarr then
 - [Categories are incorrect - See Above](#wrong-categories)
 - An ID based searched is being done and the Indexer does not have the releases correctly mapped to that ID. This is something only your indexer can solve. They need to ensure the release is mapped to the correct applicable ids.
 - Not searching how Lidarr is searching; It's highly likely the terms you are searching on the indexer is not how Lidarr is querying it. You can see how Lidarr is querying from the Trace Logs. Text based queries will generally be in the format of `q=words%20and%20things%20here`  this string is HTTP encoded and can be easily decoded using any HTML decoding/encoding tool online.
+
+### Release Rejected: Album duration is 0
+
+When Lidarr grabs a release it checks that the file size returned by the indexer is plausible for the album. That check requires knowing the total duration of the album. If MusicBrainz does not have track lengths for the release (shown as `???` on the MusicBrainz release page), Lidarr calculates a duration of 0 and rejects every candidate with:
+
+```none
+Release Rejected
+* Album duration is 0, unable to validate size until it is available
+```
+
+The album can still be added to Lidarr and will appear in your library, but no automatic or manual search will succeed until the duration data exists.
+
+**Fix:** Add the missing track lengths to MusicBrainz, then let the data propagate to Lidarr.
+
+1. Open the release on [MusicBrainz](https://musicbrainz.org) and edit the track list to add durations. If you don’t have a MusicBrainz account, [creating one](https://musicbrainz.org/register) is free.
+2. Wait for the Servarr metadata server to pick up the change (up to ~1 hour), or use the `!refresh` bot command in the [Lidarr Discord](https://lidarr.audio/discord) `#lidarr-music-requests` channel to force an early refresh.
+3. In Lidarr, go to the artist page and trigger **Artist → Refresh & Scan** to pull in the updated metadata.
+4. Retry the search — Lidarr can now validate sizes and will grab matching releases normally.
+
+> If you cannot edit MusicBrainz (for example, the release is locked pending a vote), the only workaround is **Manual Import** — download the files through other means and use Lidarr’s manual import flow to match and move them.
+{.is-info}
 
 ### Certificate validation
 
