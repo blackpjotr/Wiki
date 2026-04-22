@@ -2,6 +2,16 @@
 title: Lidarr FAQ
 description: Frequently asked questions and common issues with solutions for Lidarr music management
 published: true
+date: 2026-04-22T19:51:03.348Z
+tags: lidarr, troubleshooting, faq, questions, help, common-issues
+editor: markdown
+dateCreated: 2021-06-14T14:33:41.344Z
+---
+
+---
+title: Lidarr FAQ
+description: Frequently asked questions and common issues with solutions for Lidarr music management
+published: true
 date: 2026-04-20T14:25:16.385Z
 tags: lidarr, troubleshooting, faq, questions, help, common-issues
 editor: markdown
@@ -102,6 +112,10 @@ Three common causes:
 - **Metadata server cache needs busting.** Rare but it happens — especially after big MB edits. The full flow, including the `!refresh` bot command, is on [Metadata Troubleshooting](/lidarr/metadata-troubleshooting).
 
 If none of those apply, the full troubleshooting flow lives on the [Metadata Troubleshooting](/lidarr/metadata-troubleshooting) page.
+
+### I added an album but searches fail with "Album duration is 0"
+
+MusicBrainz does not have track lengths for this release (they appear as `???` on the MB release page). Lidarr needs the total duration to validate that a grabbed file is the right size, and with a duration of 0 it rejects every result. Fix the track lengths on MusicBrainz, refresh the artist in Lidarr, then retry the search. Full steps are in [Troubleshooting → Release Rejected: Album duration is 0](/lidarr/troubleshooting#release-rejected-album-duration-is-0).
 
 ## Importing and renaming
 
