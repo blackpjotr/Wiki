@@ -2,7 +2,7 @@
 title: Lidarr Tips and Tricks
 description: Advanced tips, optimization techniques, and workflow improvements for experienced Lidarr users
 published: true
-date: 2026-04-20T13:09:31.684Z
+date: 2026-04-26T14:46:09.066Z
 tags: lidarr, tips, tricks, optimization, workflow, advanced, advanced tips
 editor: markdown
 dateCreated: 2021-08-14T15:15:51.656Z
@@ -13,6 +13,46 @@ dateCreated: 2021-08-14T15:15:51.656Z
 Recipes and workarounds for things that come up often enough to be worth documenting, but don't fit the install / troubleshoot / FAQ shape. Most of this is library-management content: filling in gaps in metadata, bulk-editing the library, and backup/restore hygiene.
 
 For setup recipes (reverse proxy, VPN, Docker compose, hardlinks) see the [TRaSH Guides](https://trash-guides.info/) — they cover those topics in more depth than this wiki does.
+
+## Folder structure
+
+### Separating download folders from your library
+
+Lidarr requires that your download folder and your music library root folder are **not the same location**. This is not just a best practice — mixing them causes imports to fail or loop, since Lidarr cannot reliably tell what is a finished download and what is already part of the library.
+
+A clean layout keeps three locations separate:
+
+```
+/data/
+  downloads/          ← download client writes here
+  music/              ← Lidarr root folder (your library)
+```
+
+Lidarr moves (or hardlinks) files from `downloads/` into `music/` on import. Once imported, the file in `downloads/` is the copy the download client owns; the file in `music/` is the copy Lidarr manages.
+
+> For hardlinks to work — which avoids any extra disk space during import — both paths must be on the same physical filesystem. If `downloads/` and `music/` are on different drives or volumes, Lidarr will copy instead of hardlink. See [Concepts → Hardlinks and completed downloads](/lidarr/concepts#hardlinks-and-completed-downloads).
+{.is-info}
+
+### Multiple download clients
+
+If you run more than one download client (for example, both a Usenet client and a torrent client), give each its own download subfolder **and** configure a matching category in Lidarr:
+
+```
+/data/
+  downloads/
+    usenet/           ← SABnzbd / NZBGet category: "lidarr"
+    torrents/         ← qBittorrent / Deluge category: "lidarr"
+  music/
+```
+
+In **Settings → Download Clients**, set each client's **Category** to a unique value (e.g., `lidarr`) and set the **Download Client**'s own category to match. Lidarr only monitors items in the configured category — anything outside it is invisible, which prevents cross-contamination between clients and between applications sharing the same client.
+
+> Radarr, Sonarr, and Lidarr can share the same download client safely as long as each application uses a different category. Never point two applications at the same category — they will fight over each other's downloads.
+{.is-info}
+
+### Remote path mapping
+
+If Lidarr and your download client run in separate containers or on separate machines, the path the download client reports for a completed download may differ from the path Lidarr sees when it tries to access the same file. Use **Settings → Download Clients → Remote Path Mappings** to translate between the two. See [Troubleshooting → Remote Path Mapping](/lidarr/troubleshooting#remote-path-mapping) for the full explanation.
 
 ## Library maintenance
 
