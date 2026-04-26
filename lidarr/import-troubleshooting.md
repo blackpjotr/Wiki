@@ -2,7 +2,7 @@
 title: Lidarr Import Troubleshooting
 description: Why a download finishes but Lidarr does not import it — match-quality thresholds, the manual-import path, and when human intervention is necessary
 published: true
-date: 2026-04-26T16:30:19.737Z
+date: 2026-04-26T22:02:06.558Z
 tags: lidarr, troubleshooting, plugins, import, matching
 editor: markdown
 dateCreated: 2026-04-20T13:06:15.307Z
@@ -154,6 +154,23 @@ The only checks still enforced at manual-import time are filesystem- and DB-leve
 
 If manual import fails, the reason will be one of the above — a filesystem or DB failure, not a match-quality rejection.
 
+## Controlling which pressing gets matched
+
+{#controlling-which-pressing-gets-matched}
+
+Lidarr's automatic import matcher picks the MusicBrainz release (pressing) that scores closest to the files on disk. It does not prefer one pressing over another based on format (CD / Digital Media / Vinyl) — `media_format` has a low weight in the distance model and only penalises releases whose format is `Unknown` in MusicBrainz. If you want a specific pressing to be matched rather than whichever one happened to score closest, you have three options.
+
+**Option 1 — Tag with the correct MusicBrainz Release MBID.** The `album_id` distance signal (weight 5.0) is the second-strongest signal in the model after Recording IDs. If your files carry the `MusicBrainz Album Id` tag set to the Release MBID for the pressing you want, the automatic matcher will nearly always select it. Use [MusicBrainz Picard](https://picard.musicbrainz.org/), [beets](https://beets.io/), or [Harmony](https://harmony.pulsewidth.org.uk/) to write the tag before the import runs. Make sure you use the **Release MBID**, not the Release Group MBID — those are different IDs.
+
+**Option 2 — Use manual import and pick the pressing.** The manual-import dialog lets you select the specific release within a release group. Once you choose a pressing and click Import, that pressing becomes the attached release for those files. No tags need changing. See [Using manual import](#using-manual-import) above for the two entry points.
+
+**Option 3 — Switch the active release on the album page.** Each album in Lidarr has a currently-active release. You can change it by going to the album page, clicking **Edit**, and selecting a different release from the dropdown. After saving, a new import triggered from Activity → Queue or a manual import will match against that release.
+
+> None of these options work retroactively on files Lidarr has already imported and is tracking. For already-imported files, use manual import to re-import with a different pressing selection, which overwrites the attached release in the database.
+{.is-info}
+
+For background on why format preference is not automatic and the open feature request on this, see [FAQ → Can Lidarr prefer a specific pressing or format during import?](/lidarr/faq#can-lidarr-prefer-a-specific-pressing-or-format-during-import).
+
 ## Where this lives in the source
 
 For advanced readers who want to verify the rules or trace a specific rejection, the relevant code lives under [`src/NzbDrone.Core/MediaFiles/TrackImport/`](https://github.com/Lidarr/Lidarr/tree/develop/src/NzbDrone.Core/MediaFiles/TrackImport) in the Lidarr source tree:
@@ -179,4 +196,4 @@ For advanced readers who want to verify the rules or trace a specific rejection,
 - [Importing an Existing Library](/lidarr/importing-existing-library) — the fresh-install import walkthrough
 - [Metadata Troubleshooting](/lidarr/metadata-troubleshooting) — for problems where the release is missing or wrong at MusicBrainz
 - [FAQ](/lidarr/faq) — shorter answers that didn't fit this page
-- [MusicBrainz Picard](https://picard.musicbrainz.org/) — tag files with MBIDs before importing for a dramatically higher success rate
+- [MusicBrainz Picard](https://picard.musicbrainz.org/) — tag files with MBIDs before importing for a dramatically higher succes
