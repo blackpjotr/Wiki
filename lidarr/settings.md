@@ -2,7 +2,7 @@
 title: Lidarr Settings
 description: Complete configuration guide for Lidarr settings including media management, profiles, quality definitions, and metadata preferences
 published: true
-date: 2026-04-26T22:01:00.948Z
+date: 2026-04-26T22:18:06.334Z
 tags: lidarr, settings, configuration, quality, profiles, metadata, media
 editor: markdown
 dateCreated: 2021-06-14T21:36:07.513Z
@@ -68,8 +68,27 @@ Example: `{Artist Name}` → `/music/The Beatles/`
 | **Skip Free Space Check** | Off | Skip the available disk space check before importing. Only enable this if Lidarr cannot correctly detect free space (some network shares and unusual storage setups). |
 | **Minimum Free Space** | 100 MB | Lidarr will refuse to import if available space in the root folder falls below this value. |
 | **Use Hardlinks Instead of Copy** | On | Use hardlinks when the source and destination are on the same filesystem. Hardlinks avoid copying data and allow seeding to continue. Falls back to copy if hardlinks are not supported. |
-| **Import Extra Files** | Off | Import additional files with the same base name alongside audio files (e.g. cover art, booklets). |
-| **Extra File Extensions** | (empty) | Comma-separated list of file extensions to import alongside audio when **Import Extra Files** is enabled. Example: `jpg,png,pdf,cue` |
+| **Import Extra Files** | Off | Import sidecar files with the same base name alongside audio files at import time (e.g. lyric files, NFO files, cover images). See below. |
+| **Extra File Extensions** | (empty) | Comma-separated list of file extensions to import when **Import Extra Files** is enabled. Example: `lrc,nfo,jpg,png`. Do not use `*` — it is not treated as a wildcard and matches nothing. |
+
+### How Import Extra Files works
+
+When enabled, Lidarr scans the **same directory as each downloaded track file** immediately after that track imports. It looks for sidecar files — files whose name (without extension) starts with the track's name (without extension). For example, when importing `01 Song.flac`, Lidarr will consider `01 Song.lrc`, `01 Song.nfo`, and `01 Song.jpg` as candidates. A file like `cover.jpg` or `album.nfo` whose name does not share the track's filename prefix is ignored.
+
+Matching files are then filtered against the configured extension list. Files that pass are:
+
+1. Moved into the **library folder** alongside the imported track (or hardlinked/copied if the download is seeding and is read-only).
+2. Renamed to match the track filename, preserving the extension.
+3. Recorded in Lidarr's database and associated with the track file.
+
+**NFO files:** only the first NFO file found in the source folder is imported per import run. Subsequent NFO files from the same folder are skipped to prevent duplicates.
+
+**Lyric files** (`.lrc`, `.txt`, `.utf`, `.utf8`, `.utf-8`) are handled by a separate lyric manager that takes priority over the general extra-file handler. They are imported with the same base name as the track and will follow it on rename.
+
+**When an artist is moved to a new root folder**, all files in the artist directory move together at the filesystem level — including extra files Lidarr is not tracking. Extra files that Lidarr is tracking continue to resolve correctly at the new location because their stored paths are relative to the artist folder, which is updated as part of the move.
+
+> The `*` wildcard is not supported in the extension list. The code matches by `filename.EndsWith(extension)` — a file never literally ends in `*`. List explicit extensions only.
+{.is-warning}
 
 ## File Management
 
