@@ -2,12 +2,11 @@
 title: Lidarr Settings
 description: Complete configuration guide for Lidarr settings including media management, profiles, quality definitions, and metadata preferences
 published: true
-date: 2026-04-26T16:32:53.365Z
+date: 2026-04-26T22:01:00.948Z
 tags: lidarr, settings, configuration, quality, profiles, metadata, media
 editor: markdown
 dateCreated: 2021-06-14T21:36:07.513Z
 ---
-
 
 # Lidarr Settings
 
@@ -154,6 +153,36 @@ Release profiles filter and score releases based on their titles. Use them to re
 | **Include Preferred when Renaming** | If enabled, the matched preferred term is appended to the filename during rename. Useful for tagging releases from specific groups in the filename. |
 | **Indexers** | Restrict this profile to specific indexers. Leave empty to apply to all indexers. |
 | **Tags** | Restrict this profile to artists with matching tags. Leave empty to apply to all artists. |
+
+> Release profiles apply at **grab/download time** — they filter and score releases from indexers before Lidarr sends anything to a download client. They have no effect on which MusicBrainz release (pressing, edition, format) Lidarr matches your already-downloaded files to during import. See [FAQ → Can Lidarr prefer a specific pressing or format during import?](/lidarr/faq#can-lidarr-prefer-a-specific-pressing-or-format-during-import) for the import side of this.
+{.is-info}
+
+
+## Custom Formats
+
+{#custom-formats-2}
+
+Custom formats score releases based on patterns matched against the release title and indexer flags. Unlike release profiles, which require or reject terms absolutely, custom formats assign a numeric score that accumulates across all matched formats. A quality profile can then set a **Minimum Custom Format Score** — releases below that threshold are not grabbed.
+
+Click **Add (+)** to create a format, or **Import** to paste a JSON definition.
+
+> Like release profiles, custom formats apply at **grab/download time** — scores are computed against indexer release titles before any download is sent to a client. They do not influence which MusicBrainz release Lidarr matches an already-downloaded file to during import.
+{.is-info}
+
+### Specifications
+
+Each custom format contains one or more specifications. A specification defines a single matching rule — for example, "release title contains `\bFLAC\b`" or "release is from indexer X". Specifications within a format combine with AND logic (all must match for the format to fire) unless you tick **Negate** (inverts the match) or adjust the **Required** flag.
+
+Common specification types for music:
+
+| Specification | Matches against |
+|---|---|
+| **Release Title** | The full release title string from the indexer. Supports regex. |
+| **Release Group** | The release group portion of the title, if parseable. |
+| **Indexer Flag** | Indexer-specific flags (Freeleech, Halfleech, etc.) where the indexer supports them. |
+| **Source** | Audio source tag (CD, WEB, Vinyl, etc.) if present in the title. |
+
+For worked examples and suggested scoring values for a FLAC-focused library, see [Tips and Tricks → Custom Formats](/lidarr/tips-and-tricks#custom-formats).
 
 
 # Quality
@@ -333,32 +362,3 @@ Tags are particularly useful for:
 # UI
 
 {#ui}
-
-## Calendar
-
-| Setting | Description |
-|---|---|
-| **First Day of Week** | Day the week starts on in the calendar view. |
-| **Week Column Header** | Date format shown in the calendar's week-column headers. |
-
-## Dates
-
-| Setting | Description |
-|---|---|
-| **Short Date Format** | Format used for dates in compact contexts (e.g. album lists). |
-| **Long Date Format** | Format used for dates in expanded contexts. |
-| **Time Format** | 12-hour (`1:30 PM`) or 24-hour (`13:30`) time display. |
-| **Show Relative Dates** | Show dates as "3 days ago" or "in 2 weeks" instead of absolute dates. |
-
-## Style
-
-| Setting | Description |
-|---|---|
-| **Enable Color Impaired Mode** | Adjust the UI color palette for better visibility with common color vision deficiencies. |
-| **Expand Albums by Default** | Expand the album list on artist pages by default instead of showing collapsed view. Separate toggles are available for Albums, EPs, Singles, Broadcasts, and Other release types. |
-
-## Language
-
-| Setting | Description |
-|---|---|
-| **UI Language** | Language for the Lidarr interface. Translations are community-maintained; coverage varies. |
