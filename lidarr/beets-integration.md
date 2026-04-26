@@ -2,11 +2,12 @@
 title: Lidarr and beets Integration
 description: 
 published: true
-date: 2026-04-26T15:17:29.688Z
+date: 2026-04-26T16:18:22.804Z
 tags: lidarr, beets
 editor: markdown
 dateCreated: 2026-04-26T15:17:29.688Z
 ---
+
 
 # Lidarr and beets Integration
 
@@ -46,7 +47,7 @@ In this pattern, beets runs once per import triggered by a Lidarr Custom Script.
 
 ## How it works
 
-Lidarr fires its **On Import / On Upgrade** event after it has moved and renamed the downloaded files into the library folder. A Custom Script registered in **Settings → Connect** receives the file paths via the `lidarr_addedtrackpaths` environment variable (pipe-separated). The script invokes beets against those files with a configuration that writes tags but does not move or copy anything.
+Lidarr fires its **On Import / On Upgrade** event after it has moved and renamed the downloaded files into the library folder. A Custom Script registered in **Settings → Connect** receives the file paths via the `Lidarr_AddedTrackPaths` environment variable (pipe-separated). The script invokes beets against those files with a configuration that writes tags but does not move or copy anything.
 
 ## Required beets configuration
 
@@ -79,14 +80,14 @@ plugins:
 
 Save as an executable shell script, e.g. `/opt/scripts/beets-import.sh`:
 
-```bash
+```shell
 #!/bin/bash
 set -euo pipefail
 
 BEETS_CONFIG="/opt/scripts/beets-import-script.yaml"
 
 # Split the pipe-separated track paths and collect unique album directories
-IFS='|' read -ra TRACKS <<< "$lidarr_addedtrackpaths"
+IFS='|' read -ra TRACKS <<< "$Lidarr_AddedTrackPaths"
 declare -A SEEN_DIRS
 DIRS=()
 for track in "${TRACKS[@]}"; do
@@ -112,7 +113,7 @@ Save as a `.ps1` file, e.g. `C:\Scripts\beets-import.ps1`:
 ```powershell
 $beetsConfig = "C:\Scripts\beets-import-script.yaml"
 
-$trackPaths = $env:lidarr_addedtrackpaths -split '\|'
+$trackPaths = $env:Lidarr_AddedTrackPaths -split '\|'
 $albumDirs  = $trackPaths | ForEach-Object { Split-Path -Parent $_ } | Select-Object -Unique
 
 foreach ($dir in $albumDirs) {
@@ -172,7 +173,7 @@ plugins:
 
 The `--pretend` flag is your safety net:
 
-```bash
+```shell
 beet --config=/config/beets/beets-persistent.yaml import --pretend /music/some-artist
 ```
 
