@@ -2,11 +2,12 @@
 title: Lidarr Tips and Tricks
 description: Advanced tips, optimization techniques, and workflow improvements for experienced Lidarr users
 published: true
-date: 2026-04-26T14:46:09.066Z
+date: 2026-04-26T21:46:05.756Z
 tags: lidarr, tips, tricks, optimization, workflow, advanced, advanced tips
 editor: markdown
 dateCreated: 2021-08-14T15:15:51.656Z
 ---
+
 
 # Lidarr Tips and Tricks
 
@@ -92,6 +93,156 @@ Use **Library → Artist Editor** (formerly "Mass Editor"):
    - *Remove from Lidarr and delete files* is destructive and irreversible. Make sure you have a backup first if in doubt.
 
 The same flow works for bulk changes that aren't deletion — root folder moves, quality profile swaps, monitoring toggles — via the other bulk-action buttons at the bottom of Artist Editor.
+
+## Custom Formats
+
+Custom formats let you score releases by source, release group, and other title characteristics so Lidarr can prefer or avoid them automatically. The examples below are a useful starting point for a FLAC-focused library. Import each block via **Settings → Custom Formats → Import**.
+
+### Quality definitions for FLAC
+
+Before setting up custom format scoring, consider tightening the FLAC quality definition to filter out single-file CUE+FLAC rips, which present as a single very large track rather than properly split files.
+
+In **Settings → Quality**, set the FLAC row to:
+
+| | Min | Preferred | Max |
+|---|---|---|---|
+| FLAC | 0 | 895 | 1400 |
+| FLAC 24bit | 0 | 895 | 1495 |
+
+The Max value rejects releases whose computed bitrate exceeds a realistic ceiling for split-track FLAC, which catches most CUE+single-file rips without affecting normal releases.
+
+### Example custom formats
+
+#### Preferred Groups
+
+Boosts releases from groups known for consistent quality and accurate tagging.
+
+```json
+{
+  "name": "Preferred Groups",
+  "includeCustomFormatWhenRenaming": false,
+  "specifications": [
+    {
+      "name": "DeVOiD",
+      "implementation": "ReleaseGroupSpecification",
+      "negate": false,
+      "required": false,
+      "fields": { "value": "\\bDeVOiD\\b" }
+    },
+    {
+      "name": "PERFECT",
+      "implementation": "ReleaseGroupSpecification",
+      "negate": false,
+      "required": false,
+      "fields": { "value": "\\bPERFECT\\b" }
+    },
+    {
+      "name": "ENRiCH",
+      "implementation": "ReleaseGroupSpecification",
+      "negate": false,
+      "required": false,
+      "fields": { "value": "\\bENRiCH\\b" }
+    }
+  ]
+}
+```
+
+#### CD
+
+Tags releases identified as a CD source.
+
+```json
+{
+  "name": "CD",
+  "includeCustomFormatWhenRenaming": false,
+  "specifications": [
+    {
+      "name": "CD",
+      "implementation": "ReleaseTitleSpecification",
+      "negate": false,
+      "required": false,
+      "fields": { "value": "\\bCD\\b" }
+    }
+  ]
+}
+```
+
+#### WEB
+
+Tags releases identified as a web (streaming) source.
+
+```json
+{
+  "name": "WEB",
+  "includeCustomFormatWhenRenaming": false,
+  "specifications": [
+    {
+      "name": "WEB",
+      "implementation": "ReleaseTitleSpecification",
+      "negate": false,
+      "required": false,
+      "fields": { "value": "\\bWEB\\b" }
+    }
+  ]
+}
+```
+
+#### Lossless
+
+Tags releases that identify themselves as lossless. Useful on Usenet where filenames are less predictable.
+
+```json
+{
+  "name": "Lossless",
+  "includeCustomFormatWhenRenaming": false,
+  "specifications": [
+    {
+      "name": "Lossless",
+      "implementation": "ReleaseTitleSpecification",
+      "negate": false,
+      "required": false,
+      "fields": { "value": "\\blossless\\b" }
+    }
+  ]
+}
+```
+
+#### Vinyl
+
+Tags releases from a vinyl source, for libraries that want to avoid or specifically seek out vinyl rips.
+
+```json
+{
+  "name": "Vinyl",
+  "includeCustomFormatWhenRenaming": false,
+  "specifications": [
+    {
+      "name": "Vinyl",
+      "implementation": "ReleaseTitleSpecification",
+      "negate": false,
+      "required": false,
+      "fields": { "value": "\\bVinyl\\b" }
+    }
+  ]
+}
+```
+
+### Suggested scoring
+
+Once the formats are created, assign scores in **Settings → Profiles → [your profile] → Custom Formats**. The table below implements a setup that requires releases to match at least one positive format before Lidarr will grab them, prefers CD over WEB, and actively avoids vinyl.
+
+| Custom Format | Score |
+|---|---|
+| Preferred Groups | 100 |
+| CD | 10 |
+| Lossless | 10 |
+| WEB | 5 |
+| Vinyl | -10000 |
+
+Set **Minimum Custom Format Score** to `1` in the profile. This means a release must match at least one of CD, Lossless, WEB, or Preferred Groups to be grabbed — releases with no recognised source tag are skipped entirely.
+
+> Scoring is subjective and depends on your indexers and sources. Treat these values as a starting point, not a prescription.
+{.is-info}
 
 ## Backup and restore
 
