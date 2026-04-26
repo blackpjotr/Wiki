@@ -1,8 +1,8 @@
 ---
-title: Metadata Troubleshooting
+title: Lidarr Metadata Troubleshooting
 description: Why can't I add or update this album? Diagnose MusicBrainz metadata problems in Lidarr — propagation, unknown release statuses, matching, cache-busts
 published: true
-date: 2026-04-26T14:53:55.253Z
+date: 2026-04-26T16:29:35.210Z
 tags: lidarr, troubleshooting, releases, metadata, musicbrainz, cache-bust
 editor: markdown
 dateCreated: 2026-04-20T13:04:32.647Z
