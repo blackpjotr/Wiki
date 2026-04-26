@@ -2,7 +2,7 @@
 title: Lidarr FAQ
 description: Frequently asked questions and common issues with solutions for Lidarr music management
 published: true
-date: 2026-04-26T14:52:41.355Z
+date: 2026-04-26T22:01:42.219Z
 tags: lidarr, troubleshooting, faq, questions, help, common-issues
 editor: markdown
 dateCreated: 2021-06-14T14:33:41.344Z
@@ -162,6 +162,24 @@ Files with any other extension are invisible to Lidarr — it will not import, r
 A subset of these formats have named quality definitions that quality profiles and upgrade rules can target: **FLAC**, **APE**, **WavPack** (`.wv`), **WAV**, and **WMA**. The remaining formats (`mp3`, `m4a`, `ogg`, `opus`, etc.) are grouped under `Unknown` quality in Lidarr's quality system, which means quality-based upgrade rules treat them as interchangeable. If you want to distinguish between, say, MP3 and AAC for upgrade purposes, use Custom Formats rather than quality thresholds.
 
 If a file with a supported extension is still not being imported, the issue is typically match quality rather than format — see [Import Troubleshooting](/lidarr/import-troubleshooting).
+
+### Can Lidarr prefer a specific pressing or format during import?
+
+{#can-lidarr-prefer-a-specific-pressing-or-format-during-import}
+
+**No — not automatically.** Lidarr's import matcher selects the MusicBrainz release (pressing) that scores closest to the files on disk using tags, filenames, track counts, and durations. It does not factor in format (CD / Digital Media / Vinyl / Cassette) as a preference signal when comparing candidates of similar quality. If you download a web rip, Lidarr will match it to whichever pressing best fits the file metadata — typically the one with the most matching track-level data — regardless of whether that pressing is flagged as "Digital Media" or "CD" in MusicBrainz.
+
+**Why the matcher behaves this way:** Lidarr's distance scoring gives heavy weight to MusicBrainz Recording and Release IDs (weights 10.0 and 5.0 respectively), artist/album/title text (3.0 each), track count, and duration. The `media_format` field has a weight of only 1.0, and it only penalises releases whose format is listed as `Unknown` in MusicBrainz — it does not differentiate between CD, Digital Media, Vinyl, or Cassette. Files tagged with accurate MBIDs override almost everything else; files without MBIDs fall back to text matching.
+
+**Release profiles and custom formats don't help here either** — both operate at grab/download time, filtering and scoring releases on indexers before anything is sent to a download client. They have no influence on which pressing Lidarr matches your already-downloaded files to.
+
+**Feature request status:** There is a long-standing [open feature request](https://github.com/Lidarr/Lidarr/issues/186) to expose format/country/status as preferences in profiles. It has been open since January 2018 and is not currently implemented.
+
+**What you can do:**
+
+- **Use manual import** and pick the specific pressing you want from the release-selection dialog. Manual import lets you choose the artist, release group, and specific release (pressing) — Lidarr will attach the files to whatever you select, regardless of what the automatic matcher would have chosen. See [Import Troubleshooting → Controlling which pressing gets matched](/lidarr/import-troubleshooting#controlling-which-pressing-gets-matched).
+- **Tag your files with the correct MusicBrainz Release MBID** before importing. If the `MusicBrainz Album Id` tag contains the Release MBID for the pressing you want, the `album_id` distance (weight 5.0) pulls the score strongly toward that specific pressing. MusicBrainz Picard, beets, and similar taggers can write this tag.
+- **Fix the active release on the album in Lidarr.** The album page shows which release Lidarr currently treats as canonical. You can switch it — Lidarr will re-attempt to match files against that release if you trigger a new import.
 
 ## Lists and automation
 
