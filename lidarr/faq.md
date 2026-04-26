@@ -2,17 +2,7 @@
 title: Lidarr FAQ
 description: Frequently asked questions and common issues with solutions for Lidarr music management
 published: true
-date: 2026-04-26T13:23:47.319Z
-tags: lidarr, troubleshooting, faq, questions, help, common-issues
-editor: markdown
-dateCreated: 2021-06-14T14:33:41.344Z
----
-
----
-title: Lidarr FAQ
-description: Frequently asked questions and common issues with solutions for Lidarr music management
-published: true
-date: 2026-04-20T14:25:16.385Z
+date: 2026-04-26T14:52:41.355Z
 tags: lidarr, troubleshooting, faq, questions, help, common-issues
 editor: markdown
 dateCreated: 2021-06-14T14:33:41.344Z
@@ -161,6 +151,18 @@ Almost always a case-only rename on Windows. Windows filesystems treat `Artist` 
 
 The fix is to rename the folder manually using a two-step rename (`Artist` → `Artist_tmp` → `Artist`) so the filesystem actually commits the case change. On Linux and macOS this is not an issue — those filesystems are case-sensitive.
 
+### What audio formats does Lidarr support?
+
+Lidarr recognises the following file extensions:
+
+`.mp2`, `.mp3`, `.m4a`, `.m4b`, `.m4p`, `.ogg`, `.oga`, `.opus`, `.wma`, `.wav`, `.wv`, `.flac`, `.ape`, `.aif`, `.aiff`
+
+Files with any other extension are invisible to Lidarr — it will not import, rename, or manage them.
+
+A subset of these formats have named quality definitions that quality profiles and upgrade rules can target: **FLAC**, **APE**, **WavPack** (`.wv`), **WAV**, and **WMA**. The remaining formats (`mp3`, `m4a`, `ogg`, `opus`, etc.) are grouped under `Unknown` quality in Lidarr's quality system, which means quality-based upgrade rules treat them as interchangeable. If you want to distinguish between, say, MP3 and AAC for upgrade purposes, use Custom Formats rather than quality thresholds.
+
+If a file with a supported extension is still not being imported, the issue is typically match quality rather than format — see [Import Troubleshooting](/lidarr/import-troubleshooting).
+
 ## Lists and automation
 
 ### Why are lists sync times so long and can I change it?
@@ -173,7 +175,7 @@ If you need faster feedback for a specific list:
 - Script the refresh via the API — `POST /api/v1/command` with body `{"name": "ImportListSync", "definitionId": <list-id>}` using your Lidarr API key. See [API Docs](https://lidarr.audio/docs/api) for the full command reference. Typical pattern: a cron on your own side that polls the source (Spotify playlist, Last.fm top-tracks, etc.) and pokes Lidarr when something changed.
 - Add the releases directly in Lidarr rather than going through a list.
 
-> **Spotify import lists are subject to Spotify's own API rate limits.** Large playlists (thousands of tracks) or many concurrent lists can take time to resolve. If a Spotify list appears to be stuck, check the Lidarr log at the Debug level — you'll see the 429s from Spotify if that's the cause. Waiting out the rate-limit window resolves it.
+> **Spotify import lists can trigger rate-limit errors (429s).** When Lidarr processes a Spotify list, it resolves Spotify IDs to MusicBrainz IDs via the metadata server cache. Any ID not in the cache requires an individual lookup, and enough of those in quick succession will hit the rate limit. The resolution is to wait, or to add the missing Spotify album links to MusicBrainz so they get cached. See [Metadata Troubleshooting → Spotify import list rate limiting](/lidarr/metadata-troubleshooting#spotify-import-list-rate-limiting) for the full mechanism.
 {.is-info}
 
 ### Does Lidarr download lyrics, liner notes, or other extras?
