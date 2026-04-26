@@ -2,15 +2,15 @@
 title: Prowlarr Supported Indexers
 description: Indexers currently named as supported in the current nightly build of Prowlarr. Other indexers may be available via either Generic Newznab or Generic Torznab.
 published: true
-date: 2026-04-21T02:32:57.397329
+date: 2026-04-26T02:40:25.207739
 tags: prowlarr, indexers, reference
 editor: markdown
-dateCreated: 2026-04-21T02:32:57.397329
+dateCreated: 2026-04-26T02:40:25.207739
 ---
 
 - Supported Trackers and Indexers as of
   - Prowlarr Build `2.3.6.5351` / [Commit: 46ce8e270138e757b14cc1b42b259419a2fac979](https://github.com/Prowlarr/Prowlarr/commit/46ce8e270138e757b14cc1b42b259419a2fac979)
-  - [Prowlarr Indexers Commit: 4adae2f46fd7297efaa3951d46f225d873978d8d](https://github.com/Prowlarr/Indexers/commit/4adae2f46fd7297efaa3951d46f225d873978d8d)
+  - [Prowlarr Indexers Commit: 7a8162d36a8939c650690a6f3c7d6b7621981b23](https://github.com/Prowlarr/Indexers/commit/7a8162d36a8939c650690a6f3c7d6b7621981b23)
 
 ---
 
@@ -404,7 +404,7 @@ dateCreated: 2026-04-21T02:32:57.397329
 |[JPTV4us (API)](https://jptv4.us/){#jptv4us-api}|JPTV4us is a JAPANESE Private Torrent Tracker for MOVIES / TV / MUSIC / GENERAL|English (United States)|
 |[KamePT](https://kamept.com/){#kamept}|KamePT is a CHINESE Private Torrent Tracker for 3X|Chinese (China)|
 |[Karagarga](https://karagarga.in/){#karagarga}|Karagarga is a Private Torrent Tracker that tracks non-hollywood, rare and obscure MOVIES, MUSIC and LITERATURE|English (United States)|
-|[Keep Friends](https://pt.keepfrds.com/){#keepfriends}|Keep Friends (FRDS-PT)  is a CHINESE Private Torrent Tracker for HD MOVIES / TV|Chinese (China)|
+|[Keep Friends](https://pt.keepfrds.com/){#keepfriends}|Keep Friends (FRDS-PT) is a CHINESE Private Torrent Tracker for HD MOVIES / TV|Chinese (China)|
 |[Kelu](https://our.kelu.one/){#kelu}|Kelu is a CHINESE Private Torrent Tracker for GAY 3X|Chinese (China)|
 |[The Kitchen](https://thekitchen.click/){#thekitchen}|TheKitchen (TK) is a Private Torrent Tracker for COOKING / CUISINES / RECIPES|English (United States)|
 |[Korsar](http://filbi1976.org/){#korsar}|Korsar is a RUSSIAN Private Torrent Tracker for MOVIES / TV / GENERAL|Russian (Russia)|
@@ -509,7 +509,7 @@ dateCreated: 2026-04-21T02:32:57.397329
 |[PT GTK](https://pt.gtkpw.xyz/){#ptgtk}|PT GTK is a CHINESE Private Torrent Tracker for MOVIES / TV / GENERAL|Chinese (China)|
 |[PTCafe (咖啡)](https://ptcafe.club/){#ptcafe}|PTCafe (咖啡) is a CHINESE Private Torrent Tracker for MOVIES / TV / GENERAL|Chinese (China)|
 |[PTCC (我的PT)](https://cc.mypt.cc/){#ptcc}|PTCC (我的PT) is a CHINESE Private Torrent Tracker for MOVIES / TV / GENERAL|Chinese (China)|
-|[PTerClub (PT之友俱乐部)](https://pterclub.net/){#pterclub}|PTerClub (PT之友俱乐部) is a CHINESE Private Torrent Tracker for HD MUSIC VIDEOS / MOVIES / TV  / ANIME|Chinese (China)|
+|[PTerClub (PT之友俱乐部)](https://pterclub.net/){#pterclub}|PTerClub (PT之友俱乐部) is a CHINESE Private Torrent Tracker for HD MUSIC VIDEOS / MOVIES / TV / ANIME|Chinese (China)|
 |[PTFans](https://ptfans.cc/){#ptfans}|PTFans is a CHINESE Private Torrent Tracker for MOVIES / TV / GENERAL|Chinese (China)|
 |[PTFiles](https://ptfiles.net/){#ptfiles}|PTFiles (PTF) is a Private Torrent Tracker for MOVIES / TV / GENERAL|English (United States)|
 |[PThome](https://www.pthome.net/){#pthome}|PTHome is a CHINESE Private Torrent Tracker for HD MOVIES / TV|Chinese (China)|
