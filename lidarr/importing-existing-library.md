@@ -1,8 +1,8 @@
 ---
-title: Importing an Existing Library
+title: Lidarr Importing an Existing Library
 description: End-to-end guide for migrating an existing music library into Lidarr — preparation, pre-import checks, the import process itself, and post-import cleanup
 published: true
-date: 2026-04-18T17:02:04.571Z
+date: 2026-04-26T16:30:54.662Z
 tags: lidarr, library, musicbrainz, importing, migration, tagging
 editor: markdown
 dateCreated: 2026-04-18T16:54:14.510Z
