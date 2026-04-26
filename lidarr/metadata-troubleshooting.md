@@ -2,7 +2,7 @@
 title: Metadata Troubleshooting
 description: Why can't I add or update this album? Diagnose MusicBrainz metadata problems in Lidarr — propagation, unknown release statuses, matching, cache-busts
 published: true
-date: 2026-04-20T13:04:32.647Z
+date: 2026-04-26T14:53:55.253Z
 tags: lidarr, troubleshooting, releases, metadata, musicbrainz, cache-bust
 editor: markdown
 dateCreated: 2026-04-20T13:04:32.647Z
@@ -171,6 +171,27 @@ Cover art is **not pulled directly by Lidarr** — covers are served to Lidarr v
 - Plan on days, not hours. If a cover still has not appeared after a full week, a cache-bust request is the right next step.
 
 > This page does not cover MusicBrainz's style guidelines or the review process. If you have never edited MusicBrainz before, start with [How to Contribute](https://musicbrainz.org/doc/How_to_Contribute) on the MusicBrainz wiki.
+{.is-info}
+
+## Spotify import list rate limiting
+
+{#spotify-import-list-rate-limiting}
+
+When Lidarr processes a Spotify import list, it resolves each Spotify track or album ID to a MusicBrainz ID in two stages:
+
+1. **Cache lookup** — Lidarr sends all Spotify IDs to the Servarr metadata server at once. The server returns MusicBrainz IDs for any Spotify IDs it has already cached.
+2. **Individual lookups** — for any Spotify ID not in the cache, Lidarr falls back to querying the metadata server one ID at a time. A large playlist or many concurrent lists can generate enough individual lookups to trigger a 429 rate-limit response from the metadata server.
+
+When you hit the rate limit, affected albums will not be added to Lidarr's queue until the limit clears.
+
+**Resolution:**
+
+- **Wait** — the rate-limit window will expire and Lidarr will retry on the next list sync.
+- **Add the missing Spotify link to MusicBrainz** — if the MusicBrainz release for an album does not have its Spotify album URL in the relationship links, the metadata server cannot cache that mapping. Adding the Spotify relationship to the release on MusicBrainz allows the server to cache it, so future lookups for that album resolve from cache rather than triggering an individual API call.
+
+To add a Spotify relationship on MusicBrainz: open the release, go to **Edit** → **Add Relationship**, set the type to **stream for free** (Spotify) or the appropriate streaming relationship type, and paste the Spotify album URL. The cache will pick it up on the next metadata server refresh cycle.
+
+> A 429 from Spotify does not indicate anything wrong with your Lidarr setup — it is a server-side rate limit on lookups. Checking Lidarr's logs at Debug level will show the 429 responses if you want to confirm that is the cause.
 {.is-info}
 
 ## Retry or wait?
