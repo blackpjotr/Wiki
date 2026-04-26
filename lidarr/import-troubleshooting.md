@@ -2,7 +2,7 @@
 title: Import Troubleshooting
 description: Why a download finishes but Lidarr does not import it — match-quality thresholds, the manual-import path, and when human intervention is necessary
 published: true
-date: 2026-04-20T13:06:15.307Z
+date: 2026-04-26T14:53:14.924Z
 tags: lidarr, troubleshooting, plugins, import, matching
 editor: markdown
 dateCreated: 2026-04-20T13:06:15.307Z
@@ -14,6 +14,10 @@ dateCreated: 2026-04-20T13:06:15.307Z
 {.is-info}
 
 If you have not imported anything yet and are setting up a fresh library, start with [Importing an Existing Library](/lidarr/importing-existing-library) instead — this page is for diagnosing imports that do not auto-complete, not for the first-time setup.
+
+## Supported file types
+
+Lidarr only processes files with these extensions: `.mp2`, `.mp3`, `.m4a`, `.m4b`, `.m4p`, `.ogg`, `.oga`, `.opus`, `.wma`, `.wav`, `.wv`, `.flac`, `.ape`, `.aif`, `.aiff`. Any other extension is ignored entirely — Lidarr will not attempt to import, rename, or track it. If your files are not being picked up at all, confirm they have a supported extension before troubleshooting further.
 
 ## Why Lidarr rejects an import
 
