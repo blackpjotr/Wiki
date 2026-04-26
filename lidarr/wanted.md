@@ -2,7 +2,7 @@
 title: Lidarr Wanted
 description: Managing wanted albums, manual searches, and download monitoring in Lidarr's Wanted section
 published: true
-date: 2026-04-26T14:33:46.693Z
+date: 2026-04-26T14:34:44.691Z
 tags: lidarr, wanted, monitoring, albums, search, missing
 editor: markdown
 dateCreated: 2021-06-14T21:35:43.417Z
