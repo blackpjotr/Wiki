@@ -1,8 +1,8 @@
 ---
-title: Import Troubleshooting
+title: Lidarr Import Troubleshooting
 description: Why a download finishes but Lidarr does not import it — match-quality thresholds, the manual-import path, and when human intervention is necessary
 published: true
-date: 2026-04-26T14:53:14.924Z
+date: 2026-04-26T16:30:19.737Z
 tags: lidarr, troubleshooting, plugins, import, matching
 editor: markdown
 dateCreated: 2026-04-20T13:06:15.307Z
