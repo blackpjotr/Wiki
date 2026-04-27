@@ -2,12 +2,11 @@
 title: Lidarr Tips and Tricks
 description: Advanced tips, optimization techniques, and workflow improvements for experienced Lidarr users
 published: true
-date: 2026-04-26T21:46:05.756Z
+date: 2026-04-27T14:36:17.850Z
 tags: lidarr, tips, tricks, optimization, workflow, advanced, advanced tips
 editor: markdown
 dateCreated: 2021-08-14T15:15:51.656Z
 ---
-
 
 # Lidarr Tips and Tricks
 
@@ -19,7 +18,7 @@ For setup recipes (reverse proxy, VPN, Docker compose, hardlinks) see the [TRaSH
 
 ### Separating download folders from your library
 
-Lidarr requires that your download folder and your music library root folder are **not the same location**. This is not just a best practice — mixing them causes imports to fail or loop, since Lidarr cannot reliably tell what is a finished download and what is already part of the library.
+Lidarr requires that your download folder and your music library root folder aren't the same location. This isn't just a best practice — mixing them causes imports to fail or loop, since Lidarr can't reliably tell what's a finished download and what's already part of the library.
 
 A clean layout keeps three locations separate:
 
@@ -46,7 +45,7 @@ If you run more than one download client (for example, both a Usenet client and 
   music/
 ```
 
-In **Settings → Download Clients**, set each client's **Category** to a unique value (e.g., `lidarr`) and set the **Download Client**'s own category to match. Lidarr only monitors items in the configured category — anything outside it is invisible, which prevents cross-contamination between clients and between applications sharing the same client.
+In **Settings → Download Clients**, set each client's **Category** to a unique value (for example, `lidarr`) and set the **Download Client**'s own category to match. Lidarr only monitors items in the configured category — anything outside it's invisible, which prevents cross-contamination between clients and between applications sharing the same client.
 
 > Radarr, Sonarr, and Lidarr can share the same download client safely as long as each application uses a different category. Never point two applications at the same category — they will fight over each other's downloads.
 {.is-info}
@@ -59,11 +58,11 @@ If Lidarr and your download client run in separate containers or on separate mac
 
 ### Missing artist images
 
-Artist images in Lidarr are pulled from whatever the Servarr metadata server aggregates from its upstream sources. Lidarr itself does not reach out to any specific image service — it renders whatever URLs the metadata server returns.
+Artist images in Lidarr are pulled from whatever the Servarr metadata server aggregates from its upstream sources. Lidarr itself doesn't reach out to any specific image service — it renders whatever URLs the metadata server returns.
 
 If an artist is showing no image or an obviously-wrong image:
 
-1. Check the artist on [MusicBrainz](https://musicbrainz.org/). If the MB entity has no image linked, there is no image for Lidarr to render. MB accepts community contributions for artist and album artwork; see MB's [How to Contribute](https://musicbrainz.org/doc/How_to_Contribute) page.
+1. Check the artist on [MusicBrainz](https://musicbrainz.org/). If the MB entity has no image linked, there's no image for Lidarr to render. MB accepts community contributions for artist and album artwork; see MB's [How to Contribute](https://musicbrainz.org/doc/How_to_Contribute) page.
 2. Wait for the metadata refresh to propagate. Lidarr's copy of metadata refreshes hourly from the Servarr metadata server; the metadata server's own cache has its own propagation window measured in hours, sometimes longer.
 3. Trigger an artist refresh in Lidarr once you believe upstream has updated (Artist page → Refresh button, or Library → Artist Editor → Update).
 
@@ -244,11 +243,23 @@ Set **Minimum Custom Format Score** to `1` in the profile. This means a release 
 > Scoring is subjective and depends on your indexers and sources. Treat these values as a starting point, not a prescription.
 {.is-info}
 
+## Testing release title parsing
+
+{#testing-release-title-parsing}
+
+Two ways to check how Lidarr will parse a release name before building profiles around it:
+
+**In Lidarr:** Go to **Settings → Custom Formats** and use the **Test Parsing** button. Enter a release title and Lidarr shows the parsed fields (source, quality, release group, etc.) alongside which custom formats match and their combined score.
+
+**Via the Servarr Discord bot:** In the `#bot-spam` channel on the [Servarr Discord](https://lidarr.audio/discord), run `/parser lidarr <release title>` — for example, `/parser lidarr Artist.Album.2022.FLAC-GROUP`. The bot replies with the same parsed breakdown. Any user who donates to Servarr becomes a Donatarr and can use the parser bot.
+
+Both tools give you the same parser output. Use them when writing a custom format specification, debugging a release that isn't scoring as expected, or confirming that a release group pattern matches before adding it to a release profile.
+
 ## Backup and restore
 
 {#backup-restore}
 
-Lidarr's entire state lives in its [AppData directory](/lidarr/appdata-directory). Backing up is a matter of capturing that directory at rest; restoring is a matter of putting it back in place with matching permissions and paths. There is nothing in the database that is meaningful without the matching `config.xml` and vice-versa — back up the whole folder, not individual files.
+Lidarr's entire state lives in its [AppData directory](/lidarr/appdata-directory). Backing up is a matter of capturing that directory at rest; restoring is a matter of putting it back in place with matching permissions and paths. There's nothing in the database that's meaningful without the matching `config.xml` and vice-versa — back up the whole folder, not individual files.
 
 ### Backing up
 
@@ -264,7 +275,7 @@ This captures the database, config, and the minimum needed to restore. The backu
 
 **Filesystem copy:**
 
-1. Stop Lidarr. This is the only way to guarantee the database is in a consistent state — SQLite's WAL can leave a running database in a state that is safe for the running process but not safe to copy.
+1. Stop Lidarr. This is the only way to guarantee the database is in a consistent state — SQLite's WAL can leave a running database in a state that's safe for the running process but not safe to copy.
 2. Copy the entire AppData directory to a safe location. Include `.db-wal` and `.db-journal` siblings of `lidarr.db` if they exist.
 3. Start Lidarr.
 
@@ -272,7 +283,7 @@ Filesystem backup is the right choice if you want to use existing backup tooling
 
 ### Restoring
 
-> **Cross-OS restores are not supported.** Windows ↔ Linux and Windows ↔ macOS will not work because the path separators differ. Linux ↔ macOS may work since both use `/`, but is not officially supported. If you need to move between OSes, expect to edit every path in the database by hand.
+> **Cross-OS restores aren't supported.** Windows ↔ Linux and Windows ↔ macOS won't work because the path separators differ. Linux ↔ macOS may work since both use `/`, but isn't officially supported. If you need to move between OSes, expect to edit every path in the database by hand.
 {.is-warning}
 
 **From a built-in zip backup:**
