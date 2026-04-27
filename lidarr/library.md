@@ -2,7 +2,7 @@
 title: Lidarr Library
 description: Managing your music library in Lidarr including artist monitoring, album tracking, and metadata management
 published: true
-date: 2026-04-26T13:55:55.175Z
+date: 2026-04-27T14:30:56.740Z
 tags: lidarr, library, monitoring, albums, music, metadata, artists
 editor: markdown
 dateCreated: 2021-06-14T21:34:03.446Z
@@ -28,7 +28,7 @@ The toolbar above the artist list contains the following actions:
 - **Update All** — refreshes metadata for every artist from the Servarr metadata server and rescans all artist folders.
 - **RSS Sync** — polls your configured indexers' RSS feeds immediately, rather than waiting for the next scheduled sync.
 - **Search All** / **Search Filtered** / **Search Selected** — triggers an automatic search for all missing and cutoff-unmet albums across all artists, the current filtered view, or only the artists you have checked.
-- **Manual Import** — opens the manual import dialog to match files in any folder Lidarr can reach to artists and albums in your library. Use this when the automatic import pipeline has not picked up a download. See [Import Troubleshooting](/lidarr/import-troubleshooting) for when and how to use it.
+- **Manual Import** — opens the manual import dialog to match files in any folder Lidarr can reach to artists and albums in your library. Use this when the automatic import pipeline hasn't picked up a download. See [Import Troubleshooting](/lidarr/import-troubleshooting) for when and how to use it.
 - **Artist Editor** — toggles mass-editor mode, letting you change the monitoring status, quality profile, metadata profile, root folder, or tags across multiple artists at once.
 - **Options** — shows or hides columns in Table view and adjusts poster/banner size in the grid views.
 
@@ -38,10 +38,10 @@ The **Filter** button narrows the artist list. Built-in filters:
 
 - **All** — every artist in the library, monitored or not.
 - **Monitored** — artists with monitoring enabled.
-- **Unmonitored** — artists with monitoring disabled. Lidarr will not search for new releases from these artists.
+- **Unmonitored** — artists with monitoring disabled. Lidarr won't search for new releases from these artists.
 - **Missing** — monitored artists that have at least one monitored album with no files on disk.
-- **Wanted** — monitored artists with at least one monitored album that is missing and past its release date.
-- **Cutoff Unmet** — artists where at least one album exists on disk but has not yet reached the quality target set in its Quality Profile.
+- **Wanted** — monitored artists with at least one monitored album that's missing and past its release date.
+- **Cutoff Unmet** — artists where at least one album exists on disk but hasn't yet reached the quality target set in its Quality Profile.
 - **No Metadata Profile** — artists not assigned to any metadata profile.
 - **Custom Filters** — you can build and save your own filters against any combination of artist fields (monitored status, quality profile, metadata profile, path, tags, added date, and more).
 
@@ -56,7 +56,7 @@ Clicking an artist's name opens their detail page, which shows the artist biogra
 
 # Add New
 
-The Add New tab is where you search for and add artists to Lidarr. Search by name or paste a MusicBrainz artist ID directly (prefixed with `lidarr:`, e.g. `lidarr:9255f594-b912-4bdf-87a2-ada04502a459`). See [Finding music and MusicBrainz](/lidarr/faq#finding-music-and-musicbrainz) in the FAQ if an artist is hard to find.
+The Add New tab is where you search for and add artists to Lidarr. Search by name or paste a MusicBrainz artist ID directly (prefixed with `lidarr:`, for example, `lidarr:9255f594-b912-4bdf-87a2-ada04502a459`). See [Finding music and MusicBrainz](/lidarr/faq#finding-music-and-musicbrainz) in the FAQ if an artist is hard to find.
 
 When adding an artist you will set:
 
