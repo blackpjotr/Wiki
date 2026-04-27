@@ -2,18 +2,17 @@
 title: Lidarr and beets Integration
 description: 
 published: true
-date: 2026-04-26T16:18:22.804Z
+date: 2026-04-27T14:19:40.588Z
 tags: lidarr, beets
 editor: markdown
 dateCreated: 2026-04-26T15:17:29.688Z
 ---
 
-
 # Lidarr and beets Integration
 
-This page describes how to run [beets](https://beets.io/) alongside Lidarr to write richer audio metadata than Lidarr alone provides. beets can pull from sources Lidarr does not support — AcoustID fingerprinting, lyrics services, ReplayGain analysis, and more — and write those values directly into file tags.
+This page describes how to run [beets](https://beets.io/) alongside Lidarr to write richer audio metadata than Lidarr alone provides. beets can pull from sources Lidarr doesn't support — AcoustID fingerprinting, lyrics services, ReplayGain analysis, and more — and write those values directly into file tags.
 
-> **This is an advanced configuration.** This page does not explain how to use beets; it assumes you are already familiar with beets and its configuration. See the [beets documentation](https://beets.readthedocs.io/en/stable/) if you are new to it.
+> **This is an advanced configuration.** This page doesn't explain how to use beets; it assumes you are already familiar with beets and its configuration. See the [beets documentation](https://beets.readthedocs.io/en/stable/) if you are new to it.
 {.is-warning}
 
 Two patterns are described below. They differ in how persistent the beets configuration is and how much ongoing involvement beets has in managing the library.
@@ -32,26 +31,26 @@ Platform notes:
 
 ## Disable Lidarr's tag writing
 
-Both patterns require that Lidarr does not overwrite tags after beets has written them. Set this before configuring either pattern:
+Both patterns require that Lidarr doesn't overwrite tags after beets has written them. Set this before configuring either pattern:
 
 **Settings → Metadata → Write Audio Tags → Write Tags: Never**
 
-With this set, Lidarr will not write or rewrite audio file tags at any point — beets becomes the sole tag writer. Lidarr continues to manage file names and folder structure via its naming templates; only tag content is delegated to beets.
+With this set, Lidarr won't write or rewrite audio file tags at any point — beets becomes the sole tag writer. Lidarr continues to manage file names and folder structure via its naming templates; only tag content is delegated to beets.
 
 > If you previously had **Write Tags** set to anything other than **Never**, consider running a beets pass over your existing library after changing this setting, since those files will have been tagged by Lidarr and may have gaps that beets can fill.
 {.is-info}
 
 # Pattern 1: Import script (stateless, per-import)
 
-In this pattern, beets runs once per import triggered by a Lidarr Custom Script. It processes only the files that were just imported, writes enriched tags, and exits. beets has no persistent library database and does not participate in ongoing library management.
+In this pattern, beets runs once per import triggered by a Lidarr Custom Script. It processes only the files that were just imported, writes enriched tags, and exits. beets has no persistent library database and doesn't participate in ongoing library management.
 
 ## How it works
 
-Lidarr fires its **On Import / On Upgrade** event after it has moved and renamed the downloaded files into the library folder. A Custom Script registered in **Settings → Connect** receives the file paths via the `Lidarr_AddedTrackPaths` environment variable (pipe-separated). The script invokes beets against those files with a configuration that writes tags but does not move or copy anything.
+Lidarr fires its **On Import / On Upgrade** event after it has moved and renamed the downloaded files into the library folder. A Custom Script registered in **Settings → Connect** receives the file paths via the `Lidarr_AddedTrackPaths` environment variable (pipe-separated). The script invokes beets against those files with a configuration that writes tags but doesn't move or copy anything.
 
 ## Required beets configuration
 
-Create a dedicated beets config file for this script — do not reuse your personal beets config if you have one. The critical settings:
+Create a dedicated beets config file for this script — don't reuse your personal beets config if you have one. The critical settings:
 
 ```yaml
 # beets-import-script.yaml
@@ -78,7 +77,7 @@ plugins:
 
 ### Linux / macOS (shell)
 
-Save as an executable shell script, e.g. `/opt/scripts/beets-import.sh`:
+Save as an executable shell script, for example, `/opt/scripts/beets-import.sh`:
 
 ```shell
 #!/bin/bash
@@ -108,7 +107,7 @@ Make it executable: `chmod +x /opt/scripts/beets-import.sh`
 
 ### Windows (PowerShell)
 
-Save as a `.ps1` file, e.g. `C:\Scripts\beets-import.ps1`:
+Save as a `.ps1` file, for example, `C:\Scripts\beets-import.ps1`:
 
 ```powershell
 $beetsConfig = "C:\Scripts\beets-import-script.yaml"
@@ -127,7 +126,7 @@ foreach ($dir in $albumDirs) {
 ## Registering the script in Lidarr
 
 1. Go to **Settings → Connect → + Add Connection → Custom Script**.
-2. Set **Name** to something descriptive, e.g. `beets tag enrichment`.
+2. Set **Name** to something descriptive, for example, `beets tag enrichment`.
 3. Set **Path** to the full path of the script file.
 4. Enable **On Import** and **On Upgrade**. Leave other triggers disabled unless you specifically want beets to run on those events.
 5. Click **Test** — the script receives a test event; it should exit cleanly without errors.
@@ -136,10 +135,10 @@ foreach ($dir in $albumDirs) {
 
 | | |
 |---|---|
-| **Benefit** | beets runs once at import time with any plugins you want, writing a full tag set that Lidarr would not produce on its own. |
+| **Benefit** | beets runs once at import time with any plugins you want, writing a full tag set that Lidarr wouldn't produce on its own. |
 | **Benefit** | No persistent beets database to maintain or back up. |
-| **Drawback** | Tags written at import time are never updated. If MusicBrainz data improves, or a plugin source updates its data (e.g. updated ReplayGain values), the library files will not reflect it until you re-import or run beets manually. |
-| **Drawback** | Lidarr's **Write Tags: Never** setting means files imported before beets was configured will not have their tags updated automatically — a manual beets pass is needed to backfill those. |
+| **Drawback** | Tags written at import time are never updated. If MusicBrainz data improves, or a plugin source updates its data (for example, updated ReplayGain values), the library files won't reflect it until you re-import or run beets manually. |
+| **Drawback** | Lidarr's **Write Tags: Never** setting means files imported before beets was configured won't have their tags updated automatically — a manual beets pass is needed to backfill those. |
 
 # Pattern 2: Side-by-side persistent beets
 
@@ -147,7 +146,7 @@ In this pattern, beets and Lidarr run concurrently against the same library fold
 
 ## How it works
 
-beets watches or scans the library folder and writes enriched tags to files it finds there. It does not move, copy, or rename any files — all of that is Lidarr's responsibility. The two tools coexist by having strictly separate duties: Lidarr controls the filesystem, beets controls the tag content.
+beets watches or scans the library folder and writes enriched tags to files it finds there. It doesn't move, copy, or rename any files — all of that's Lidarr's responsibility. The two tools coexist by having strictly separate duties: Lidarr controls the filesystem, beets controls the tag content.
 
 ## Critical beets configuration
 
@@ -183,9 +182,9 @@ Review the output carefully. Confirm that beets reports it will write tags but n
 
 Two scenarios where the tools can conflict:
 
-**Lidarr renames files after beets has tagged them.** When Lidarr renames a file (e.g. because you change a naming template), the file path changes but the tags beets wrote remain. beets' persistent database will have the old path and will treat the file as missing. Resolution: after a Lidarr rename, run `beet update` to resync the beets database to the new paths, then a `beet import` pass if you want to re-enrich the renamed files.
+**Lidarr renames files after beets has tagged them.** When Lidarr renames a file (for example, because you change a naming template), the file path changes but the tags beets wrote remain. beets' persistent database will have the old path and will treat the file as missing. Resolution: after a Lidarr rename, run `beet update` to resync the beets database to the new paths, then a `beet import` pass if you want to re-enrich the renamed files.
 
-**Metadata refresh.** Lidarr periodically refreshes artist metadata from MusicBrainz and — if Write Tags is not set to Never — can overwrite file tags. With **Write Tags: Never** set as described above, this does not occur.
+**Metadata refresh.** Lidarr periodically refreshes artist metadata from MusicBrainz and — if Write Tags isn't set to Never — can overwrite file tags. With **Write Tags: Never** set as described above, this doesn't occur.
 
 ## Trade-offs
 
