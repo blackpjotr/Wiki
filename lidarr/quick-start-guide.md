@@ -2,7 +2,7 @@
 title: Lidarr Quick Start
 description: From a fresh install to your first Lidarr download in about 15 minutes
 published: true
-date: 2026-04-19T18:03:10.742Z
+date: 2026-04-27T14:34:05.219Z
 tags: lidarr, library, setup, music, quick-start, getting-started
 editor: markdown
 dateCreated: 2021-06-13T06:14:53.615Z
@@ -19,7 +19,7 @@ This guide walks you from a fresh Lidarr install to your first successful downlo
 
 This page is for users starting with an empty library who want to get to a first download quickly. The defaults used below are deliberately minimal and are safe to refine later.
 
-If any of the following describes you, read the linked page instead — the quick path here will not work for your setup:
+If any of the following describes you, read the linked page instead — the quick path here won't work for your setup:
 
 - You already have music files on disk and want Lidarr to manage them → [Importing an Existing Library](/lidarr/importing-existing-library).
 - You want to understand *why* Lidarr behaves the way it does, or whether it fits your library at all → [Concepts](/lidarr/concepts).
@@ -54,7 +54,7 @@ Fill in:
 
 Leave everything else at defaults.
 
-> Do not put Lidarr's root folder on a cloud storage provider. Lidarr writes tags frequently, which will exhaust cloud-service API quotas and cause failures. Keep the library on local or network-attached storage.
+> Don't put Lidarr's root folder on a cloud storage provider. Lidarr writes tags frequently, which will exhaust cloud-service API quotas and cause failures. Keep the library on local or network-attached storage.
 {.is-warning}
 
 > NFS mounts need `nolock`; SMB mounts need `nobrl`. Non-Windows only.
@@ -81,7 +81,7 @@ Click **Add (+)** and pick one you have access to. Choosing and configuring an i
 
 ![lidarr-settings-download-clients.png](./images/lidarr-settings-download-clients.png)
 
-Lidarr sends downloads to your client with a label/category (e.g. `music`), watches the client's API for completion, then imports finished files into your root folder. The client and Lidarr must both be able to read the same filesystem path, and that path must be on the same mount as your root folder for hardlinks and atomic moves to work.
+Lidarr sends downloads to your client with a label/category (for example, `music`), watches the client's API for completion, then imports finished files into your root folder. The client and Lidarr must both be able to read the same filesystem path, and that path must be on the same mount as your root folder for hardlinks and atomic moves to work.
 
 > Volume and path configuration is the single most common source of import failures, especially with Docker. If Lidarr and your download client run in separate containers, both must mount the same host path at the same container path. See [Installation → Docker](/lidarr/installation/docker#volumes-and-paths) and [TRaSH's hardlink guide](https://trash-guides.info/hardlinks/) before configuring.
 {.is-info}
