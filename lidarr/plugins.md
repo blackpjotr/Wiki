@@ -2,13 +2,13 @@
 title: Lidarr Plugins
 description: Basic Setup and Details for Plugins beta Testing Branch
 published: true
-date: 2026-01-18T20:59:54.633Z
+date: 2026-04-27T14:32:43.929Z
 tags: lidarr, installation, plugins, configuration
 editor: markdown
 dateCreated: 2025-01-18T16:05:16.687Z
 ---
 
-# Lidarr Plugins Branch
+# Lidarr Plugins
 
 ## What are plugins
 
@@ -16,7 +16,7 @@ Lidarr plugins allow users to extend the capability of Lidarr to include new ind
 
 Plug-in capabilities are now part of the main branch of Lidarr, but only in the `nightly` branch. Both Hotio and Linuxserver are updated.
 
-> You cannot go back to a mainline Lidarr branch (master/develop) without restoring a database prior to the `plugins` or `nightly` branch. Errors will be relating to the protocol such as `Error parsing column 10 (Protocol=TorrentDownloadProtocol - String)` or being unable to enable torrent/usenet in a Delay Profile
+> You can't go back to a mainline Lidarr branch (master/develop) without restoring a database prior to the `plugins` or `nightly` branch. Errors will be relating to the protocol such as `Error parsing column 10 (Protocol=TorrentDownloadProtocol - String)` or being unable to enable torrent/usenet in a Delay Profile
 {.is-danger}
 
 ### How To Install Plugins
@@ -52,19 +52,19 @@ image: lscr.io/linuxserver/lidarr:nightly
 ### Post Install
 
 - Once you have changed branches, navigate to `/system/plugins`. You will have the option to enter the URL of the GitHub repository containing the plugin. Enter the URL and select Install. You can observe the progress in the lower left corner. The installation will take several seconds depending your installation.
-- If `/system/plugins` does not appear in the menu, ensure that `/system/updates` shows that plugins has a status of `Currently Installed`.
+- If `/system/plugins` doesn't appear in the menu, ensure that `/system/updates` shows that plugins has a status of `Currently Installed`.
 
 ## Next Steps
 
 - Install the plugin to Lidarr using the new Plugin Lidarr Page and the plugin's documentation.
 - Restart Lidarr to complete plugin installation
 
-> Plugin updates do not occur automatically
+> Plugin updates don't occur automatically
 {.is-info}
 
 # Plugins
 
-> Both plugins and this documentation are community-driven. There are no official recommendations at this time, and each plugin is supported by its developer.
+> Both plugins and this documentation are community-driven. No official recommendations exist at this time, and each plugin is supported by its developer.
 {.is-info}
 
 ## ta264/deemix
@@ -106,7 +106,7 @@ To search, Slskd must also be added as an Indexer.
 - Enter the API key.
 - Enter a '0' (Key) and your Soulseek username (Value) for 'Ignored Users'.
 - Select the Test button.
-  - The Indexer test will send a test search to slskd for "Silent Partner Chances".
+  - The Indexer test will send a test search to slskd for "Silent Partner Chances."
 - If the Test returns a green checkmark, select Save.
 
 ### Delay Profile
@@ -175,8 +175,8 @@ TrevTV develops specialized Lidarr plugins for direct music platform integration
 ### Toolbox Additions
 
 - **Soundtrack Importer**: Fetches soundtracks from Sonarr/Radarr via *Arr-Soundtracks* import list
-- **Queue Cleaner**: Auto-manages failed imports (blocklist/rename/retry)
-- **Codec Tinker**: Converts audio formats using FFmpeg rules (e.g., `wav→flac`, `AAC→MP3`)
+- **Queue Cleaner**: Automatically manages failed imports (blocklist/rename/retry)
+- **Codec Tinker**: Converts audio formats using FFmpeg rules (for example, `wav→flac`, `AAC→MP3`)
 - **Lyrics Fetcher**: Adds time-synced lyrics (.lrc files or embedded metadata)
 - **Search Sniper**: Automates batch searching of large wanted lists
 - **MetaMix**: Aggregates metadata from different sources (experimental)
