@@ -2,12 +2,11 @@
 title: Lidarr Custom Scripts
 description: Guide for creating and implementing custom scripts for automation and integration in Lidarr
 published: true
-date: 2026-04-26T16:07:02.889Z
+date: 2026-04-27T14:21:43.868Z
 tags: lidarr, scripts, automation, custom, integration, hooks, api
 editor: markdown
 dateCreated: 2021-11-24T19:22:09.331Z
 ---
-
 
 # Lidarr Custom Scripts
 
@@ -38,7 +37,7 @@ Enable **Debug** or **Trace** logging in **Settings → General → Logging** to
 
 Lidarr passes data to your script through environment variables. The variables available depend on the event type, indicated by `Lidarr_EventType`.
 
-> **Variable names are case-sensitive on Linux.** The exact names used by Lidarr are in Title_Case as shown in the tables below (e.g. `Lidarr_EventType`, `Lidarr_Artist_Id`). Using lowercase versions (an older convention) will not work on Linux.
+> **Variable names are case-sensitive on Linux.** The exact names used by Lidarr are in Title_Case as shown in the tables below (for example, `Lidarr_EventType`, `Lidarr_Artist_Id`). Using lowercase versions (an older convention) won't work on Linux.
 {.is-warning}
 
 ### Common variables (all events)
@@ -61,7 +60,7 @@ Fired when Lidarr sends a release to a download client.
 | `Lidarr_Artist_Id` | Internal Lidarr ID for the artist |
 | `Lidarr_Artist_Name` | Artist name |
 | `Lidarr_Artist_MBId` | MusicBrainz artist ID |
-| `Lidarr_Artist_Type` | Artist type (e.g. `Person`, `Group`) |
+| `Lidarr_Artist_Type` | Artist type (for example, `Person`, `Group`) |
 | `Lidarr_Artist_Genres` | Pipe-separated list of genres |
 | `Lidarr_Artist_Tags` | Pipe-separated list of tag labels |
 | `Lidarr_Release_AlbumCount` | Number of albums in this release |
@@ -72,14 +71,14 @@ Fired when Lidarr sends a release to a download client.
 | `Lidarr_Release_Title` | Release title as returned by the indexer |
 | `Lidarr_Release_Indexer` | Indexer the release was found on |
 | `Lidarr_Release_Size` | Release size in bytes |
-| `Lidarr_Release_Quality` | Quality name (e.g. `FLAC`, `MP3-320`) |
+| `Lidarr_Release_Quality` | Quality name (for example, `FLAC`, `MP3-320`) |
 | `Lidarr_Release_QualityVersion` | Quality revision version |
 | `Lidarr_Release_ReleaseGroup` | Release group tag from the release title |
 | `Lidarr_Release_IndexerFlags` | Indexer flags on the release |
 | `Lidarr_Release_CustomFormat` | Pipe-separated list of matched custom format names |
 | `Lidarr_Release_CustomFormatScore` | Total custom format score for this release |
 | `Lidarr_Download_Client` | Name of the download client used |
-| `Lidarr_Download_Client_Type` | Type of download client (e.g. `qBittorrent`, `SABnzbd`) |
+| `Lidarr_Download_Client_Type` | Type of download client (for example, `qBittorrent`, `SABnzbd`) |
 | `Lidarr_Download_Id` | Download ID in the download client |
 
 ### On Import / On Upgrade
@@ -324,7 +323,7 @@ curl -s -X POST "$WEBHOOK_URL" \
 
 Replace `YOUR_WEBHOOK_URL` with your Discord webhook URL. In Discord, open channel settings → Integrations → Webhooks to create one.
 
-> The message string above does not escape special characters. If your artist or album names can contain double-quotes or backslashes, use `jq` or similar to build the JSON payload safely instead of constructing it manually.
+> The message string above doesn't escape special characters. If your artist or album names can contain double-quotes or backslashes, use `jq` or similar to build the JSON payload safely instead of constructing it manually.
 {.is-info}
 
 ### Discord webhook on import (PowerShell)
@@ -364,7 +363,7 @@ curl -s -X GET \
 
 To find your section ID, open `http://your-plex-server:32400/library/sections?X-Plex-Token=YOUR_TOKEN` in a browser and look for the music library. Your Plex token can be found in Plex Web → Settings → Troubleshooting → Get an Online Media Token.
 
-> If Plex and Lidarr run in separate Docker containers, `localhost` will not reach the Plex container. Use the Plex container's name or IP on the shared Docker network instead.
+> If Plex and Lidarr run in separate Docker containers, `localhost` won't reach the Plex container. Use the Plex container's name or IP on the shared Docker network instead.
 {.is-info}
 
 ### Notify on health issues (shell)
