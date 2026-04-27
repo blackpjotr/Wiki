@@ -2,8 +2,8 @@
 title: Lidarr Configuring PostgreSQL Database
 description: Configuring Lidarr with a Postgres Database
 published: true
-date: 2025-05-29T21:35:39.065Z
-tags: lidarr, postgres, database, installation
+date: 2026-04-27T14:33:24.162Z
+tags: lidarr, installation, postgres, database
 editor: markdown
 dateCreated: 2022-11-25T01:35:56.796Z
 ---
@@ -17,7 +17,7 @@ This document will go over the key points of migrating and setting up Postgres s
 
 This guide was been created by the amazing [Roxedus](https://github.com/Roxedus).
 
-> Postgres databases are NOT backed up by Lidarr, any backups must be implemented and maintained by the user
+> Postgres databases aren't backed up by Lidarr, any backups must be implemented and maintained by the user
 {.is-danger}
 
 > Note that while the community migration guide is only written for **Postgres 14**. Users have **reported no issues with Postgres 15-17 inclusive**. Please note that the migration details below may not work with Postgres 15+.  **If one wishes to use a newer Postgres version than 14 they should start the application's database from scratch OR upgrade after the unsupported community migration is executed**.
@@ -27,7 +27,7 @@ This guide was been created by the amazing [Roxedus](https://github.com/Roxedus)
 
  First, we need a Postgres instance. This guide is written for usage of the `postgres:14` Docker image.
 
- > Do not even think about using the `latest` tag! {.is-danger}
+ > Don't even think about using the `latest` tag! {.is-danger}
 
 ```bash
 docker create --name=postgres14 \
@@ -46,7 +46,7 @@ Lidarr needs two databases, the default names of these are:
 - `lidarr-main`   This is used to store all configuration and history
 - `lidarr-log`    This is used to store events that produce a logentry
 
-> Lidarr will not create the databases for you. Make sure you create them ahead of time{.is-warning}
+> Lidarr won't create the databases for you. Make sure you create them ahead of time{.is-warning}
 
 Create the databases mentioned above using your favorite method - for example [pgAdmin](https://www.pgadmin.org/) or [Adminer](https://www.adminer.org/).
 
@@ -74,17 +74,17 @@ Only **after creating** both databases you can start the Lidarr migration from S
 
 ## Migrating data
 
-> If you do not want to migrate a existing SQLite database to Postgres then you are already finished with this guide! {.is-info}
+> If you don't want to migrate a existing SQLite database to Postgres then you are already finished with this guide! {.is-info}
 
-> Migrating an existing sqlite3 database is unsupported, and this script may not work without modifications which we cannot assist you with. We support only new installs using postgres. {.is-warning}
+> Migrating an existing sqlite3 database is unsupported, and this script may not work without modifications which we can't assist you with. We support only new installs using postgres. {.is-warning}
 
 To migrate data we can use [PGLoader](https://github.com/dimitri/pgloader). It does, however, have some gotchas:
 
 - By default transactions are case-insensitive, we use `--with "quote identifiers"` to make them sensitive.
-- The version packaged in Debian and Ubuntu's apt repo are too old for newer versions of Postgres (Roxedus has not tested packages in other distros).
+- The version packaged in Debian and Ubuntu's apt repo are too old for newer versions of Postgres (Roxedus hasn't tested packages in other distros).
   Roxedus [built a binary](https://github.com/Roxedus/Pgloader-bin) to enable this support (no code modification was needed, simply had to be built with updated dependencies).
 
-> Do not drop any tables in the Postgres instance {.is-danger}
+> Don't drop any tables in the Postgres instance {.is-danger}
 
 Before starting a migration please ensure that you have run Lidarr against the created Postgres databases **at least once** successfully. Begin the migration by doing the following:
 
@@ -113,7 +113,7 @@ Before starting a migration please ensure that you have run Lidarr against the c
 		> If you experience an error using pgloader it could be due to your DB being too large, to resolve this try adding `--with "prefetch rows = 100" --with "batch size = 1MB"` to the above command
     {.is-warning}
 
-		> With these handled, it is pretty straightforward after telling it to not mess with the scheme using `--with "data only"`
+		> With these handled, it's pretty straightforward after telling it to not mess with the scheme using `--with "data only"`
     {.is-info}
 
 1. For those having the issues POST-MIGRATION from SQLite run the following:
