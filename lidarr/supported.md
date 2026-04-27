@@ -2,12 +2,11 @@
 title: Lidarr Supported
 description: List of supported music indexers, trackers, and download clients compatible with Lidarr
 published: true
-date: 2026-04-26T16:35:08.680Z
+date: 2026-04-27T14:35:09.089Z
 tags: lidarr, indexers, music, supported, download-clients, compatibility, trackers
 editor: markdown
 dateCreated: 2021-06-23T07:55:13.803Z
 ---
-
 
 This page is the disambiguation target for all **More Info** links in the Lidarr UI. Each entry corresponds to a specific integration type.
 
@@ -48,7 +47,7 @@ This page is the disambiguation target for all **More Info** links in the Lidarr
   - [Refer to the Settings Page](/lidarr/settings#download-clients)
 - uTorrent {#utorrent}
   - [Refer to the Settings Page](/lidarr/settings#download-clients)
-  - Due to uTorrent being adware and formerly spyware, it is not recommended. Most users use qBittorrent.
+  - Due to uTorrent being adware and formerly spyware, it isn't recommended. Most users use qBittorrent.
 - Vuze {#vuze}
   - [Refer to the Settings Page](/lidarr/settings#download-clients)
 
@@ -73,7 +72,7 @@ This page is the disambiguation target for all **More Info** links in the Lidarr
   - [Refer to the Settings Page](/lidarr/settings#indexer-settings)
 - IP Torrents {#iptorrents}
   - Private Tracker
-  > IP Torrents' native implementation does not support Search.
+  > IP Torrents' native implementation doesn't support Search.
   {.is-info}
   - [Refer to the Settings Page](/lidarr/settings#indexer-settings)
 - Nyaa {#nyaa}
