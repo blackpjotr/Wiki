@@ -2,7 +2,7 @@
 title: Lidarr Environment Variables
 description: Complete guide to Lidarr environment variables for configuration management including Docker, database, authentication, and server settings
 published: true
-date: 2025-12-16T17:04:28.314Z
+date: 2026-04-27T14:22:16.358Z
 tags: lidarr, docker, installation, scripts, postgres
 editor: markdown
 dateCreated: 2025-09-06T22:28:37.512Z
