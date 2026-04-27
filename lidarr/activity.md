@@ -2,17 +2,7 @@
 title: Lidarr Activity
 description: Monitor download progress, search history, and queue management in Lidarr
 published: true
-date: 2026-04-27T14:18:37.704Z
-tags: lidarr, activity, queue, downloads, history, monitoring
-editor: markdown
-dateCreated: 2021-06-14T21:35:25.390Z
----
-
----
-title: Lidarr Activity
-description: Monitor download progress, search history, and queue management in Lidarr
-published: true
-date: 2026-04-26T14:07:41.530Z
+date: 2026-04-27T14:20:03.788Z
 tags: lidarr, activity, queue, downloads, history, monitoring
 editor: markdown
 dateCreated: 2021-06-14T21:35:25.390Z
