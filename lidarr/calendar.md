@@ -2,7 +2,7 @@
 title: Lidarr Calendar
 description: View upcoming album releases and track music release schedules
 published: true
-date: 2026-04-26T13:54:57.928Z
+date: 2026-04-27T14:20:26.156Z
 tags: lidarr, calendar, releases, schedule, albums, music, planning
 editor: markdown
 dateCreated: 2021-06-14T21:35:03.094Z
@@ -10,7 +10,7 @@ dateCreated: 2021-06-14T21:35:03.094Z
 
 # Calendar
 
-The Calendar page shows album releases from artists in your library, laid out week by week. It is useful for seeing what is coming up and checking whether Lidarr already has files for a recent release.
+The Calendar page shows album releases from artists in your library, laid out week by week. It's useful for seeing what's coming up and checking whether Lidarr already has files for a recent release.
 
 ## Color coding
 
@@ -21,7 +21,7 @@ Each release tile is color-coded to show its current status:
 | Green | Files on disk — Lidarr has this release. |
 | Blue | Monitored and upcoming — the release date is in the future. |
 | Yellow/Orange | Monitored, released, and missing — past release date but no files yet. |
-| Grey | Unmonitored — Lidarr is not looking for this release. |
+| Grey | Unmonitored — Lidarr isn't looking for this release. |
 
 ## Navigation
 
@@ -44,7 +44,7 @@ Click the **iCal Feed** button on the Calendar page to open the feed configurati
 
 The dialog generates a personalised **iCal Feed URL** containing your API key. Copy the URL into your calendar client to subscribe, or click the calendar icon to open it directly if your browser supports the `webcal://` protocol.
 
-> The feed URL contains your Lidarr API key. Treat it as a secret and do not share it publicly.
+> The feed URL contains your Lidarr API key. Treat it as a secret and don't share it publicly.
 {.is-warning}
 
 ## Options
@@ -56,13 +56,13 @@ The **Options** button opens the Calendar Options dialog, split into two section
 | Option | Default | Description |
 |---|---|---|
 | Collapse Multiple Albums | On | When multiple albums from the same artist release on the same day, collapse them into a single tile instead of showing each separately. |
-| Icon for Cutoff Unmet | On | Show a visual indicator on release tiles where files exist but the quality cutoff has not been met. |
+| Icon for Cutoff Unmet | On | Show a visual indicator on release tiles where files exist but the quality cutoff hasn't been met. |
 
 **Global** (apply across all browsers and users):
 
 | Option | Description |
 |---|---|
 | First Day of Week | Sets whether weeks start on Sunday or Monday. |
-| Week Column Header | Controls the date format shown above each day column (e.g. `Tue 3/25`). |
+| Week Column Header | Controls the date format shown above each day column (for example, `Tue 3/25`). |
 | Time Format | Sets the time format used across the calendar (12-hour or 24-hour). |
 | Enable Color-Impaired Mode | Adjusts the color scheme to help users who have difficulty distinguishing the default color-coded release statuses. |
