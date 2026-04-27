@@ -1,8 +1,8 @@
 ---
-title: Davo's Community Lidarr Guide
+title: Lidarr Community Guide
 description: Like TRaSH Guides, but Davo for Lidarr
 published: true
-date: 2026-04-26T21:45:42.894Z
+date: 2026-04-27T13:10:21.961Z
 tags: lidarr, guide, configuration, quality
 editor: markdown
 dateCreated: 2024-02-27T14:10:01.585Z
