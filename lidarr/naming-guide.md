@@ -2,7 +2,7 @@
 title: Lidarr File Naming Guide
 description: Common file and folder naming schemes for Lidarr music organization including custom formats and multi-disc album handling
 published: true
-date: 2026-04-26T14:45:07.084Z
+date: 2026-04-27T14:31:55.059Z
 tags: lidarr, naming, configuration
 editor: markdown
 dateCreated: 2024-03-30T13:23:53.095Z
@@ -29,19 +29,19 @@ Lidarr renames and organises files on import according to four configurable temp
 
 Different media servers have different expectations about how music libraries are laid out:
 
-- **Plex** expects `Artist/Album/Track` folder nesting. It reads tags for metadata and uses the folder structure as a secondary hint. Plex does not require the release year in the album folder but many users include it to disambiguate re-issues.
+- **Plex** expects `Artist/Album/Track` folder nesting. It reads tags for metadata and uses the folder structure as a secondary hint. Plex doesn't require the release year in the album folder but many users include it to disambiguate re-issues.
 - **Navidrome** reads tags exclusively and is indifferent to folder structure, so almost any sane layout works.
 - **Jellyfin** follows MusicBrainz conventions and works best with `Artist/Album/Track` nesting, a release year in the album folder, and accurate MusicBrainz tags in the files themselves.
 
-If you run multiple media servers against the same library, choose a format that the pickiest server accepts — that is usually Plex or Jellyfin.
+If you run multiple media servers against the same library, choose a format that the pickiest server accepts — that's usually Plex or Jellyfin.
 
 ## Cost of changing naming later
 
-Every naming change triggers a rename of all files the next time Lidarr refreshes the artist. On a large library this means thousands of file moves, all of which must be on the same filesystem as hardlinks (or full copies if they are not). Media servers will also need to re-scan after a mass rename. It is worth spending time upfront to pick a format you can live with permanently.
+Every naming change triggers a rename of all files the next time Lidarr refreshes the artist. On a large library this means thousands of file moves, all of which must be on the same filesystem as hardlinks (or full copies if they're not). Media servers will also need to re-scan after a mass rename. It's worth spending time upfront to pick a format you can live with permanently.
 
 # Naming token reference
 
-Tokens are wrapped in `{}` and substituted at import time. Any token that resolves to an empty string is omitted silently, including any surrounding literal text that is inside the same `{}` — this is how conditional formatting works (e.g., `{ (Album Disambiguation)}` produces nothing if there is no disambiguation string).
+Tokens are wrapped in `{}` and substituted at import time. Any token that resolves to an empty string is omitted silently, including any surrounding literal text that's inside the same `{}` — this is how conditional formatting works (for example, `{ (Album Disambiguation)}` produces nothing if there's no disambiguation string).
 
 **Truncation:** append `:N` inside any token to cap the rendered value at N characters: `{Album Title:150}` truncates to 150 characters. Use this on Windows to stay within path limits.
 
@@ -50,10 +50,10 @@ Tokens are wrapped in `{}` and substituted at import time. Any token that resolv
 | Token | Description |
 |---|---|
 | `{Artist Name}` | Full artist name as stored in MusicBrainz. |
-| `{Artist NameThe}` | Artist name with a leading "The" moved to the end, e.g. `Beatles, The`. Useful for consistent alphabetical sorting. |
+| `{Artist NameThe}` | Artist name with a leading "The" moved to the end, for example, `Beatles, The`. Useful for consistent alphabetical sorting. |
 | `{Artist CleanName}` | Artist name with illegal filesystem characters removed. |
 | `{Artist CleanNameThe}` | Clean artist name with "The" moved to the end. |
-| `{Artist Disambiguation}` | Disambiguation string from MusicBrainz, e.g. `UK band`. Empty for most artists. |
+| `{Artist Disambiguation}` | Disambiguation string from MusicBrainz, for example, `UK band`. Empty for most artists. |
 | `{Artist Genre}` | First genre tag associated with the artist. |
 
 ## Album tokens
@@ -90,12 +90,12 @@ Tokens are wrapped in `{}` and substituted at import time. Any token that resolv
 
 | Token | Description |
 |---|---|
-| `{Quality Title}` | Quality profile name as defined in Lidarr (e.g., FLAC, MP3-320). |
+| `{Quality Title}` | Quality profile name as defined in Lidarr (for example, FLAC, MP3-320). |
 | `{Quality Full}` | Full quality string including proper/repack designation. |
-| `{MediaInfo AudioBitRate}` | Audio bitrate (e.g., 320kbps). Only available after import; blank on pre-import rename previews. |
+| `{MediaInfo AudioBitRate}` | Audio bitrate (for example, 320kbps). Only available after import; blank on pre-import rename previews. |
 | `{MediaInfo AudioChannels}` | Number of audio channels. |
-| `{MediaInfo AudioCodec}` | Audio codec (e.g., FLAC, MP3). |
-| `{MediaInfo AudioSampleRate}` | Audio sample rate (e.g., 44100Hz). |
+| `{MediaInfo AudioCodec}` | Audio codec (for example, FLAC, MP3). |
+| `{MediaInfo AudioSampleRate}` | Audio sample rate (for example, 44100Hz). |
 
 ## Miscellaneous tokens
 
