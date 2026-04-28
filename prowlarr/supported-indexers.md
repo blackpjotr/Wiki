@@ -2,15 +2,15 @@
 title: Prowlarr Supported Indexers
 description: Indexers currently named as supported in the current nightly build of Prowlarr. Other indexers may be available via either Generic Newznab or Generic Torznab.
 published: true
-date: 2026-04-27T02:42:25.565690
+date: 2026-04-28T02:50:15.035586
 tags: prowlarr, indexers, reference
 editor: markdown
-dateCreated: 2026-04-27T02:42:25.565690
+dateCreated: 2026-04-28T02:50:15.035586
 ---
 
 - Supported Trackers and Indexers as of
   - Prowlarr Build `2.3.6.5351` / [Commit: 46ce8e270138e757b14cc1b42b259419a2fac979](https://github.com/Prowlarr/Prowlarr/commit/46ce8e270138e757b14cc1b42b259419a2fac979)
-  - [Prowlarr Indexers Commit: d22822a1725a979f484991469b2c442fe0abed13](https://github.com/Prowlarr/Indexers/commit/d22822a1725a979f484991469b2c442fe0abed13)
+  - [Prowlarr Indexers Commit: 490ba198bee4d946810623e1eeb3428df5bf274d](https://github.com/Prowlarr/Indexers/commit/490ba198bee4d946810623e1eeb3428df5bf274d)
 
 ---
 
@@ -35,7 +35,6 @@ dateCreated: 2026-04-27T02:42:25.565690
 |[arab-torrents\.com](https://arab-torrents.com/){#arabtorrents-com}|arab-torrents\.com is an ARABIC Public Torrent Tracker for MOVIES / TV / GENERAL|Arabic (U.A.E.)|
 |[Bangumi Moe](https://bangumi.moe/){#bangumi-moe}|Bangumi Moe is a Public torrent site for ANIME|English (United States)|
 |[BigFANGroup](https://bigfangroup.org/){#bigfangroup}|BigFANGroup is a RUSSIAN Public Torrent Tracker for MOVIES / TV|Russian (Russia)|
-|[BitRu](https://bitru.org/){#bitru}|BitRu is a RUSSIAN Public Torrent Tracker for MOVIES / TV / GENERAL|Russian (Russia)|
 |[BlueRoms](https://www.blueroms.ws/){#blueroms}|BlueRoms is a Public Torrent Tracker for ROMS|English (United States)|
 |[BT\.etree](https://bt.etree.org/){#btetree}|BT\.etree is a Public Tracker dedicated to Bootleg FLAC MUSIC|English (United States)|
 |[BTdirectory](https://btmulu.live/){#btdirectory}|BTdirectory (BT目录) is a Public DHT Crawler|English (United States)|
@@ -118,7 +117,7 @@ dateCreated: 2026-04-27T02:42:25.565690
 |[VST Torrentz](https://vsttorrentz.net/){#vsttorrents}|VST Torrentz is a Public site for AUDIO apps, plugins and samples|English (United States)|
 |[VSTHouse](https://vsthouse.ru/){#vsthouse}|VSTHouse is a RUSSIAN Public site for AUDIO apps, plugins and samples|Russian (Russia)|
 |[VSTorrent](https://vstorrent.org/){#vstorrent}|VSTorrent is a Public site for AUDIO apps, plugins and samples|English (United States)|
-|[World-torrent](https://www.darkflix.cc/){#world-torrent}|World-torrent is a FRENCH Public site for MOVIES / TV / GENERAL|French (France)|
+|[World-torrent](https://www.darkfox.cc/){#world-torrent}|World-torrent is a FRENCH Public site for MOVIES / TV / GENERAL|French (France)|
 |[XXXClub](https://xxxclub.to/){#xxxclub}|XXXClub is a Public torrent site for 3X|English (United States)|
 |[xxxtor](https://xxxtor.com/){#xxxtor}|xxxtor is a RUSSIAN Public Torrent Tracker for 3X|Russian (Russia)|
 |[YTS](https://yts.bz/){#yts}|YTS is a Public torrent site specialising in HD movies of small size|English (United States)|
@@ -585,7 +584,6 @@ dateCreated: 2026-04-27T02:42:25.565690
 |[TLFBits](https://pt.eastgame.org/){#tlfbits}|TLFBits is a CHINESE Private Torrent Tracker for HD MOVIES / TV|Chinese (China)|
 |[TmGHuB](https://tmghub.org/){#tmghub}|TmGHuB (TH) is an INDIAN Private Torrent Tracker for MOVIES / TV / GENERAL|English (United States)|
 |[Toca Share (API)](https://tocashare.biz/){#tocashare}|Toca Share is a PORTUGUESE Private Torrent Tracker for EBOOKS / AUDIOBOOKS / COURSES|Portuguese (Portugal)|
-|[TokyoPT](https://www.tokyopt.xyz/){#tokyopt}|TokyoPT is a CHINESE Private Torrent Tracker for MOVIES / TV|Chinese (China)|
 |[Tormac](https://tormac.org/){#tormac}|Tormac is a RUSSIAN Private Torrent Tracker for MAC SOFTWARE|Russian (Russia)|
 |[Tornado](https://www.tornado.si/){#tornado}|Tornado is a SLOVENIAN Private Torrent Tracker for MOVIES / TV / GENERAL|Slovenian (Slovenia)|
 |[Torr9](https://torr9.net/){#torr9}|Torr9 is a FRENCH Private Torrent Tracker for MOVIES / TV / GENERAL|French (France)|
