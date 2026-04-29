@@ -2,6 +2,16 @@
 title: Lidarr Concepts
 description: How Lidarr models music, why MusicBrainz metadata matters, and when Lidarr is (and isn't) the right tool for your library
 published: true
+date: 2026-04-29T12:42:27.887Z
+tags: lidarr, releases, metadata, concepts, musicbrainz, artist
+editor: markdown
+dateCreated: 2026-04-18T16:48:08.649Z
+---
+
+---
+title: Lidarr Concepts
+description: How Lidarr models music, why MusicBrainz metadata matters, and when Lidarr is (and isn't) the right tool for your library
+published: true
 date: 2026-04-27T14:20:52.253Z
 tags: lidarr, releases, metadata, concepts, musicbrainz, artist
 editor: markdown
@@ -35,6 +45,8 @@ Examples of `Releases`:
 - Broadcast
 
 If something you want to manage doesn't exist as a `Release` in the metadata source, Lidarr can't handle it — there's no "add it locally only" escape hatch.
+
+Lidarr is audio-only. MusicBrainz marks some recordings as video (music videos, live video streams, etc.), and Lidarr skips them entirely — it won't search for, grab, or import a release where all tracks carry the video flag.
 
 > `Releases` must exist in the third-party services to be managed in Lidarr.
 {.is-info}
