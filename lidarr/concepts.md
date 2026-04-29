@@ -2,17 +2,7 @@
 title: Lidarr Concepts
 description: How Lidarr models music, why MusicBrainz metadata matters, and when Lidarr is (and isn't) the right tool for your library
 published: true
-date: 2026-04-29T12:42:27.887Z
-tags: lidarr, releases, metadata, concepts, musicbrainz, artist
-editor: markdown
-dateCreated: 2026-04-18T16:48:08.649Z
----
-
----
-title: Lidarr Concepts
-description: How Lidarr models music, why MusicBrainz metadata matters, and when Lidarr is (and isn't) the right tool for your library
-published: true
-date: 2026-04-27T14:20:52.253Z
+date: 2026-04-29T12:42:56.149Z
 tags: lidarr, releases, metadata, concepts, musicbrainz, artist
 editor: markdown
 dateCreated: 2026-04-18T16:48:08.649Z
