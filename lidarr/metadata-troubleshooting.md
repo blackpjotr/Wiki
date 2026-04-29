@@ -2,7 +2,7 @@
 title: Lidarr Metadata Troubleshooting
 description: Why can't I add or update this album? Diagnose MusicBrainz metadata problems in Lidarr — propagation, unknown release statuses, matching, cache-busts
 published: true
-date: 2026-04-27T14:31:22.443Z
+date: 2026-04-29T12:44:04.108Z
 tags: lidarr, troubleshooting, releases, metadata, musicbrainz, cache-bust
 editor: markdown
 dateCreated: 2026-04-20T13:04:32.647Z
@@ -98,13 +98,13 @@ If you notice this pattern for a specific artist, it's worth spot-checking their
 - **Metadata server ↔ MusicBrainz:** faster but not instant; assume hours, not minutes.
 - **Cover art updates:** slowest of the three, usually days. Covers aren't pulled directly by Lidarr — see [Cover art](#cover-art) below.
 
-If an edit's more than 24 hours old, has propagated through the MusicBrainz site, and still doesn't show in Lidarr after a manual **Refresh Artist**, that's when the cache-bust process applies.
+If an edit's more than 3 hours old, has propagated through the MusicBrainz site, and still doesn't show in Lidarr after a manual **Refresh Artist**, that's when the cache-bust process applies.
 
 ### Metadata server cache-bust
 
 The Servarr metadata server occasionally holds onto stale data past the normal refresh window. When that happens, a **Servarr Team Member** or **Servarr Donatarr** can clear the cache for a specific artist or album. Any user who donates any amount to Servarr becomes a Donatarr and can run `!refresh` commands directly — no need to wait for a team member.
 
-- This is less common now that the metadata server has been rebuilt. Try a manual Refresh Artist after 24 hours first.
+- This is less common now that the metadata server has been rebuilt. Try a manual Refresh Artist after 3 hours first.
 - Run the refresh bot commands in the **`#bot-spam`** channel on the [Servarr Discord](https://lidarr.audio/discord). The format is:
   - **Album:** `!refresh album/<release-group-mbid>` — note this is the **release group** MBID (what Lidarr calls the album ID), not the release MBID. Mixing these two up is the most common reason a refresh request does nothing.
   - **Artist:** `!refresh artist/<artist-mbid>` — the artist MBID from MusicBrainz.
@@ -198,12 +198,12 @@ To add a Spotify relationship on MusicBrainz: open the release, go to **Edit** �
 
 | Situation | Action |
 |---|---|
-| You just submitted an edit at MusicBrainz | Wait ~24 hours, then **Refresh Artist** in Lidarr |
+| You just submitted an edit at MusicBrainz | Wait ~3 hours, then **Refresh Artist** in Lidarr |
 | You just uploaded cover art to the Cover Art Archive | Allow days, not hours — covers propagate slower than metadata |
-| A release status was `unknown` and you changed it | Wait ~24 hours after the edit's visible on MusicBrainz, then **Refresh Artist** |
+| A release status was `unknown` and you changed it | Wait ~3 hours after the edit's visible on MusicBrainz, then **Refresh Artist** |
 | A scripted import left the album type blank | Fix the type on MusicBrainz first; the release is invisible to Lidarr until then |
 | Lidarr matched the wrong release | Use the release dropdown on the album detail page — no waiting needed |
-| You already waited 24+ hours and refreshed and the data is still wrong | Request a cache-bust on the Servarr Discord with `!refresh album/<release-group-mbid>` or `!refresh artist/<artist-mbid>` |
+| You already waited 3+ hours and refreshed and the data is still wrong | Request a cache-bust on the Servarr Discord with `!refresh album/<release-group-mbid>` or `!refresh artist/<artist-mbid>` |
 | The release doesn't exist on MusicBrainz at all | Add it with [Harmony](https://harmony.pulsewidth.org.uk/) or the MusicBrainz web editor, then follow the first row above |
 
 ## See also
