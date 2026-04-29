@@ -2,7 +2,7 @@
 title: Lidarr FAQ
 description: Frequently asked questions and common issues with solutions for Lidarr music management
 published: true
-date: 2026-04-27T14:22:47.391Z
+date: 2026-04-29T12:43:27.685Z
 tags: lidarr, troubleshooting, faq, questions, help, common-issues
 editor: markdown
 dateCreated: 2021-06-14T14:33:41.344Z
@@ -113,6 +113,7 @@ Three common causes:
 
 - **Propagation lag.** Lidarr's copy of MusicBrainz refreshes hourly via the Servarr metadata server. If you edited MB in the last hour, wait a refresh cycle before troubleshooting further.
 - **Unknown release type.** If the MB release group has `Type: Unknown` or `Status: Unknown`, most metadata profiles filter it out. Fix the type at MusicBrainz.
+- **Video recordings.** MusicBrainz marks some recordings as video (music videos, live video streams, etc.). Lidarr is audio-only and skips releases where tracks are flagged as video — they won't appear in searches and Lidarr won't grab them. If an expected release has 0 audio tracks because all recordings are marked as video in MusicBrainz, there's nothing Lidarr can do until an audio release exists.
 - **Metadata server cache needs busting.** This is rare but happens, especially after large MB edits. The full flow, including the `!refresh` bot command, is on [Metadata Troubleshooting](/lidarr/metadata-troubleshooting).
 
 If none of those apply, the full troubleshooting flow is on [Metadata Troubleshooting](/lidarr/metadata-troubleshooting).
