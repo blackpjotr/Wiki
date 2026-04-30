@@ -2,15 +2,15 @@
 title: Prowlarr Supported Indexers
 description: Indexers currently named as supported in the current nightly build of Prowlarr. Other indexers may be available via either Generic Newznab or Generic Torznab.
 published: true
-date: 2026-04-28T02:50:15.035586
+date: 2026-04-30T02:50:47.034421
 tags: prowlarr, indexers, reference
 editor: markdown
-dateCreated: 2026-04-28T02:50:15.035586
+dateCreated: 2026-04-30T02:50:47.034421
 ---
 
 - Supported Trackers and Indexers as of
   - Prowlarr Build `2.3.6.5351` / [Commit: 46ce8e270138e757b14cc1b42b259419a2fac979](https://github.com/Prowlarr/Prowlarr/commit/46ce8e270138e757b14cc1b42b259419a2fac979)
-  - [Prowlarr Indexers Commit: 490ba198bee4d946810623e1eeb3428df5bf274d](https://github.com/Prowlarr/Indexers/commit/490ba198bee4d946810623e1eeb3428df5bf274d)
+  - [Prowlarr Indexers Commit: 9b9b7b4354e2f37d2588e862870904e80aa8b310](https://github.com/Prowlarr/Indexers/commit/9b9b7b4354e2f37d2588e862870904e80aa8b310)
 
 ---
 
@@ -616,6 +616,7 @@ dateCreated: 2026-04-28T02:50:15.035586
 |[TVChaosUK](https://tvchaosuk.com/){#tvchaosuk}|TV Chaos UK (TVCUK) is a Private Torrent Tracker for UK TV|English (United Kingdom)|
 |[U2](https://u2.dmhy.org/){#u2}|U2 (U2分享園@動漫花園) is a CHINESE Private Torrent Tracker for ANIME|Chinese (China)|
 |[UBits](https://ubits.club/){#ubits}|UBits is a CHINESE Private Torrent Tracker for MOVIES / TV / GENERAL|Chinese (China)|
+|[Ultrabits (API)](https://ultrabits.org/){#ultrabits-api}|Ultrabits is a NORDIC Private Torrent Tracker for MOVIES / TV / GENERAL|Swedish (Sweden)|
 |[UltraHD](https://ultrahd.net/){#ultrahd}|UltraHD is a CHINESE Private Torrent Tracker for UHD MOVIES / TV / GENERAL|Chinese (China)|
 |[Unlimitz](https://www.unlimitz.biz/){#unlimitz}|Unlimitz is a THAI Private Torrent Tracker for GENERAL|Thai (Thailand)|
 |[upload\.cx (API)](https://upload.cx/){#uploadcx}|upload\.cx (ULCX) is a Private Torrent Tracker for MOVIES / TV|English (United States)|
