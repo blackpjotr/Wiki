@@ -2,19 +2,19 @@
 title: Lidarr Plugins
 description: Basic Setup and Details for Plugins beta Testing Branch
 published: true
-date: 2026-04-27T14:32:43.929Z
+date: 2026-05-03T15:11:19.328Z
 tags: lidarr, installation, plugins, configuration
 editor: markdown
 dateCreated: 2025-01-18T16:05:16.687Z
 ---
 
-# Lidarr Plugins
+# Lidarr Plugins Branch
 
 ## What are plugins
 
 Lidarr plugins allow users to extend the capability of Lidarr to include new indexers and download clients, including peer-to-peer networks and common streaming services.
 
-Plug-in capabilities are now part of the main branch of Lidarr, but only in the `nightly` branch. Both Hotio and Linuxserver are updated.
+Plug-in capabilities are now part of the main branch of Lidarr, but only in the `nightly` branch. Hotio and Linuxserver both update their images.
 
 > You can't go back to a mainline Lidarr branch (master/develop) without restoring a database prior to the `plugins` or `nightly` branch. Errors will be relating to the protocol such as `Error parsing column 10 (Protocol=TorrentDownloadProtocol - String)` or being unable to enable torrent/usenet in a Delay Profile
 {.is-danger}
@@ -64,7 +64,7 @@ image: lscr.io/linuxserver/lidarr:nightly
 
 # Plugins
 
-> Both plugins and this documentation are community-driven. No official recommendations exist at this time, and each plugin is supported by its developer.
+> Both plugins and this documentation are community-driven. No official recommendations exist at this time, and each developer supports their own plugin.
 {.is-info}
 
 ## ta264/deemix
@@ -89,7 +89,7 @@ To generate the Api Key necessary for the communication to the Slskd app follow 
 
 #### Download Client
 
-Once the plugin is installed, Slskd can be added as a download client.
+Once you install the plugin, you can add Slskd as a download client.
 
 - Navigate to `/settings/downloadclients`, and select the <kb>+</kb> button under Download clients. Slskd will appear at the bottom under the Other section.
 - Enter the correct hostname.
@@ -99,7 +99,7 @@ Once the plugin is installed, Slskd can be added as a download client.
 
 ### Indexer
 
-To search, Slskd must also be added as an Indexer.
+To search, you must also add Slskd as an Indexer.
 
 - Navigate to `/settings/indexers`, and select the <kb>+</kb> button under Indexers. Slskd will appear at the bottom under the Other section.
 - Enter the correct URL.
@@ -158,7 +158,7 @@ TrevTV develops specialized Lidarr plugins for direct music platform integration
      - Lidarr's Media Management → "Import Extra Files" (add `lrc`)
 3. **Docker Requirements**:
    - FFmpeg required for Tidal conversions
-   - Custom app IDs may be needed for Qobuz authentication
+   - Qobuz authentication may require custom app IDs
 
 ## TypNull/Tubifarry
 
@@ -187,7 +187,7 @@ TrevTV develops specialized Lidarr plugins for direct music platform integration
 - To install these:
   1. First ensure you have the stable version installed.
   2. Then switch to your desired branch using its URL.
-- *Example:* The development version can be found at:
+- *Example:* Find the development version at:
   `https://github.com/TypNull/Tubifarry/tree/develop`
 
 > See the [Tubifarry README](https://github.com/TypNull/Tubifarry) for advanced configuration, troubleshooting, and feature deep-dives.
