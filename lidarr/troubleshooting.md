@@ -2,7 +2,7 @@
 title: Lidarr Troubleshooting
 description: Common issues, error codes, and solutions for troubleshooting Lidarr installation, configuration, and operational problems
 published: true
-date: 2026-04-27T14:36:46.729Z
+date: 2026-05-03T14:15:06.955Z
 tags: lidarr, troubleshooting, support, issues, debugging, errors
 editor: markdown
 dateCreated: 2021-06-14T21:36:46.193Z
@@ -77,14 +77,14 @@ To provide good and useful logs for sharing:
 
 ## Standard Logs Location
 
-The log files are located in Lidarr's [Appdata Directory](/lidarr/appdata-directory), inside the logs/ folder. You can also access the log files from the UI at System => Logs => Files.
+Lidarr stores log files in the [Appdata Directory](/lidarr/appdata-directory), inside the logs/ folder. You can also access the log files from the UI at System => Logs => Files.
 
 > Note: The Logs ("Events") Table in the UI isn't the same as the log files and isn't as useful. If you're asked for logs, please copy/paste from the log files and not the table.
 {.is-info}
 
 ## Update Logs Location
 
-The update log files are located in Lidarr's [Appdata Directory](/lidarr/appdata-directory), inside the UpdateLogs/ folder.
+Lidarr stores update log files in the [Appdata Directory](/lidarr/appdata-directory), inside the UpdateLogs/ folder.
 
 ## Sharing Logs
 
@@ -92,7 +92,7 @@ The logs can be long and hard to read as part of a forum or Reddit post and they
 
 ## Trace/Debug Logs
 
-You can change the log level at Settings => General => Logging. Lidarr doesn't need to restarted for the change to take effect. This change only affects the log files, not the logging database. The latest debug/trace log files are named `lidarr.debug.txt` and `lidarr.trace.txt` respectively.
+You can change the log level at Settings => General => Logging. Lidarr doesn't need to restarted for the change to take effect. This change only affects the log files, not the logging database. The latest debug/trace log files are `lidarr.debug.txt` and `lidarr.trace.txt` respectively.
 
 If you're unable to access the UI to set the logging level you can do so by editing config.xml in the AppData directory by setting the LogLevel value to Debug or Trace instead of Info.
 
@@ -112,9 +112,9 @@ You can clear log files and the logs database directly from the UI, under System
 
 Lidarr uses rolling log files limited to 1MB each. The current log file is always ,`lidarr.txt`, for the the other files `.0.txt` is the next newest (higher numbers are older). This log file contains `fatal`, `error`, `warn`, and `info` entries.
 
-When Debug log level is enabled, additional `lidarr.debug.txt` rolling log files will be present. This log files contains `fatal`, `error`, `warn`, `info`, and `debug` entries. It usually covers a 40h period.
+With Debug log level enabled, additional `lidarr.debug.txt` rolling log files will be present. This log files contains `fatal`, `error`, `warn`, `info`, and `debug` entries. It usually covers a 40h period.
 
-When Trace log level is enabled, additional `lidarr.trace.txt` rolling log files will be present. This log files contains `fatal`, `error`, `warn`, `info`, `debug`, and `trace` entries. Due to trace verbosity it only covers a couple of hours at most.
+With Trace log level enabled, additional `lidarr.trace.txt` rolling log files will be present. This log files contains `fatal`, `error`, `warn`, `info`, `debug`, and `trace` entries. Due to trace verbosity it only covers a couple of hours at most.
 
 # Recovering from a Failed Update
 
@@ -123,7 +123,7 @@ We do everything we can to prevent issues when upgrading, but if they do occur t
 ## Determine the issue
 
 - The best place to look when the application won't start after an update is to review the [update logs](#update-logs-location) and see if the update completed successfully. If those don't have an issue then the next step is to look at your regular application log files, before trying to start again, use [Logging](/lidarr/settings#logging) and [Log Files](/lidarr/system#log-files) to find them and increase the log level.
-- The most frequently seen issue is that the system the app is installed on messed with the `/tmp` directory and deleted critical \*Arr files during the upgrade thus causing both the upgrade and rollback to fail. In this case, simply reinstall in-place over the existing borked installation.
+- Most often, the host system messes with the `/tmp` directory and deletes critical \*Arr files during the upgrade, causing both the upgrade and rollback to fail. In this case, reinstall in-place over the existing borked installation.
 
 ### Migration Issue
 
@@ -224,13 +224,13 @@ Logs will look like
 Thus `/volume3/data` doesn't exist within Lidarr's container or isn't accessible.
 
 - [Settings => Download Clients => Remote Path Mappings](/lidarr/settings#remote-path-mappings)
-- A remote path mapping is used when your download client is reporting a path for completed data either on another server or in a way that \*Arr doesn't address that folder.
-- Generally, a remote path map is only required if your download client is on Linux when \*Arr is on Windows or vice versa. A remote path map is also possibly needed if mixing Docker and Native clients or if using a remote server.
+- Use a remote path mapping when your download client reports a path for completed data on another server or in a way that \*Arr can't resolve.
+- Generally, you only need a remote path map if your download client is on Linux when \*Arr is on Windows or vice versa. A remote path map may also be necessary when mixing Docker and native clients or using a remote server.
 - A remote path map is a DUMB search/replace (where it finds the REMOTE value, replace it with LOCAL value for the specified Host).
 - If the error message about a bad path doesn't contain the REPLACED value, then the path mapping isn't working as you expect. The typical solution is to add and remove the mapping.
 - [See TRaSH's Tutorial for additional information regarding remote path mapping](https://trash-guides.info/Radarr/Radarr-remote-path-mapping/)
 
-> If both \*Arr and your Download Client are Docker Containers it's rare a remote path map is needed. It's suggested you [review the Docker Guide](/docker-guide) and/or [follow TRaSH's Tutorial](https://trash-guides.info/hardlinks)
+> If both \*Arr and your Download Client are Docker Containers, you rarely need a remote path map. Review the [Docker Guide](/docker-guide) and/or [follow TRaSH's Tutorial](https://trash-guides.info/hardlinks)
 {.is-info}
 
 #### Remote Mount or Remote Sync (Syncthing)
@@ -243,7 +243,7 @@ Thus `/volume3/data` doesn't exist within Lidarr's container or isn't accessible
   - (Optional - if applicable and/or required (for example, remote usenet client)) Configure a custom script to run on import/download/upgrade to remove the remote file
 - Alternatively a remote mount rather than a remote sync setup is significantly less complicated to configure, but typically slowly.
   - Mount your remote storage with sshfs or another network file system protocol
-  - Ensure the user and group \*Arr is configured to run as has read or write access.
+  - Ensure the user and group that \*Arr runs as has read or write access.
   - Configure a remote path map to find the REMOTE path and replace it with the LOCAL equivalent
 
 ### Permissions on the Library Folder
@@ -254,11 +254,11 @@ Logs will look like
 2022-02-28 18:51:01.1|Error|DownloadedTracksImportService|Import failed, path doesn't exist or isn't accessible by Lidarr: /data/media/music/Jasmine Guillory/Party of Two - Jasmine Guillory.mp3. Ensure the path exists and the user running Lidarr has the correct permissions to access this file/folder
 ```
 
-Don’t forget to check permissions and ownership of the *destination*. It's easy to get fixated on the download’s ownership and permissions and that's *usually* the cause of permissions related issues, but it *could* be the destination as well. Check that the destination folders exist. Check that a destination *file* doesn’t already exist or can’t be deleted or moved to recycle bin. Check that ownership and permissions allow the downloaded file to be copied, hard linked or moved. The user or group that runs as needs to be able to read and write the root folder.
+Don’t forget to check permissions and ownership of the *destination*. It's easy to get fixated on the download’s ownership and permissions and that's *usually* the cause of permissions related issues, but it *could* be the destination as well. Check that the destination folders exist. Check that no destination *file* already exists, or that you can delete or move any existing file to the recycle bin. Check that ownership and permissions allow you to copy, hard link, or move the downloaded file. The user or group that runs as needs to be able to read and write the root folder.
 
 - For Windows Users this may be due to running as a service:
-  - the Windows Service runs under the 'Local Service' account, by default this account doesn't have permissions to access your user's home directory unless permissions have been assigned manually. This is particularly relevant when using download clients that are configured to download to your home directory.
-  - 'Local Service' also generally has very limited permissions. It's therefore advisable to install the app as a system tray application if the user can remain logged in. The option to do so is provided during the installer. See the FAQ for how to convert from a service to tray app.
+  - the Windows Service runs under the 'Local Service' account, by default this account doesn't have permissions to access your user's home directory unless you assign permissions manually. This is particularly relevant when using download clients configured to download to your home directory.
+  - 'Local Service' also generally has very limited permissions. It's therefore advisable to install the app as a system tray application if the user can remain logged in. The installer provides this option. See the FAQ for how to convert from a service to tray app.
 
 - For Synology Users refer to [SynoCommunity's Permissions Article for their Packages](https://github.com/SynoCommunity/spksrc/wiki/Permission-Management)
 
@@ -273,11 +273,11 @@ Logs will look like
 2022-02-28 18:51:01.1|Error|DownloadedTracksImportService|Import failed, path doesn't exist or isn't accessible by Lidarr: /data/downloads/music/Party of Two - Jasmine Guillory.mp3. Ensure the path exists and the user running Lidarr has the correct permissions to access this file/folder
 ```
 
-Don’t forget to check permissions and ownership of the *source*. It's easy to get fixated on the destination's ownership and permissions and that's a *possible* cause of permissions related issues, but it *typically* is the source. Check that the source folders exist - and if docker that the mounts are aligned and consistent. Check that ownership and permissions allow the downloaded file to be copied/hardlinked or copy+delete/moved. The user or group that runs as needs to be able to read and write the downloads folder.
+Don’t forget to check permissions and ownership of the *source*. It's easy to get fixated on the destination's ownership and permissions and that's a *possible* cause of permissions related issues, but it *typically* is the source. Check that the source folders exist - and if docker that the mounts are aligned and consistent. Check that ownership and permissions allow you to copy, hard-link, or move the downloaded file. The user or group that runs as needs to be able to read and write the downloads folder.
 
 - For Windows Users this may be due to running as a service:
-  - the Windows Service runs under the 'Local Service' account, by default this account doesn't have permissions to access your user's home directory unless permissions have been assigned manually. This is particularly relevant when using download clients that are configured to download to your home directory.
-  - 'Local Service' also generally has very limited permissions. It's therefore advisable to install the app as a system tray application if the user can remain logged in. The option to do so is provided during the installer. See the FAQ for how to convert from a service to tray app.
+  - the Windows Service runs under the 'Local Service' account, by default this account doesn't have permissions to access your user's home directory unless you assign permissions manually. This is particularly relevant when using download clients configured to download to your home directory.
+  - 'Local Service' also generally has very limited permissions. It's therefore advisable to install the app as a system tray application if the user can remain logged in. The installer provides this option. See the FAQ for how to convert from a service to tray app.
 
 - For Synology Users refer to [SynoCommunity's Permissions Article for their Packages](https://github.com/SynoCommunity/spksrc/wiki/Permission-Management)
 
@@ -289,8 +289,8 @@ Don’t forget to check permissions and ownership of the *source*. It's easy to 
 - The download client should download into a folder accessible by \*Arr and that isn't your root/library folder; should import from that separate download folder into your Library folder.
 - You should never download directly into your root folder. You also shouldn't use your root folder as the download client's completed folder or incomplete folder.
 - [**This will also cause a healthcheck in System as well**](/lidarr/system#downloading-into-root-folder)
-- Within the application, a root folder is defined as the configured media library folder. This isn't the root folder of a mount. Your download client has an incomplete or complete (or is moving completed downloads) into your root (library) folder. This frequently causes issues and isn't advised. To fix this change your download client so it isn't placing downloads within your root folder. Note that 'placing' also includes if your download client category is set to your root folder or if NZBGet/SABnzbd have sort enabled and are sorting to your root folder. Please note that this check looks at all defined/configured root folders added not only root folders currently in use. In other words, the folder your download client downloads into or moves completed downloads to, shouldn't be the same folder you have configured as your root/library/final media destination folder in the \*Arr application.
-- Configured Root Folders (aka Library folders) can be found in [Settings => Media Management => Root Folders](/lidarr/settings/#root-folders)
+- Within the application, the configured media library folder is the root folder. This isn't the root folder of a mount. Your download client has an incomplete or complete (or is moving completed downloads) into your root (library) folder. This frequently causes issues and isn't advised. To fix this change your download client so it isn't placing downloads within your root folder. Note that 'placing' also includes if your download client category points to your root folder or if NZBGet/SABnzbd have sort enabled and are sorting to your root folder. Please note that this check looks at all defined/configured root folders added not only root folders currently in use. In other words, the folder your download client downloads into or moves completed downloads to, shouldn't be the same folder you have configured as your root/library/final media destination folder in the \*Arr application.
+- Find configured root folders (aka library folders) in [Settings => Media Management => Root Folders](/lidarr/settings/#root-folders)
 - One example is if your downloads are going into `\data\downloads` then you have a root folder set as `\data\downloads`.
 - It's suggested to use paths like `\data\media\` for your root folder/library and `\data\downloads\` for your downloads.
 
@@ -299,7 +299,7 @@ Don’t forget to check permissions and ownership of the *source*. It's easy to 
 
 ### Incorrect category
 
-Lidarr should be setup to use a category so that it only tries to process its own downloads. It's rare that a torrent submitted by gets added without the correct category, but it can happen. If you’re adding torrents manually and want to process them, they’ll need to have the correct category. It can be set at any time, since tries to process downloads every minute.
+Lidarr should be setup to use a category so that it only tries to process its own downloads. It's rare that a torrent submitted by gets added without the correct category, but it can happen. If you’re adding torrents manually and want to process them, they’ll need to have the correct category. You can set it at any time, since Lidarr processes downloads every minute.
 
 ### Packed torrents
 
@@ -309,13 +309,13 @@ Logs will indicate errors like
 No files found are eligible for import
 ```
 
-If your torrent is packed in `.rar` files, you’ll need to setup extraction. We recommend [Unpackerr](https://github.com/unpackerr/unpackerr) as it does unpacking right: preventing corrupt partial imports and cleans up the unpacked files after import.
+If your torrent arrives in `.rar` files, you’ll need to set up extraction. We recommend [Unpackerr](https://github.com/unpackerr/unpackerr) as it does unpacking right: preventing corrupt partial imports and cleans up the unpacked files after import.
 
-The error by also be seen if there's no valid media file in the folder.
+This error also appears if there's no valid media file in the folder.
 
 ### Repeated downloads
 
-Repeated downloads have a few causes; one is related to the Indexer restriction in Release Profiles. Because the indexer *isn’t* stored with the data, any preferred word scores are *zero* for media in your library, *but* during “RSS” and search, they’ll be applied. This gets you into a loop where you download the items again and again because it looks like an upgrade, then isn’t, then shows up again and looks like an upgrade, then isn’t. Don’t restrict your release profile to an indexer.
+Repeated downloads have a few causes; one relates to the Indexer restriction in Release Profiles. Because the indexer *isn’t* stored with the data, any preferred word scores are *zero* for media in your library, *but* during “RSS” and search, Lidarr applies them. This gets you into a loop where you download the items again and again because it looks like an upgrade, then isn’t, then shows up again and looks like an upgrade, then isn’t. Don’t restrict your release profile to an indexer.
 
 This may also be due to the fact that the download never actually imports and then is missing from the queue, so a new download is perpetually grabbed and never imported. Please see the various other common problems and troubleshooting steps for this.
 
@@ -325,19 +325,19 @@ Lidarr only looks at the 60 most recent downloads in SABnzbd and NZBGet, so if y
 
 ### Download client clearing items
 
-The download client shouldn’t be responsible for removing downloads. Usenet clients should be configured so they *don’t* remove downloads from history. Torrent clients should be set up so they *don’t* remove torrents when they’re finished seeding (pause or stop instead). This is because communicates with the download client to know what to import, so if they’re *removed* there's nothing to be imported… even if there's a folder full of files.
+The download client shouldn’t be responsible for removing downloads. Configure usenet clients so they *don’t* remove downloads from history. Set up torrent clients so they *don’t* remove torrents when they’re finished seeding (pause or stop instead). This is because Lidarr communicates with the download client to know what to import, so if items are *removed* there’s nothing for Lidarr to import... even if there’s a folder full of files.
 
-For SABnzbd, this is handled with the History Retention setting.
+For SABnzbd, use the History Retention setting.
 
 ### Download can't be matched to a library item
 
-For various reasons, releases can't be parsed once grabbed and sent to the download client. Activity => Options => Show Unknown (this is now enabled by default in recent builds) will display all items not otherwise ignored / already imported within \*Arr's download client category. These will typically need to be manually mapped and imported.
+For various reasons, Lidarr can't parse some releases once grabbed and sent to the download client. Activity => Options => Show Unknown (this is now enabled by default in recent builds) will display all items not otherwise ignored / already imported within \*Arr's download client category. These will typically need to be manually mapped and imported.
 
 This can also occur if you have a release in your download client but that media item (movie/episode/book/song) doesn't exist in the application.
 
 ### The underlying connection was closed: An unexpected error occurred on a send
 
-This is caused by the indexer using a SSL protocol not supported by the current .NET Version found in [Radarr => System => Status](/radarr/system#status).
+The indexer uses a TLS/SSL protocol that the current .NET Version doesn't support. Check [Radarr => System => Status](/radarr/system#status) for the installed version.
 
 ### The request timed out
 
@@ -353,7 +353,7 @@ Lidarr is getting no response from the client.
 [v4.3.0.6671] System.Threading.Tasks.TaskCanceledException: A task was canceled.
 ```
 
-This can also be caused by:
+Other causes include:
 
 - improperly configured or use of a VPN
 - improperly configured or use of a proxy
@@ -398,7 +398,7 @@ mv <foldername...> <foldername>
 
 # Searches Indexers and Trackers
 
-- If you use [Prowlarr](/prowlarr), then you can view the [History](/prowlarr/history) of all queries Prowlarr received and how they were sent to the sites. Ensure that `Parameters` is enabled in Prowlarr History => Options. The (i) icon provides additional details.
+- If you use [Prowlarr](/prowlarr), then you can view the [History](/prowlarr/history) of all queries Prowlarr received and how Prowlarr sent them to the sites. Enable `Parameters` in Prowlarr History => Options. The (i) icon provides additional details.
 
 ## Turn logging up to trace
 
@@ -413,7 +413,7 @@ When you test an indexer or tracker, in debug or trace logs you can find the URL
 
 Just like the indexer/tracker test above, when you trigger a search while at Debug or Trace level logging, you can get the URL used from the log files. While testing, it's best to use as narrow a search as possible. A manual search is good because it's specific and you can see the results in the UI while examining the logs.
 
-In this test, you’ll be looking for obvious errors and running some simple tests. You can see the search used the url ***UPDATED MUSIC SPECIFIC URL NEEDED - THIS IS A SONARR URL EXAMPLE*** `https://api.nzbgeek.info/api?t=tvsearch&cat=5030,5040,5045,5080&extended=1&apikey=(removed)&offset=0&limit=100&tvdbid=354629&season=1&ep=1`, which you can try yourself in a browser after replacing (removed) with your apikey for that indexer. Does it work? Do you see the expected results? Does this FAQ entry apply? In that URL, you can see that it set specific categories with `cat=5030,5040,5045,5080`, so if you’re not seeing expected results, this is one likely reason. You can also see that it searched by tvdbid with `tvdbid=354629`, so if the episode isn’t properly categorized on the indexer, it will need to be fixed. You can also see that it searches by specific season and episode with season=1 and ep=1, so if that isn’t correct on the indexer, you won’t see those results. Look at Manual Search XML Output below to see an example of a working query’s output.
+In this test, you’ll be looking for obvious errors and running some simple tests. You can see the search used the url ***UPDATED MUSIC SPECIFIC URL NEEDED - THIS IS A SONARR URL EXAMPLE*** `https://api.nzbgeek.info/api?t=tvsearch&cat=5030,5040,5045,5080&extended=1&apikey=(removed)&offset=0&limit=100&tvdbid=354629&season=1&ep=1`, which you can try yourself in a browser after replacing (removed) with your apikey for that indexer. Does it work? Do you see the expected results? Does this FAQ entry apply? In that URL, you can see that it set specific categories with `cat=5030,5040,5045,5080`, so if you’re not seeing expected results, this is one likely reason. You can also see that it searched by tvdbid with `tvdbid=354629`, so if the episode isn’t properly categorized on the indexer, fix it there. You can also see that it searches by specific season and episode with season=1 and ep=1, so if that isn’t correct on the indexer, you won’t see those results. Look at Manual Search XML Output below to see an example of a working query’s output.
 
 - Manual Search XML Output
 
@@ -444,7 +444,7 @@ Below are some common problems.
 
 ### Unable to Load Search Results
 
-Most likely you're using a reverse proxy and you reverse proxy timeout is set too short before \*Arr has completed the search query. Increase the timeout and try again.
+Most likely you're using a reverse proxy and your reverse proxy timeout is too short for \*Arr to complete the search query. Increase the timeout and try again.
 
 ### Media is Unmonitored
 
@@ -455,8 +455,8 @@ The songs aren't monitored.
 - Lidarr is searching for `Kikis Delivery Service` but your tracker only has results for `Kiki's Delivery Service`
 - This is due to your tracker not supporting normal standardized searches.
 - The solution is that your tracker's definition's search capabilities need to be updates to indicate it requires and supports `RawSearch`
-- Jackett supports the flag, but the capabilities need to be updated on a per-indexer basis. Open a feature request for Jackett to add this functionality for your indexer.
-- Prowlarr supports the flag, but the capabilities need to be updated on a per-indexer basis. Open a feature request for Prowlarr to add this functionality for your indexer.
+- Jackett supports the flag, but you need to update the capabilities per indexer. Open a feature request for Jackett to add this functionality for your indexer.
+- Prowlarr supports the flag, but you need to update the capabilities per indexer. Open a feature request for Prowlarr to add this functionality for your indexer.
 
 ### Wrong categories
 
@@ -470,14 +470,14 @@ Sometimes indexers will return completely unrelated results,  will feed in param
 
 You receive a message similar to `Query successful, but no results were returned from your indexer. This may be an issue with the indexer or your indexer category settings.`
 
-This is caused by your Indexer failing to return any results that are within the categories you configured for the Indexer.
+Your indexer returned no results within the categories you configured.
 
 ### Missing Results
 
 If you have results on the site you can find that aren't showing in Lidarr then your issue is likely one of several possibilities:
 
 - [Categories are incorrect - See Above](#wrong-categories)
-- An ID based searched is being done and the Indexer doesn't have the releases correctly mapped to that ID. This is something only your indexer can solve. They need to ensure the release is mapped to the correct applicable ids.
+- Lidarr ran an ID-based search but the indexer hasn't mapped those releases to that ID correctly. Only your indexer can fix this -- they need to map the release to the correct IDs.
 - Not searching how Lidarr is searching; It's highly likely the terms you are searching on the indexer isn't how Lidarr is querying it. You can see how Lidarr is querying from the Trace Logs. Text based queries will generally be in the format of `q=words%20and%20things%20here`  this string is HTTP encoded and can be easily decoded using any HTML decoding/encoding tool online.
 
 ### Release Rejected: Album duration is 0
@@ -489,7 +489,7 @@ Release Rejected
 * Album duration is 0, unable to validate size until it's available
 ```
 
-The album can still be added to Lidarr and will appear in your library, but no automatic or manual search will succeed until the duration data exists.
+You can still add the album to Lidarr and it will appear in your library, but no automatic or manual search will succeed until the duration data exists.
 
 **Fix:** Add the missing track lengths to MusicBrainz, then let the data propagate to Lidarr.
 
@@ -503,7 +503,7 @@ The album can still be added to Lidarr and will appear in your library, but no a
 
 ### Certificate validation
 
-You’ll be connecting to most indexers/trackers via https, so you’ll need that to work properly on your system. That means your time zone and time both need to be set *correctly*. It also means your system certificates need to be up to date.
+You’ll be connecting to most indexers/trackers via https, so you’ll need that to work properly on your system. That means you need to set your time zone and time *correctly*. It also means your system certificates need to be up to date.
 
 ### Hitting rate limits
 
@@ -518,7 +518,7 @@ Similarly to rate limits, certain indexers - such as Nyaa - may outright ban an 
 {#jacketts-all-endpoint}
 {#jackett-all-endpoint}
 
-The Jackett `/all` endpoint is convenient, but that's its only benefit. Everything else is potential problems, so adding each tracker individually is required. Alternatively, you may wish to check out the Jackett & NZBHydra2 alternative [Prowlarr](/prowlarr)
+The Jackett `/all` endpoint is convenient, but that's its only benefit. Everything else is potential problems, so add each tracker individually. Alternatively, you may wish to check out the Jackett & NZBHydra2 alternative [Prowlarr](/prowlarr)
 
 [Even Jackett says /all should be avoided and shouldn't be used.](https://github.com/Jackett/Jackett#aggregate-indexers)
 
@@ -526,11 +526,11 @@ Using the all endpoint has no advantages (besides reduced management overhead), 
 
 - you lose control over indexer specific settings (categories, search modes, etc.)
 - mixing search modes (IMDB, query, etc.) might cause low-quality results
-- indexer specific categories (\>= 100000) can't be used.
+- you can't use indexer-specific categories (>= 100000).
 - slow indexers will slow down the overall result
-- total results are limited to 1000
+- total results cap at 1000
 
-Adding each indexer separately It allows for fine tuning of categories on a per indexer basis, which can be a problem with the `/all` end point if using the wrong category causes errors on some trackers. In , each indexer is limited to 1000 results if pagination is supported or 100 if not, which means as you add more and more trackers to Jackett, you’re more and more likely to clip results. Finally, if *one* of the trackers in `/all` returns an error,  will disable it and now you don’t get any results.
+Adding each indexer separately It allows for fine tuning of categories on a per indexer basis, which can be a problem with the `/all` end point if using the wrong category causes errors on some trackers. In , each indexer caps at 1000 results with pagination or 100 without, which means as you add more trackers to Jackett, you’re more likely to clip results. Finally, if *one* of the trackers in `/all` returns an error,  will disable it and now you don’t get any results.
 
 ### Using NZBHydra2 as a single entry
 
@@ -546,7 +546,7 @@ These are some of the common errors you may see when adding an indexer
 
 ### The underlying connection was closed: An unexpected error occurred on a send
 
-This is caused by the indexer using a SSL protocol not supported by the current .NET Version found in [Lidarr => System => Status](/lidarr/system#status).
+The indexer uses a TLS/SSL protocol that the current .NET Version doesn't support. Check [Lidarr => System => Status](/lidarr/system#status) for the installed version.
 
 ### The request timed out
 
@@ -562,7 +562,7 @@ Lidarr is getting no response from the indexer.
 [v4.3.0.6671] System.Threading.Tasks.TaskCanceledException: A task was canceled.
 ```
 
-This can also be caused by:
+Other causes include:
 
 - improperly configured or use of a VPN
 - improperly configured or use of a proxy
