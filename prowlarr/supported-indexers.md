@@ -2,15 +2,15 @@
 title: Prowlarr Supported Indexers
 description: Indexers currently named as supported in the current nightly build of Prowlarr. Other indexers may be available via either Generic Newznab or Generic Torznab.
 published: true
-date: 2026-05-02T02:38:20.615746
+date: 2026-05-03T02:50:15.176227
 tags: prowlarr, indexers, reference
 editor: markdown
-dateCreated: 2026-05-02T02:38:20.615746
+dateCreated: 2026-05-03T02:50:15.176227
 ---
 
 - Supported Trackers and Indexers as of
-  - Prowlarr Build `2.3.6.5351` / [Commit: 46ce8e270138e757b14cc1b42b259419a2fac979](https://github.com/Prowlarr/Prowlarr/commit/46ce8e270138e757b14cc1b42b259419a2fac979)
-  - [Prowlarr Indexers Commit: c1d469998ce8eaf42d78f76ac5102f70ee51e88b](https://github.com/Prowlarr/Indexers/commit/c1d469998ce8eaf42d78f76ac5102f70ee51e88b)
+  - Prowlarr Build `2.3.7.5365` / [Commit: 18fe4ec4955f620013cd61daac8a760e033d8a67](https://github.com/Prowlarr/Prowlarr/commit/18fe4ec4955f620013cd61daac8a760e033d8a67)
+  - [Prowlarr Indexers Commit: 76a96a528da57dc2780d0f50b7af5f5b01b1bff8](https://github.com/Prowlarr/Indexers/commit/76a96a528da57dc2780d0f50b7af5f5b01b1bff8)
 
 ---
 
@@ -86,7 +86,6 @@ dateCreated: 2026-05-02T02:38:20.615746
 |[Postman](http://tracker2.postman.i2p/){#postman}|Postman is a Public I2P Torrent Tracker for MOVIES / TV / GENERAL|English (United States)|
 |[RinTor\.NeT](https://www.rintor.net/){#rintornet}|RinTor\.NeT is a RUSSIAN Public tracker for 3X|Russian (Russia)|
 |[RuTor](https://rutor.info/){#rutor}|RuTor is a RUSSIAN Public site for MOVIES / TV / GENERAL|Russian (Russia)|
-|[RuTracker\.RU](http://rutracker.ru/){#rutracker-ru}|RuTracker\.RU is a RUSSIAN Public Torrent Tracker for MOVIES / TV / GENERAL|Russian (Russia)|
 |[Sexy-Pics](https://www.sexy-pics.us/){#sexypics}|Sexy-Pics is a Public Magnet Links site for 3X MP4|English (United States)|
 |[Shana Project](https://www.shanaproject.com/){#shanaproject}|Shana Project is a Public torrent site for ANIME|English (United States)|
 |[showRSS](https://showrss.info/){#showrss}|showRSS is a service that allows you to keep track of your favorite TV shows|English (United States)|
