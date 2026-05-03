@@ -2,11 +2,12 @@
 title: Lidarr Metadata Troubleshooting
 description: Why can't I add or update this album? Diagnose MusicBrainz metadata problems in Lidarr — propagation, unknown release statuses, matching, cache-busts
 published: true
-date: 2026-04-29T12:44:04.108Z
+date: 2026-05-03T15:07:56.073Z
 tags: lidarr, troubleshooting, releases, metadata, musicbrainz, cache-bust
 editor: markdown
 dateCreated: 2026-04-20T13:04:32.647Z
 ---
+
 
 # Metadata Troubleshooting
 
@@ -39,7 +40,7 @@ The edit hasn't reached the Servarr metadata server yet, or it has, but Lidarr h
 
 ### 2. The release status is `unknown`
 
-Lidarr only imports releases with statuses it recognises. Anything with status `unknown` at MusicBrainz is skipped even if the release is otherwise complete.
+Lidarr only imports releases with statuses it recognises. Lidarr skips anything with status `unknown` at MusicBrainz, even if the release is otherwise complete.
 
 Statuses Lidarr can import, depending on the **Release Statuses** selected in your metadata profile:
 
@@ -50,7 +51,7 @@ Statuses Lidarr can import, depending on the **Release Statuses** selected in yo
 
 The fix is to update the status at MusicBrainz — typically to `Official`. See [Updating MusicBrainz](#updating-musicbrainz) below for the tools.
 
-> The `unknown` status is the single most common reason a release visible on `musicbrainz.org` doesn't appear in Lidarr. Check the status on the MusicBrainz release page before concluding anything is broken on the Lidarr side.
+> The `unknown` status is the single most common reason a release visible on `musicbrainz.org` doesn't appear in Lidarr. Check the status on the MusicBrainz release page before concluding there is a bug on the Lidarr side.
 {.is-info}
 
 ### 3. Wrong release matched
@@ -87,7 +88,7 @@ The usual trigger: someone adds a new release (a new pressing, a new format, a r
 
 Two fixes:
 
-- **Local / immediate.** Unmonitor the new (duplicate) album in Lidarr so it stops trying to download. This stops the symptom but leaves the underlying MusicBrainz structure wrong; the same thing will happen the next time a release is added to the duplicate group.
+- **Local / immediate.** Unmonitor the new (duplicate) album in Lidarr so it stops trying to download. This stops the symptom but leaves the underlying MusicBrainz structure wrong; the same thing will happen the next time someone adds a release to the duplicate group.
 - **Upstream / full fix.** Merge the release groups on MusicBrainz so there's only one album entity. The edit goes through the usual MusicBrainz review window — expect days. Once approved and propagated, Lidarr collapses the duplicate back into a single album on the next refresh.
 
 If you notice this pattern for a specific artist, it's worth spot-checking their MusicBrainz discography for other duplicated release groups while you are already looking — merging them in one pass is cheaper than catching each duplicate one at a time.
@@ -118,13 +119,13 @@ The Servarr metadata server occasionally holds onto stale data past the normal r
 
 {#refresh-releases-task}
 
-Refresh Releases is the task that keeps Lidarr's local view of metadata in sync with the metadata server. It can't be disabled, and you shouldn't disable it through database edits or other workarounds — Lidarr relies on it to catch upstream corrections (ID changes, cast updates, alt titles, ratings, summaries, translations) that affect matching and organisation.
+Refresh Releases is the task that keeps Lidarr's local view of metadata in sync with the metadata server. You can't disable it, and you shouldn't try through database edits or other workarounds — Lidarr relies on it to catch upstream corrections (ID changes, cast updates, alt titles, ratings, summaries, translations) that affect matching and organisation.
 
 If the refresh is causing heavy disk I/O, the setting to look at is **Rescan Artist Folder after Refresh**:
 
 - Default is `Always`, which re-reads every file after every refresh.
 - Changing it to `Manual` usually solves the I/O problem — refreshes still update metadata, they just don't re-scan files on disk.
-- **Don't** set it to `Never` unless every change to your library (additions, upgrades, deletions) goes through Lidarr. Manual file changes or third-party tooling won't be picked up if rescans never run.
+- **Don't** set it to `Never` unless every change to your library (additions, upgrades, deletions) goes through Lidarr. Lidarr won't pick up manual file changes or third-party tooling if rescans never run.
 
 ## Updating MusicBrainz
 
@@ -164,7 +165,7 @@ Picard is a *tagging* tool first and foremost. For adding or editing releases at
 
 ### Cover art
 
-Cover art **isn't pulled directly by Lidarr** — covers are served to Lidarr via the Servarr metadata server, which aggregates from upstream sources. The canonical place to upload album art is the [Cover Art Archive](https://coverartarchive.org/) (attached to the MusicBrainz release), but don't expect an instant appearance in Lidarr:
+Cover art **isn't pulled directly by Lidarr** — the Servarr metadata server serves covers to Lidarr, aggregating from upstream sources. The canonical place to upload album art is the [Cover Art Archive](https://coverartarchive.org/) (attached to the MusicBrainz release), but don't expect an instant appearance in Lidarr:
 
 - The metadata server's refresh cadence for cover data is slower than for textual metadata.
 - Lidarr displays whatever cover URL the metadata server hands it; if the server hasn't yet picked up the new upload, Lidarr won't either.
@@ -182,7 +183,7 @@ When Lidarr processes a Spotify import list, it resolves each Spotify track or a
 1. **Cache lookup** — Lidarr sends all Spotify IDs to the Servarr metadata server at once. The server returns MusicBrainz IDs for any Spotify IDs it has already cached.
 2. **Individual lookups** — for any Spotify ID not in the cache, Lidarr falls back to querying the metadata server one ID at a time. A large playlist or many concurrent lists can generate enough individual lookups to trigger a 429 rate-limit response from the metadata server.
 
-When you hit the rate limit, affected albums won't be added to Lidarr's queue until the limit clears.
+When you hit the rate limit, Lidarr won't add affected albums to its queue until the limit clears.
 
 **Resolution:**
 
