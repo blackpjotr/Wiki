@@ -2,11 +2,12 @@
 title: Lidarr Concepts
 description: How Lidarr models music, why MusicBrainz metadata matters, and when Lidarr is (and isn't) the right tool for your library
 published: true
-date: 2026-04-29T12:42:56.149Z
+date: 2026-05-03T14:26:11.903Z
 tags: lidarr, releases, metadata, concepts, musicbrainz, artist
 editor: markdown
 dateCreated: 2026-04-18T16:48:08.649Z
 ---
+
 
 # Lidarr Concepts
 
@@ -20,7 +21,7 @@ Unlike movies and TV shows, music has no consistent set of standards for tagging
 
 The choice Lidarr makes is to lean on third-party metadata to impose order. Every album and artist in Lidarr corresponds to a record in an external data source, and Lidarr uses that record to categorize, tag, and manage files. Everything else in this page follows from that decision.
 
-> If the data doesn't exist in the third-party services, it can't be managed by Lidarr.
+> If the data doesn't exist in third-party services, Lidarr can't manage it.
 {.is-warning}
 
 ## The Release model
@@ -38,7 +39,7 @@ If something you want to manage doesn't exist as a `Release` in the metadata sou
 
 Lidarr is audio-only. MusicBrainz marks some recordings as video (music videos, live video streams, etc.), and Lidarr skips them entirely — it won't search for, grab, or import a release where all tracks carry the video flag.
 
-> `Releases` must exist in the third-party services to be managed in Lidarr.
+> You can only manage `Releases` in Lidarr if they exist in third-party services.
 {.is-info}
 
 ## Release groups and releases
@@ -51,8 +52,8 @@ Lidarr's `Album` corresponds to **MusicBrainz's release group**, not its release
 
 Two consequences follow:
 
-- **You can't add a single release without its release group.** There's no "only this pressing" model in Lidarr; the release group is always added, and one of its releases is designated. You can switch which release is active from the album's Edit dialog — this is how you tell Lidarr to match the 2015 remaster instead of the 2005 original, for example.
-- **Adding "just an album" still involves the artist.** When you add an album, Lidarr also needs the artist record in its database. You can add the album without monitoring the rest of the artist's catalogue by setting monitoring to *None* at add-time; the artist row exists in Lidarr's database but nothing but the target album is monitored.
+- **You can't add a single release without its release group.** There's no "only this pressing" model in Lidarr; the release group is always added, and Lidarr designates one of its releases as active. You can switch which release is active from the album's Edit dialog — this is how you tell Lidarr to match the 2015 remaster instead of the 2005 original, for example.
+- **Adding "just an album" still involves the artist.** When you add an album, Lidarr also needs the artist record in its database. You can add the album without monitoring the rest of the artist's catalogue by setting monitoring to *None* at add-time; the artist row exists in Lidarr's database but Lidarr only monitors the target album.
 
 Individual tracks aren't addable in isolation. A recording that was released as part of an album lives inside that release group; to get Lidarr to fetch it you would need to add the release group and let Lidarr fetch the whole thing. Where a track was released *as a single* in MusicBrainz (its own release group of type `Single`), Lidarr can handle it — that's one of the reasons Metadata Profiles expose `Single` as a release-group-type toggle separately from `Album`.
 
@@ -72,9 +73,9 @@ Consider how many ways the same person can appear:
 - Bob Dylan feat. The Band
 - The Band featuring Bob Dylan
 
-Every `Release` is associated with exactly one `Artist`. To add a `Release` in Lidarr you have to find and use the canonical `Artist` as the metadata source defines it — not the one written on the album cover, the one written in MusicBrainz. This is the source of most "why can't I add this artist?" problems; see the [FAQ](/lidarr/faq) for specific cases.
+Each `Release` belongs to exactly one `Artist`. To add a `Release` in Lidarr you have to find and use the canonical `Artist` as the metadata source defines it — not the one written on the album cover, the one written in MusicBrainz. This is the source of most "why can't I add this artist?" problems; see the [FAQ](/lidarr/faq) for specific cases.
 
-> `Release Artists` must exist in the third-party services to be managed in Lidarr.
+> You can only manage `Release Artists` in Lidarr if they exist in third-party services.
 {.is-info}
 
 ## Dependence on MusicBrainz
@@ -96,57 +97,3 @@ If you find that a `Release` or `Release Artist` is missing from MusicBrainz, yo
 Two questions that come up often enough to answer here:
 
 - *Why do I have the same file in my download folder and my library folder?*
-- *Why do files stay in the download folder after Lidarr imported them?*
-
-Both are expected with the default Lidarr workflow, and both are answered by understanding how the post-import handoff works.
-
-### The torrent download flow
-
-1. Lidarr sends a download request to the torrent client, tagged with a category (default: `lidarr-music` or similar — configurable per download client).
-2. Lidarr watches the download client's queue via its API for items in that category.
-3. When a download finishes, Lidarr imports the files into the library folder. Whether that import copies or hardlinks is determined by filesystem support — see below.
-4. The torrent client keeps the files in the download folder so it can seed. That's why the file "is left in downloads" after import.
-5. Optionally, if **Completed Download Handling → Remove Completed** is enabled, Lidarr tells the torrent client to remove the torrent and its files *after* seeding is complete. If you don't want the file to persist in the download folder at all, this is the setting to turn on.
-
-### Hardlinks
-
-If the download folder and the library folder are on the **same filesystem** (same mount, same partition), Lidarr uses a **hardlink** instead of a copy. A hardlink is a second directory entry pointing at the same underlying file — the file appears in both folders but only occupies disk space once. Lidarr can import by hardlink *before* the torrent is done seeding, and the seeding will continue to work on the original file because they're literally the same bytes on disk.
-
-If the download folder and the library folder are on **different filesystems**, Lidarr can't hardlink across them and falls back to a copy. The copy doubles the disk space until the download client cleans up its side.
-
-**The requirement for hardlinks to work:**
-
-- Both folders must be on the same filesystem (same mount point, same volume).
-- In Docker, both folders must be mounted through the *same* volume or bind mount. Two separate volumes, even pointing at the same host filesystem, won't hardlink.
-- The *Arr Docker Guide at [TRaSH Guides → Hardlinks](https://trash-guides.info/hardlinks) has a detailed walkthrough of the common misconfigurations.
-
-> Hardlinks are enabled by default. If you are seeing double disk usage, the usual culprits are mismatched mounts (Docker), a download client writing to a different filesystem than the library, or a filesystem that doesn't support hardlinks (some network filesystems, FAT32).
-{.is-info}
-
-## Is Lidarr right for your library?
-
-Lidarr is built around the `Release` model. If your library doesn't fit that model, Lidarr will be a frustrating tool no matter how much you tune it. Lidarr **isn't** a good fit for the following situations.
-
-- **A loose collection of files** — files from multiple artists (not compilations) or multiple `Releases` sharing a single folder. Low-to-no-curation libraries won't work with Lidarr; don't try.
-- **Classical music libraries** — classical releases typically have extensive tagging requirements, and `Release` metadata on MusicBrainz is often missing or incorrect. You can use Lidarr, but expect substantial manual work.
-- **Singles-heavy libraries** — many singles aren't actual `Releases` in MusicBrainz. Third-party data sources return no metadata for them, so they can't be automated.
-- **Mixes, beats, and samples** — libraries made of DJ mixes, beat packs, or producer samples (Beatport-style content). These aren't `Releases` in the metadata sources and Lidarr can't manage them. This does *not* apply to albums in the Electronic genre, which are fine.
-
-If most of your library falls into one of the above categories, Lidarr may not be the right tool. If only part of your library does, you can still use Lidarr for the rest — just expect to manage the problematic portion by hand.
-
-## Alternatives and companion tools
-
-The tools below can be used instead of — or alongside — Lidarr.
-
-- [Beets](https://beets.io/) — music library organizer and tagger, strong at bulk cleanup
-- [MusicBrainz Picard](https://picard.musicbrainz.org/) — the canonical MusicBrainz tagger
-- [MusicBee](https://getmusicbee.com/) — music player with strong library-management features
-
-Using these in tandem with Lidarr is beyond the scope of this page, but they're common companions for preparing a library before import, or for managing the parts of a collection Lidarr can't.
-
-## See also
-
-- [Quick Start](/lidarr/quick-start-guide) — install and reach your first download
-- [Importing an Existing Library](/lidarr/importing-existing-library) — migrating files you already have
-- [FAQ](/lidarr/faq) — common questions and troubleshooting
-- [Settings](/lidarr/settings) — detailed reference for every configuration option
