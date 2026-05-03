@@ -2,16 +2,75 @@
 title: Lidarr System
 description: System information, logs, scheduled tasks, and status monitoring for Lidarr administration and troubleshooting
 published: true
-date: 2026-05-03T14:18:41.620Z
+date: 2026-05-03T14:20:00.258Z
 tags: lidarr, system, logs, administration, tasks, status
 editor: markdown
 dateCreated: 2021-06-14T21:36:28.225Z
 ---
 
-[TOC]
+# Table of Contents
 
-> Warning: This page is a work in progress and is currently a rough draft based on Readarr
-{.is-danger}
+- [Table of Contents](#table-of-contents)
+- [Status](#status)
+  - [Health](#health)
+    - [System Warnings](#system-warnings)
+      - [Branch isn't a valid release branch](#branch-is-not-a-valid-release-branch)
+      - [Update to .NET version](#update-to-net-version)
+        - [Fixing Docker installs](#fixing-docker-installs)
+        - [Fixing Standalone installs](#fixing-standalone-installs)
+      - [Currently installed mono version is old and unsupported](#currently-installed-mono-version-is-old-and-unsupported)
+      - [Currently installed SQLite version isn't supported](#currently-installed-sqlite-version-is-not-supported)
+      - [New update is available](#new-update-is-available)
+      - [Can't install update because startup folder isn't writable by the user](#cannot-install-update-because-startup-folder-is-not-writable-by-the-user)
+      - [Updating won't be possible to prevent deleting AppData on Update](#updating-will-not-be-possible-to-prevent-deleting-appdata-on-update)
+      - [Branch is for a previous version](#branch-is-for-a-previous-version)
+      - [Couldn't connect to signalR](#could-not-connect-to-signalr)
+        - [NGINX](#nginx)
+        - [Apache](#apache)
+        - [Caddy](#caddy)
+      - [Failed to resolve the IP Address for the Configured Proxy Host](#failed-to-resolve-the-ip-address-for-the-configured-proxy-host)
+      - [Proxy Failed Test](#proxy-failed-test)
+      - [System Time is off by more than 1 day](#system-time-is-off-by-more-than-1-day)
+      - [Mono Legacy TLS enabled](#mono-legacy-tls-enabled)
+      - [Mono and x86 builds are ending](#mono-and-x86-builds-are-ending)
+      - [FPcalc needs updating](#fpcalc-needs-updating)
+    - [Download Clients](#download-clients)
+      - [No download client is available](#no-download-client-is-available)
+      - [Unable to communicate with download client](#unable-to-communicate-with-download-client)
+      - [Download clients are unavailable due to failure](#download-clients-are-unavailable-due-to-failure)
+      - [Enable Completed Download Handling](#enable-completed-download-handling)
+      - [Docker bad remote path mapping](#docker-bad-remote-path-mapping)
+      - [Downloading into Root Folder](#downloading-into-root-folder)
+      - [Bad Download Client Settings](#bad-download-client-settings)
+      - [Bad Remote Path Mapping](#bad-remote-path-mapping)
+      - [Permissions Error](#permissions-error)
+      - [Remote File was removed part way through processing](#remote-file-was-removed-part-way-through-processing)
+      - [Remote Path is Used and Import Failed](#remote-path-is-used-and-import-failed)
+    - [Completed/Failed Download Handling](#completedfailed-download-handling)
+      - [Completed Download Handling is disabled](#completed-download-handling-is-disabled)
+      - [Download Client Removes Completed Downloads](#download-client-removes-completed-downloads)
+    - [Indexers](#indexers)
+      - [No indexers available with automatic search enabled, Lidarr won't provide any automatic search results](#no-indexers-available-with-automatic-search-enabled-lidarr-will-not-provide-any-automatic-search-results)
+      - [No indexers available with RSS sync enabled, Lidarr won't grab new releases automatically](#no-indexers-available-with-rss-sync-enabled-lidarr-will-not-grab-new-releases-automatically)
+      - [No indexers are enabled](#no-indexers-are-enabled)
+    - [Enabled indexers don't support searching](#enabled-indexers-do-not-support-searching)
+      - [No indexers Available with Interactive Search Enabled](#no-indexers-available-with-interactive-search-enabled)
+      - [Indexers are unavailable due to failures](#indexers-are-unavailable-due-to-failures)
+      - [Jackett All Endpoint Used](#jackett-all-endpoint-used)
+        - [Solutions](#solutions)
+    - [Artist Folders](#artist-folders)
+      - [Missing Root Folder](#missing-root-folder)
+      - [Lists are unavailable due to failures](#lists-are-unavailable-due-to-failures)
+  - [Disk Space](#disk-space)
+  - [About](#about)
+  - [More Info](#more-info)
+- [Tasks](#tasks)
+  - [Scheduled](#scheduled)
+  - [Queue](#queue)
+- [Backup](#backup)
+- [Updates](#updates)
+- [Events](#events)
+- [Log Files](#log-files)
 
 # Status
 
