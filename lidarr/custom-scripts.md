@@ -2,7 +2,7 @@
 title: Lidarr Custom Scripts
 description: Guide for creating and implementing custom scripts for automation and integration in Lidarr
 published: true
-date: 2026-04-27T14:21:43.868Z
+date: 2026-05-03T15:09:29.401Z
 tags: lidarr, scripts, automation, custom, integration, hooks, api
 editor: markdown
 dateCreated: 2021-11-24T19:22:09.331Z
@@ -10,13 +10,13 @@ dateCreated: 2021-11-24T19:22:09.331Z
 
 # Lidarr Custom Scripts
 
-Lidarr can execute a custom script when an album is imported, renamed, retagged, or when other events occur. Scripts are added via **Settings → Connect → Custom Script**.
+Lidarr can execute a custom script when it imports, renames, or retags an album, or when other events occur. Add scripts via **Settings → Connect → Custom Script**.
 
 A custom script can be any executable accessible by the user Lidarr is running as — a shell script, PowerShell script, Python script, or compiled binary.
 
 ## Lidarr logs
 
-Script output is written to the Lidarr log files:
+Lidarr writes script output to the log files:
 
 | Output | Log level | Log file |
 |---|---|---|
@@ -30,7 +30,7 @@ Enable **Debug** or **Trace** logging in **Settings → General → Logging** to
 
 - The script file must be executable by the user Lidarr runs as.
 - On Linux/macOS: `chmod +x /path/to/your-script.sh`
-- On Windows: `.ps1` files must be accessible; PowerShell script execution must be enabled (`Set-ExecutionPolicy RemoteSigned`).
+- On Windows: `.ps1` files must be accessible; you must enable PowerShell script execution (`Set-ExecutionPolicy RemoteSigned`).
 - The script must exit cleanly (exit code `0`) on the `Test` event, which Lidarr sends when you click **Test** in the connection settings. A non-zero exit code on Test will show an error, even though no real event fired.
 
 ## Environment variables
@@ -69,7 +69,7 @@ Fired when Lidarr sends a release to a download client.
 | `Lidarr_Release_AlbumOverviews` | Pipe-separated list of album overviews |
 | `Lidarr_Release_AlbumMBIds` | Pipe-separated list of album MusicBrainz IDs |
 | `Lidarr_Release_Title` | Release title as returned by the indexer |
-| `Lidarr_Release_Indexer` | Indexer the release was found on |
+| `Lidarr_Release_Indexer` | Indexer that found the release |
 | `Lidarr_Release_Size` | Release size in bytes |
 | `Lidarr_Release_Quality` | Quality name (for example, `FLAC`, `MP3-320`) |
 | `Lidarr_Release_QualityVersion` | Quality revision version |
@@ -122,7 +122,7 @@ Fired after Lidarr renames one or more track files for an artist.
 | `Lidarr_Artist_Type` | Artist type |
 | `Lidarr_Artist_Genres` | Pipe-separated list of genres |
 | `Lidarr_Artist_Tags` | Pipe-separated list of tag labels |
-| `Lidarr_TrackFile_Ids` | Comma-separated list of internal track file IDs that were renamed |
+| `Lidarr_TrackFile_Ids` | Comma-separated list of internal track file IDs Lidarr renamed |
 | `Lidarr_TrackFile_Paths` | Pipe-separated list of new (current) paths after rename |
 | `Lidarr_TrackFile_PreviousPaths` | Pipe-separated list of old paths before rename |
 
@@ -157,11 +157,11 @@ Fired after Lidarr rewrites tags on one or more track files.
 | `Lidarr_TrackFile_ReleaseGroup` | Release group tag |
 | `Lidarr_TrackFile_SceneName` | Scene name of the source release |
 | `Lidarr_Tags_Diff` | JSON diff of tag changes |
-| `Lidarr_Tags_Scrubbed` | Whether existing tags were scrubbed (`True`/`False`) |
+| `Lidarr_Tags_Scrubbed` | Whether Lidarr scrubbed existing tags (`True`/`False`) |
 
 ### Artist Added
 
-Fired when an artist is added to Lidarr.
+Fired when you add an artist to Lidarr.
 
 | Environment Variable | Details |
 |---|---|
@@ -176,14 +176,14 @@ Fired when an artist is added to Lidarr.
 
 ### Artist Deleted
 
-Fired when an artist is removed from Lidarr.
+Fired when you remove an artist from Lidarr.
 
 | Environment Variable | Details |
 |---|---|
 | `Lidarr_EventType` | `ArtistDeleted` |
 | `Lidarr_Artist_Id` | Internal Lidarr ID for the artist |
 | `Lidarr_Artist_Title` | Artist name |
-| `Lidarr_Artist_Path` | Path that was used for this artist |
+| `Lidarr_Artist_Path` | Path Lidarr used for this artist |
 | `Lidarr_Artist_MBId` | MusicBrainz artist ID |
 | `Lidarr_Artist_Type` | Artist type |
 | `Lidarr_Artist_Genres` | Pipe-separated list of genres |
@@ -192,7 +192,7 @@ Fired when an artist is removed from Lidarr.
 
 ### Album Deleted
 
-Fired when an album is removed from Lidarr.
+Fired when you remove an album from Lidarr.
 
 | Environment Variable | Details |
 |---|---|
@@ -244,7 +244,7 @@ Fired after Lidarr updates itself to a new version.
 | `Lidarr_EventType` | `ApplicationUpdate` |
 | `Lidarr_Update_Message` | Update changelog message |
 | `Lidarr_Update_NewVersion` | Version that was just installed |
-| `Lidarr_Update_PreviousVersion` | Version that was replaced |
+| `Lidarr_Update_PreviousVersion` | Version Lidarr replaced |
 
 ### On Test
 
@@ -361,7 +361,7 @@ curl -s -X GET \
     "$PLEX_URL/library/sections/$PLEX_SECTION_ID/refresh?path=$ENCODED_PATH&X-Plex-Token=$PLEX_TOKEN"
 ```
 
-To find your section ID, open `http://your-plex-server:32400/library/sections?X-Plex-Token=YOUR_TOKEN` in a browser and look for the music library. Your Plex token can be found in Plex Web → Settings → Troubleshooting → Get an Online Media Token.
+To find your section ID, open `http://your-plex-server:32400/library/sections?X-Plex-Token=YOUR_TOKEN` in a browser and look for the music library. Find your Plex token in Plex Web → Settings → Troubleshooting → Get an Online Media Token.
 
 > If Plex and Lidarr run in separate Docker containers, `localhost` won't reach the Plex container. Use the Plex container's name or IP on the shared Docker network instead.
 {.is-info}
@@ -397,5 +397,5 @@ curl -s -X POST "$WEBHOOK_URL" \
 
 ## See also
 
-- [Settings → Connect](/lidarr/settings#connections) — where scripts are registered in the Lidarr UI
+- [Settings → Connect](/lidarr/settings#connections) — where you register scripts in the Lidarr UI
 - [Beets Integration](/lidarr/beets-integration) — using a custom script to invoke beets for tag enrichment after import
