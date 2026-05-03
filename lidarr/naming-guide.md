@@ -2,7 +2,7 @@
 title: Lidarr File Naming Guide
 description: Common file and folder naming schemes for Lidarr music organization including custom formats and multi-disc album handling
 published: true
-date: 2026-04-27T14:31:55.059Z
+date: 2026-05-03T15:08:55.465Z
 tags: lidarr, naming, configuration
 editor: markdown
 dateCreated: 2024-03-30T13:23:53.095Z
@@ -10,24 +10,24 @@ dateCreated: 2024-03-30T13:23:53.095Z
 
 # Lidarr File Naming Guide
 
-Lidarr renames and organises files on import according to four configurable templates: **Standard Track Format**, **Multi-Disc Track Format**, **Artist Folder Format**, and **Album Folder Format**. Getting these right before your library is populated is important — changing them later forces a full rename of every file the next time each artist is refreshed.
+Lidarr renames and organises files on import according to four configurable templates: **Standard Track Format**, **Multi-Disc Track Format**, **Artist Folder Format**, and **Album Folder Format**. Getting these right before you populate your library is important — changing them later forces a full rename of every file the next time Lidarr refreshes each artist.
 
-> Changing any naming template after a library is populated will rename every existing file the next time that artist is refreshed. Test on a small artist first, and make sure your backup is current before changing naming on a large library.
+> Changing any naming template after you have populated your library will rename every existing file the next time Lidarr refreshes that artist. Test on a small artist first, and make sure your backup is current before changing naming on a large library.
 {.is-warning}
 
 # Before you choose a format
 
 ## OS path limits and illegal characters
 
-**Windows** enforces a 260-character limit on full file paths by default (this can be raised via a Group Policy setting, but most users will hit it eventually on deeply-nested libraries). Long album titles and artist names compound quickly: `Root\Artist\Album\Track.flac` can easily push 200 characters before the filename. The `:N` truncation syntax (see below) is the standard workaround — most Windows-friendly naming conventions cap tokens at 100–150 characters.
+**Windows** enforces a 260-character limit on full file paths by default (you can raise this via a Group Policy setting, but most users will hit it eventually on deeply-nested libraries). Long album titles and artist names compound quickly: `Root\Artist\Album\Track.flac` can easily push 200 characters before the filename. The `:N` truncation syntax (see below) is the standard workaround — most Windows-friendly naming conventions cap tokens at 100–150 characters.
 
-**Windows also prohibits** these characters in file and folder names: `\ / : * ? " < > |`. Lidarr's **Replace Illegal Characters** setting handles these automatically, but be aware that characters which are valid on Linux/macOS (colons in particular) will be substituted or removed on Windows.
+**Windows also prohibits** these characters in file and folder names: `\ / : * ? " < > |`. Lidarr's **Replace Illegal Characters** setting handles these automatically, but be aware that Lidarr substitutes or removes characters that are valid on Linux/macOS (colons in particular) on Windows.
 
 **Linux and macOS** have a 255-byte limit per path component (individual folder or filename) and prohibit only `/` and null bytes, so very long names are rarely a practical problem unless you are also sharing the library with a Windows machine.
 
 ## Media server compatibility
 
-Different media servers have different expectations about how music libraries are laid out:
+Different media servers have different expectations about music library folder structure:
 
 - **Plex** expects `Artist/Album/Track` folder nesting. It reads tags for metadata and uses the folder structure as a secondary hint. Plex doesn't require the release year in the album folder but many users include it to disambiguate re-issues.
 - **Navidrome** reads tags exclusively and is indifferent to folder structure, so almost any sane layout works.
@@ -41,7 +41,7 @@ Every naming change triggers a rename of all files the next time Lidarr refreshe
 
 # Naming token reference
 
-Tokens are wrapped in `{}` and substituted at import time. Any token that resolves to an empty string is omitted silently, including any surrounding literal text that's inside the same `{}` — this is how conditional formatting works (for example, `{ (Album Disambiguation)}` produces nothing if there's no disambiguation string).
+Wrap tokens in `{}`; Lidarr substitutes them at import time. Any token that resolves to an empty string Lidarr omits silently, including any surrounding literal text that's inside the same `{}` — this is how conditional formatting works (for example, `{ (Album Disambiguation)}` produces nothing if there's no disambiguation string).
 
 **Truncation:** append `:N` inside any token to cap the rendered value at N characters: `{Album Title:150}` truncates to 150 characters. Use this on Windows to stay within path limits.
 
@@ -106,7 +106,7 @@ Tokens are wrapped in `{}` and substituted at import time. Any token that resolv
 
 # Community naming conventions
 
-The following formats are contributed by community members and are offered as tested starting points, not official recommendations. Each covers Standard Track Format, Multi-Disc Track Format, and Artist Folder Format. Read the trade-offs before adopting one wholesale.
+Community members contributed the following formats as tested starting points, not official recommendations. Each covers Standard Track Format, Multi-Disc Track Format, and Artist Folder Format. Read the trade-offs before adopting one wholesale.
 
 ## Davo's convention
 
