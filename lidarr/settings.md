@@ -2,7 +2,7 @@
 title: Lidarr Settings
 description: Complete configuration guide for Lidarr settings including media management, profiles, quality definitions, and metadata preferences
 published: true
-date: 2026-04-27T14:34:37.390Z
+date: 2026-05-03T14:25:38.438Z
 tags: lidarr, settings, configuration, quality, profiles, metadata, media
 editor: markdown
 dateCreated: 2021-06-14T21:36:07.513Z
@@ -58,7 +58,7 @@ Example: `{Artist Name}` → `/music/The Beatles/`
 
 | Setting | Default | Description |
 |---|---|---|
-| **Create Empty Artist Folders** | Off | Lidarr creates an artist folder immediately when an artist is added, even before importing any tracks. |
+| **Create Empty Artist Folders** | Off | Lidarr creates an artist folder immediately when you add an artist, even before importing any tracks. |
 | **Delete Empty Folders** | Off | Lidarr automatically removes empty artist and album folders after deleting or moving files. |
 
 ## Importing
@@ -69,7 +69,7 @@ Example: `{Artist Name}` → `/music/The Beatles/`
 | **Minimum Free Space** | 100 MB | Lidarr will refuse to import if available space in the root folder falls below this value. |
 | **Use Hardlinks Instead of Copy** | On | Use hardlinks when the source and destination are on the same filesystem. Hardlinks avoid copying data and allow seeding to continue. Falls back to copy if hardlinks aren't supported. |
 | **Import Extra Files** | Off | Import sidecar files with the same base name alongside audio files at import time (for example, lyric files, NFO files, cover images). See below. |
-| **Extra File Extensions** | (empty) | Comma-separated list of file extensions to import when **Import Extra Files** is enabled. Example: `lrc,nfo,jpg,png`. Don't use `*` — the code treats it as a literal character, not a wildcard, and it matches nothing. |
+| **Extra File Extensions** | (empty) | Comma-separated list of file extensions to import when you enable **Import Extra Files**. Example: `lrc,nfo,jpg,png`. Don't use `*` — the code treats it as a literal character, not a wildcard, and it matches nothing. |
 
 ### How Import Extra Files works
 
@@ -81,7 +81,7 @@ Matching files are then filtered against the configured extension list. Files th
 2. Renamed to match the track filename, preserving the extension.
 3. Recorded in Lidarr's database and associated with the track file.
 
-**NFO files:** Lidarr imports only the first NFO file found in the source folder per run. Later NFO files from the same folder are skipped to prevent duplicates.
+**NFO files:** Lidarr imports only the first NFO file found in the source folder per run. Lidarr skips later NFO files from the same folder to prevent duplicates.
 
 **Lyric files** (`.lrc`, `.txt`, `.utf`, `.utf8`, `.utf-8`) — a separate lyric manager handles these with priority over the general extra-file handler. Lidarr imports them with the same base name as the track and renames them alongside it.
 
@@ -150,9 +150,9 @@ Metadata profiles control which release types are visible per artist. Lidarr hid
 | **Broadcasts** | Live broadcasts, radio sessions, and similar. |
 | **Others** | Release types not covered by the above categories. |
 
-Secondary types (Compilation, Soundtrack, Spokenword, Interview, Live, Remix, DJ-Mix, Mixtape, Demo, etc.) can be included or excluded as extra filters on top of the primary type selection.
+You can include or exclude secondary types (Compilation, Soundtrack, Spokenword, Interview, Live, Remix, DJ-Mix, Mixtape, Demo, etc.) as extra filters on top of the primary type selection.
 
-> MusicBrainz determines release types. If a release you expect to see is missing, check its entry on MusicBrainz — the type may be set to `Unknown`, which Lidarr can't filter on, or the primary type may be one you have unchecked in your profile.
+> MusicBrainz determines release types. If a release you expect to see is missing, check its entry on MusicBrainz — the type may be `Unknown`, which Lidarr can't filter on, or the primary type may be one you have unchecked in your profile.
 {.is-info}
 
 
@@ -166,8 +166,8 @@ Release profiles filter and score releases based on their titles. Use them to re
 
 | Field | Description |
 |---|---|
-| **Must Contain** | Comma-separated list of terms (or regex patterns) that a release title must include. Releases not matching are rejected entirely. |
-| **Must Not Contain** | Comma-separated list of terms a release title must not include. Releases matching any term are rejected. |
+| **Must Contain** | Comma-separated list of terms (or regex patterns) that a release title must include. Lidarr rejects releases that don't match. |
+| **Must Not Contain** | Comma-separated list of terms a release title must not include. Lidarr rejects releases that match any term. |
 | **Preferred** | Terms with associated scores. Positive scores boost a release; negative scores penalise it. Separate terms with commas to share a score across more than one term. |
 | **Include Preferred when Renaming** | If enabled, Lidarr appends the matched preferred term to the filename during rename. Useful for tagging releases from specific groups in the filename. |
 | **Indexers** | Restrict this profile to specific indexers. Leave empty to apply to all indexers. |
@@ -235,7 +235,7 @@ For audio, size limits use **kilobits per second (kbps)** — Lidarr computes a 
 
 {#download-clients}
 
-> Information on supported download clients can be found at the [Supported](/lidarr/supported#download-clients) page.
+> Find information on supported download clients at the [Supported](/lidarr/supported#download-clients) page.
 {.is-info}
 
 ## Overview
@@ -249,14 +249,14 @@ Lidarr sends download requests to a configured client, monitors the client's que
 1. Lidarr sends a download request to the Usenet client with a configured category label.
 2. Lidarr monitors the client's queue via its API for items in that category.
 3. When the download completes, Lidarr reads the reported file path, scans it for audio files, and imports them into the library.
-4. Atomic moves (instantaneous moves within the same filesystem) are used by default. If the download folder and library folder are on different filesystems, Lidarr falls back to copy + delete, which uses more I/O and temporary disk space.
+4. Lidarr uses atomic moves (instantaneous moves within the same filesystem) by default. If the download folder and library folder are on different filesystems, Lidarr falls back to copy + delete, which uses more I/O and temporary disk space.
 
 ### BitTorrent
 
 1. Lidarr sends a download request to the torrent client with a category label.
 2. Lidarr monitors the client's queue for items in that category.
-3. When the download completes, Lidarr imports the files. If the download folder and library folder are on the same filesystem, a **hardlink** is created — the file appears in both locations without using extra disk space, and seeding continues uninterrupted.
-4. The torrent client retains the original files so seeding can continue. Lidarr will request removal only after seeding is complete (when **Remove** is enabled and the seed goal is met).
+3. When the download completes, Lidarr imports the files. If the download folder and library folder are on the same filesystem, Lidarr creates a **hardlink** — the file appears in both locations without using extra disk space, and seeding continues uninterrupted.
+4. The torrent client retains the original files so seeding can continue. Lidarr requests removal only after seeding finishes (when you enable **Remove** and the client reaches its seed goal).
 
 > The download folder and library root folder must be on the **same filesystem** for hardlinks to work. In Docker, both must be mounted through the same volume or bind mount. See [Concepts — Hardlinks](/lidarr/concepts#hardlinks-and-completed-downloads) and [TRaSH's Hardlink Guide](https://trash-guides.info/hardlinks) for setup details.
 {.is-info}
@@ -279,7 +279,7 @@ Click **Add (+)**, choose a client type, and fill in the connection details.
 | **Category** | Category or label to apply to Lidarr's downloads. Lidarr only monitors items in this category — setting one is strongly recommended to avoid conflicts with other applications sharing the same client. |
 | **Recent Priority** | Priority level for recently released music. |
 | **Older Priority** | Priority level for back-catalogue music. |
-| **(Advanced) Client Priority** | Order among clients of the same type. `1` = highest priority; `50` = lowest. Round-robin is used among equal-priority clients. |
+| **(Advanced) Client Priority** | Order among clients of the same type. `1` = highest priority; `50` = lowest. Lidarr uses round-robin among equal-priority clients. |
 
 ### Usenet-Only Fields
 
@@ -296,7 +296,7 @@ Click **Add (+)**, choose a client type, and fill in the connection details.
 
 ### Torrent Client Seed Goal Compatibility
 
-Lidarr can set seed ratio and time goals via the torrent client's API when a torrent is added, but not all clients support this.
+Lidarr can set seed ratio and time goals via the torrent client's API when you add a torrent, but not all clients support this.
 
 | Client | Seed Ratio | Seed Time |
 | :---: | :---: | :---: |
@@ -325,13 +325,13 @@ Failed download handling is available for SABnzbd and NZBGet only. It isn't supp
 | Setting | Description |
 |---|---|
 | **Redownload** | When a download fails, automatically search for a replacement. |
-| **(Advanced) Remove** | Remove the failed download from the client when the failure is detected. |
+| **(Advanced) Remove** | Remove the failed download from the client when Lidarr detects the failure. |
 
-When a failure is detected, Lidarr logs it, optionally removes the failed item, searches for a replacement, and blocklists the failed release so it isn't grabbed again automatically.
+When Lidarr detects a failure, it logs it, optionally removes the failed item, searches for a replacement, and blocklists the failed release so it isn't grabbed again automatically.
 
 ## Remote Path Mappings
 
-Remote path mappings are needed when Lidarr and the download client see the same files at different paths — for example, when they run on separate machines or in separate Docker containers with different volume mount paths.
+You need remote path mappings when Lidarr and the download client see the same files at different paths — for example, when they run on separate machines or in separate Docker containers with different volume mount paths.
 
 A mapping translates a remote path (as reported by the download client) to a local path (as Lidarr accesses it). Add a mapping per client under **Settings → Download Clients → Remote Path Mappings**.
 
@@ -343,7 +343,7 @@ A mapping translates a remote path (as reported by the download client) to a loc
 
 {#connections}
 
-> Information on supported connection types can be found at the [Supported](/lidarr/supported#notifications) page.
+> Find information on supported connection types at the [Supported](/lidarr/supported#notifications) page.
 {.is-info}
 
 Connections send notifications or trigger actions when events occur in Lidarr. Common uses include Discord or Slack notifications on import, Plex library updates, and custom scripts.
@@ -355,11 +355,11 @@ Click **Add (+)** and select a connection type. Most connections share these fie
 | **Name** | Label for this connection. |
 | **On Grab** | Trigger when Lidarr sends a release to a download client. |
 | **On Release Import** | Trigger when a downloaded release is successfully imported. |
-| **On Upgrade** | Trigger when a file is upgraded to a better quality. |
-| **On Rename** | Trigger when files are renamed. |
-| **On Artist Added** | Trigger when an artist is added to Lidarr. |
-| **On Artist Deleted** | Trigger when an artist is removed. |
-| **On Album Delete** | Trigger when an album is deleted. |
+| **On Upgrade** | Trigger when Lidarr upgrades a file to better quality. |
+| **On Rename** | Trigger when Lidarr renames files. |
+| **On Artist Added** | Trigger when you add an artist to Lidarr. |
+| **On Artist Deleted** | Trigger when you remove an artist. |
+| **On Album Delete** | Trigger when Lidarr deletes an album. |
 | **On Track Retag** | Trigger when audio tags are rewritten. |
 | **On Health Issue** | Trigger when a health check fails. |
 | **On Health Restored** | Trigger when a health check recovers. |
@@ -381,11 +381,3 @@ Tags are particularly useful for:
 - Assigning a non-default delay profile to a subset of artists.
 - Restricting a release profile to certain artists.
 - Tracking which import list added an artist.
-
-> Tags don't affect quality profiles or metadata profiles. Those are assigned directly to each artist.
-{.is-info}
-
-
-# UI
-
-{#ui}
