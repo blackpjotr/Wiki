@@ -2,15 +2,15 @@
 title: Prowlarr Supported Indexers
 description: Indexers currently named as supported in the current nightly build of Prowlarr. Other indexers may be available via either Generic Newznab or Generic Torznab.
 published: true
-date: 2026-05-03T02:50:15.176227
+date: 2026-05-05T02:39:54.251153
 tags: prowlarr, indexers, reference
 editor: markdown
-dateCreated: 2026-05-03T02:50:15.176227
+dateCreated: 2026-05-05T02:39:54.251153
 ---
 
 - Supported Trackers and Indexers as of
   - Prowlarr Build `2.3.7.5365` / [Commit: 18fe4ec4955f620013cd61daac8a760e033d8a67](https://github.com/Prowlarr/Prowlarr/commit/18fe4ec4955f620013cd61daac8a760e033d8a67)
-  - [Prowlarr Indexers Commit: 76a96a528da57dc2780d0f50b7af5f5b01b1bff8](https://github.com/Prowlarr/Indexers/commit/76a96a528da57dc2780d0f50b7af5f5b01b1bff8)
+  - [Prowlarr Indexers Commit: c0606965e4963ace263d207afbd79ef1b32e285f](https://github.com/Prowlarr/Indexers/commit/c0606965e4963ace263d207afbd79ef1b32e285f)
 
 ---
 
@@ -568,7 +568,6 @@ dateCreated: 2026-05-03T02:50:15.176227
 |[SunnyPT](https://sunnypt.top/){#sunnypt}|SunnyPT is a CHINESE Private Torrent Tracker for MOVIES / TV|Chinese (China)|
 |[Superbits](https://superbits.org/){#superbits}|SuperBits (SBS) is a SWEDISH Private Torrent Tracker for MOVIES / TV / GENERAL|Swedish (Sweden)|
 |[Swarmazon (API)](https://swarmazon.club/){#swarmazon-api}|Swarmazon is a Private Torrent Tracker for MOVIES / TV / GENERAL|English (United States)|
-|[Tangmen (唐门)](https://tmpt.top/){#tangmen}|Tangmen (唐门) is a CHINESE Private Torrent Tracker for MOVIES / TV / GENERAL|Chinese (China)|
 |[TangPT (躺平)](https://www.tangpt.top/){#tangpt}|TangPT (躺平) is a CHINESE Private Torrent Tracker for MOVIES / TV / GENERAL|Chinese (China)|
 |[Tapochek](https://tapochek.net/){#tapochek}|Tapochek is a RUSSIAN Private Torrent Tracker for 0DAY / GENERAL|Russian (Russia)|
 |[Tasmanit](https://tasmanit.es/){#tasmanit}|Tasmanit\.es is a AUSTRALIAN / NEW ZEALAND Private Torrent Tracker for AUS/NZ TV|English (Australia)|
