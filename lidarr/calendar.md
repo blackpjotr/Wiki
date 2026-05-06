@@ -2,7 +2,7 @@
 title: Lidarr Calendar
 description: View upcoming album releases and track music release schedules
 published: true
-date: 2026-04-27T14:20:26.156Z
+date: 2026-05-06T20:09:22.617Z
 tags: lidarr, calendar, releases, schedule, albums, music, planning
 editor: markdown
 dateCreated: 2021-06-14T21:35:03.094Z
@@ -18,10 +18,10 @@ Each release tile is color-coded to show its current status:
 
 | Color | Meaning |
 |---|---|
-| Green | Files on disk — Lidarr has this release. |
-| Blue | Monitored and upcoming — the release date is in the future. |
-| Yellow/Orange | Monitored, released, and missing — past release date but no files yet. |
-| Grey | Unmonitored — Lidarr isn't looking for this release. |
+| Green | Files on disk; Lidarr has this release. |
+| Blue | Monitored and upcoming; the release date is in the future. |
+| Yellow/Orange | Monitored, released, and missing; past release date but no files yet. |
+| Grey | Unmonitored; Lidarr isn't looking for this release. |
 
 ## Navigation
 
@@ -31,7 +31,7 @@ Clicking a release tile takes you to the album's detail page, where you can trig
 
 ## iCal Feed
 
-Lidarr can expose your calendar as an iCal feed that any calendar client supporting the webcal or iCal format can subscribe to — Outlook, Google Calendar, Apple Calendar, and similar apps all work.
+Lidarr can expose your calendar as an iCal feed that any calendar client supporting the webcal or iCal format can subscribe to. Outlook, Google Calendar, and Apple Calendar all support this.
 
 Click the **iCal Feed** button on the Calendar page to open the feed configuration dialog. The options available are:
 
