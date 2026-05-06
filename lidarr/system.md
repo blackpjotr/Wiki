@@ -2,7 +2,7 @@
 title: Lidarr System
 description: System information, logs, scheduled tasks, and status monitoring for Lidarr administration and troubleshooting
 published: true
-date: 2026-05-03T14:20:00.258Z
+date: 2026-05-06T19:45:30.132Z
 tags: lidarr, system, logs, administration, tasks, status
 editor: markdown
 dateCreated: 2021-06-14T21:36:28.225Z
@@ -181,7 +181,7 @@ sudo systemctl start $app
 
 #### Branch is for a previous version
 
-- The update branch setup in `Settings => General` is for a previous version of Lidarr, therefore the instance won't see correct update information in the `System => Updates` feed and may not receive new updates when released.
+- The update branch setup in `Settings => General` is for a previous version of Lidarr, so the instance won't see correct update information in the `System => Updates` feed and may not receive new updates when released.
 
 #### Couldn't connect to signalR
 
@@ -281,7 +281,7 @@ chmod +x /opt/Lidarr/fpcalc
 
 #### Unable to communicate with download client
 
-- Lidarr was unable to communicate with the configured download client. Please verify the download client is operational and double-check the URL. This could also indicate an authentication error.
+- Lidarr was unable to communicate with the configured download client. Please verify the download client is operational and double-check the URL. This could also mean an authentication error.
 - This is typically due to improperly configured download client. Things you can typically check:
   - Your download client's IP Address - if it's all on the same bare metal machine, this is typically `127.0.0.1`
   - The Port number that your download client is using - these default to the standard port number, but if you've changed it you will need to enter the same one in Lidarr.
@@ -289,7 +289,7 @@ chmod +x /opt/Lidarr/fpcalc
 
 #### Download clients are unavailable due to failure
 
-- One or more of your download clients isn't responding to requests made by Lidarr. Therefore Lidarr has decided to temporarily stop querying the download client on it’s normal 1 minute cycle, which is normally used to track active downloads and import finished ones. However, Lidarr will continue to attempt to send downloads to the client, but will in all likeliness fail.
+- One or more of your download clients isn't responding to requests made by Lidarr. So Lidarr has decided to temporarily stop querying the download client on its normal 1 minute cycle, which is normally used to track active downloads and import finished ones. But Lidarr will continue to attempt to send downloads to the client, and will in all likeliness fail.
 - You should inspect `System=>Logs` to see what the reason is for the failures.
 - If you no longer use this download client, disable it in Lidarr to prevent the errors.
 
@@ -304,7 +304,7 @@ chmod +x /opt/Lidarr/fpcalc
 - An example of bad (inconsistent) paths would be:
   - Download client:  `/mnt/user/downloads:/downloads`
   - Lidarr:   `/mnt/user/downloads:/data`
-- In this example the download client places its downloads into `/downloads` and tells Lidarr when its complete that the finished book is in `/downloads`. Lidarr then comes along and says "Okay, cool, let me check in `/downloads`." Well, inside Lidarr you didn't allocate a `/downloads` path you allocated a `/data` path so it throws this error.
+- In this example the download client places its downloads into `/downloads` and tells Lidarr when its complete that the finished book is in `/downloads`. Lidarr then comes along and says "Okay, cool, let me check in `/downloads`." Well, inside Lidarr you configured a `/data` path, not a `/downloads` path, so it throws this error.
 - The easiest fix for this is CONSISTENCY - if you use one scheme in your download client, use it across the board.
 
 - Team Lidarr is a big fan of simply using /data.
@@ -361,7 +361,7 @@ chmod +x /opt/Lidarr/fpcalc
 
 {#download-client-removes-completed-downloads}
 
-- Your download client must retain its history of completed downloads until Lidarr imports them. If you disable history retention, \*Arr may not see the completed download before the client removes it. Configure your download client to keep (usenet) and pause, not remove, torrents after completion: **either indefinitely or for at least 14 days**.
+- Your download client must keep its history of completed downloads until Lidarr imports them. If you disable history retention, \*Arr may not see the completed download before the client removes it. Configure your download client to keep (usenet) and pause, not remove, torrents after completion: **either indefinitely or for at least 14 days**.
   - Sabnzbd: Switches => Post Processing => Keep Jobs **must** be 14 days or greater OR Keep All History
 - Lidarr can manage removing completed downloads from your client via the download client settings in \*Arr. This lets \*Arr clean up your download client history.
 
@@ -405,7 +405,7 @@ chmod +x /opt/Lidarr/fpcalc
   - you lose control over indexer specific settings (categories, search modes, etc.)
   - mixing search modes (IMDB, query, etc.) might cause low-quality results
   - you can't use indexer-specific categories (>= 100000).
-  - slow indexers will slow down the overall result
+  - slow indexers will slow down the result
   - total results cap at 1000
   - if one of the trackers returns an error, \*Arr will disable it and now you won't get any results.
 
@@ -413,7 +413,7 @@ chmod +x /opt/Lidarr/fpcalc
 
 - Add each tracker in Jackett manually as an indexer in \*Arr
 - Check out [Prowlarr](/prowlarr) which can sync indexers to \*Arr and from the Lidarr/Radarr/Readarr development team.
-- Check out [NZBHydra2](https://github.com/theotherp/nzbhydra2) which can sync indexers to \*Arr. But don't use their single aggregate endpoint; use `multi` if you plan to use sync.
+- Check out [NZBHydra2](https://github.com/theotherp/nzbhydra2) which can sync indexers to \*Arr. But don't use their single combined endpoint; use `multi` if you plan to use sync.
 
 ### Artist Folders
 
@@ -433,7 +433,7 @@ chmod +x /opt/Lidarr/fpcalc
 
 #### Lists are unavailable due to failures
 
-- Typically this simply means that Lidarr is no longer able to communicate via API or via logging in to your chosen list provider. Your best bet if the problem persists is to contact them in order to rule them out, as their systems maybe overloaded from time to time.
+- Typically this simply means that Lidarr is no longer able to communicate via API or via logging in to your chosen list provider. Your best bet if the problem persists is to contact them to rule them out, as their systems maybe overloaded from time to time.
 - Review System => Events filtered for Warning (Warning & Errors) to see the historical failures or check logs for details.
 
 - Review System => Events filtered for Warning (Warning & Errors) to see the historical failures or check logs for details.
@@ -470,7 +470,7 @@ chmod +x /opt/Lidarr/fpcalc
 {.is-warning}
 
   - Backup - This will run a backup of your Lidarr's database on a set schedule; find more details here. More information about backups is at System => Backups.
-  - Check Health - Check Health will run on the displayed schedule in the UI checking the overall health of your Lidarr. To see a list of possible health related issues see the Wiki Entry on Health Checks.
+  - Check Health - Check Health will run on the displayed schedule in the UI checking the health of your Lidarr. To see a list of possible health related issues see the Wiki Entry on Health Checks.
   - Clean Up Recycle Bin - Lidarr clears the recycling bin on the displayed schedule. This only runs if you set a recycling bin in File Management.
   - Housekeeping - On the displayed schedule in the UI this will dust out all the cobwebs, sweeps and vacuums the floors, mops, shines, and even makes nice neat little folded notes just for you. But doesn't take out the trash. That it just wasn't paid enough for.
   - Import List Sync - On the displayed schedule in the UI this will run your Lists and import any possible new artists. Find more info about lists at Settings => Lists.
@@ -488,8 +488,8 @@ chmod +x /opt/Lidarr/fpcalc
 
 # Backup
 
-> This section will be more tailored to the buttons and overall point of the page.
-> However, if you're looking for how to back/restore your Lidarr instance click [the Lidarr backup FAQ](/lidarr/faq).
+> This section will be more tailored to the buttons and point of the page.
+> But if you're looking for how to back/restore your Lidarr instance click [the Lidarr backup FAQ](/lidarr/faq).
 {.is-info}
 
 The Backup section shows your previous backups (unless you have a fresh install with no backups yet).
@@ -516,7 +516,7 @@ It also displays the developer release notes telling you what they fixed or adde
 
 # Events
 
-The events tab shows what has been happening within your Lidarr. Use it to diagnose minor issues. However, this doesn't replace Trace Logs discussed in Logging. Events are the equivalent of INFO Logs.
+The events tab shows what has been happening within your Lidarr. Use it to diagnose minor issues. But this doesn't replace Trace Logs discussed in Logging. Events correspond to INFO Logs.
 
 - Components - This column tells you which Lidarr component triggered the event
 - Message - This column shows the message the component sent.
@@ -543,5 +543,5 @@ On the top row there are several options to allow you to control your log files.
 - File Name - This will display the file name associated with the log
 - Last Written - The local time Lidarr last wrote to this log file.
   - Lidarr uses rolling log files limited to 1MB each. The current log file is always lidarr.txt, for the the other files lidarr.0.txt is the next newest (higher numbers are older) up to 51 log files total. This log file contains `fatal`, `error`, `warn`, and `info` entries.
-  - With Debug log level enabled, additional lidarr.debug.txt rolling log files will be present, up to 51 files. This log files contains `fatal`, `error`, `warn`, `info`, and `debug` entries. It usually covers a ~40h period.
-  - With Trace log level enabled, additional lidarr.trace.txt rolling log files will be present, up to 51 files. This log files contains `fatal`, `error`, `warn`, `info`, `debug`, and `trace` entries. Due to trace verbosity it only covers a couple of hours at most.
+  - With Debug log level enabled, extra lidarr.debug.txt rolling log files will be present, up to 51 files. This log files contains `fatal`, `error`, `warn`, `info`, and `debug` entries. It usually covers a ~40h period.
+  - With Trace log level enabled, extra lidarr.trace.txt rolling log files will be present, up to 51 files. This log files contains `fatal`, `error`, `warn`, `info`, `debug`, and `trace` entries. Due to trace verbosity it only covers a couple of hours at most.
