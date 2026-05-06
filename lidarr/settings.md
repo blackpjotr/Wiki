@@ -2,7 +2,17 @@
 title: Lidarr Settings
 description: Complete configuration guide for Lidarr settings including media management, profiles, quality definitions, and metadata preferences
 published: true
-date: 2026-05-06T19:46:24.645Z
+date: 2026-05-06T20:07:49.958Z
+tags: lidarr, settings, configuration, quality, profiles, metadata, media
+editor: markdown
+dateCreated: 2021-06-14T21:36:07.513Z
+---
+
+---
+title: Lidarr Settings
+description: Complete configuration guide for Lidarr settings including media management, profiles, quality definitions, and metadata preferences
+published: true
+date: 2026-05-06T00:00:00.000Z
 tags: lidarr, settings, configuration, quality, profiles, metadata, media
 editor: markdown
 dateCreated: 2021-06-14T21:36:07.513Z
@@ -20,7 +30,7 @@ This page covers all settings available in Lidarr. For field-level detail on a s
 
 ### Rename Tracks
 
-When enabled, Lidarr renames imported track files according to the format strings below. When disabled, Lidarr imports files using their original filenames — it still manages the folder structure, but leaves individual filenames as-is.
+When enabled, Lidarr renames imported track files according to the format strings below. When disabled, Lidarr imports files using their original filenames. It still manages the folder structure but leaves individual filenames as-is.
 
 > Renaming files that a torrent client is currently seeding will break seeding unless you are using hardlinks. See [Concepts — Hardlinks](/lidarr/concepts#hardlinks-and-completed-downloads) before enabling this.
 {.is-warning}
@@ -31,7 +41,7 @@ Replaces characters in filenames that aren't valid on the target filesystem (for
 
 ## Naming Format
 
-The format strings below use tokens to build file and folder names. For a full token reference see the [Naming Guide](/lidarr/naming-guide).
+The format strings below use tokens to build file and folder names. For a full token reference, see the [Naming Guide](/lidarr/naming-guide).
 
 > Enable **Settings → Show Advanced** to reveal the format fields.
 {.is-info}
@@ -69,11 +79,11 @@ Example: `{Artist Name}` → `/music/The Beatles/`
 | **Minimum Free Space** | 100 MB | Lidarr will refuse to import if available space in the root folder falls below this value. |
 | **Use Hardlinks Instead of Copy** | On | Use hardlinks when the source and destination are on the same filesystem. Hardlinks avoid copying data and allow seeding to continue. Falls back to copy if hardlinks aren't supported. |
 | **Import Extra Files** | Off | Import sidecar files with the same base name alongside audio files at import time (for example, lyric files, NFO files, cover images). See below. |
-| **Extra File Extensions** | (empty) | Comma-separated list of file extensions to import when you enable **Import Extra Files**. Example: `lrc,nfo,jpg,png`. Don't use `*` — the code treats it as a literal character, not a wildcard, and it matches nothing. |
+| **Extra File Extensions** | (empty) | Comma-separated list of file extensions to import when you enable **Import Extra Files**. Example: `lrc,nfo,jpg,png`. Don't use `*`; the code treats it as a literal character, not a wildcard, and it matches nothing. |
 
 ### How Import Extra Files works
 
-When enabled, Lidarr scans the **same directory as each downloaded track file** immediately after that track imports. It looks for sidecar files — files whose name (without extension) starts with the track's name (without extension). For example, when importing `01 Song.flac`, Lidarr will consider `01 Song.lrc`, `01 Song.nfo`, and `01 Song.jpg` as candidates. Lidarr ignores files like `cover.jpg` or `album.nfo` whose name doesn't start with the track's filename.
+When enabled, Lidarr scans the **same directory as each downloaded track file** immediately after that track imports. It looks for sidecar files: files whose name (without extension) starts with the track's name (without extension). For example, when importing `01 Song.flac`, Lidarr will consider `01 Song.lrc`, `01 Song.nfo`, and `01 Song.jpg` as candidates. Lidarr ignores files like `cover.jpg` or `album.nfo` whose name doesn't start with the track's filename.
 
 Matching files are then filtered against the configured extension list. Files that pass are:
 
@@ -83,11 +93,11 @@ Matching files are then filtered against the configured extension list. Files th
 
 **NFO files:** Lidarr imports only the first NFO file found in the source folder per run. Lidarr skips later NFO files from the same folder to prevent duplicates.
 
-**Lyric files** (`.lrc`, `.txt`, `.utf`, `.utf8`, `.utf-8`) — a separate lyric manager handles these with priority over the general extra-file handler. Lidarr imports them with the same base name as the track and renames them alongside it.
+**Lyric files** (`.lrc`, `.txt`, `.utf`, `.utf8`, `.utf-8`): a separate lyric manager handles these with priority over the general extra-file handler. Lidarr imports them with the same base name as the track and renames them alongside it.
 
-**When you move an artist to a new root folder**, all files in the artist directory move together at the filesystem level — including extra files Lidarr isn't tracking. Extra files that Lidarr is tracking resolve correctly at the new location because their stored paths are relative to the artist folder, and Lidarr updates that path as part of the move.
+**When you move an artist to a new root folder**, all files in the artist directory move together at the filesystem level, including extra files Lidarr isn't tracking. Extra files that Lidarr is tracking resolve correctly at the new location because their stored paths are relative to the artist folder, and Lidarr updates that path as part of the move.
 
-> The `*` wildcard isn't supported in the extension list. The code matches by `filename.EndsWith(extension)` — a file never literally ends in `*`. List explicit extensions only.
+> The `*` wildcard isn't supported in the extension list. The code matches by `filename.EndsWith(extension)`; a file never literally ends in `*`. List explicit extensions only.
 {.is-warning}
 
 ## File Management
@@ -146,13 +156,13 @@ Metadata profiles control which release types are visible per artist. Lidarr hid
 |---|---|
 | **Albums** | Standard studio albums. |
 | **Singles** | Single releases (one or a few tracks). |
-| **EPs** | Extended plays — longer than a single, shorter than an album. |
+| **EPs** | Extended plays, longer than a single but shorter than an album. |
 | **Broadcasts** | Live broadcasts, radio sessions, and similar. |
 | **Others** | Release types not covered by the above categories. |
 
 You can include or exclude secondary types (Compilation, Soundtrack, Spokenword, Interview, Live, Remix, DJ-Mix, Mixtape, Demo, etc.) as extra filters on top of the primary type selection.
 
-> MusicBrainz determines release types. If a release you expect to see is missing, check its entry on MusicBrainz — the type may be `Unknown`, which Lidarr can't filter on, or the primary type may be one you have unchecked in your profile.
+> MusicBrainz determines release types. If a release you expect to see is missing, check its entry on MusicBrainz: the type may be `Unknown`, which Lidarr can't filter on, or the primary type may be one you have unchecked in your profile.
 {.is-info}
 
 
@@ -173,7 +183,7 @@ Release profiles filter and score releases based on their titles. Use them to re
 | **Indexers** | Restrict this profile to specific indexers. Leave empty to apply to all indexers. |
 | **Tags** | Restrict this profile to artists with matching tags. Leave empty to apply to all artists. |
 
-> Release profiles apply at **grab/download time** — they filter and score releases from indexers before Lidarr sends anything to a download client. They have no effect on which MusicBrainz release (pressing, edition, format) Lidarr matches your already-downloaded files to during import. See [FAQ → Can Lidarr prefer a specific pressing or format during import?](/lidarr/faq#can-lidarr-prefer-a-specific-pressing-or-format-during-import) for the import side of this.
+> Release profiles apply at **grab/download time**: they filter and score releases from indexers before Lidarr sends anything to a download client. They have no effect on which MusicBrainz release (pressing, edition, format) Lidarr matches your already-downloaded files to during import. See [FAQ → Can Lidarr prefer a specific pressing or format during import?](/lidarr/faq#can-lidarr-prefer-a-specific-pressing-or-format-during-import) for the import side of this.
 {.is-info}
 
 
@@ -181,16 +191,16 @@ Release profiles filter and score releases based on their titles. Use them to re
 
 {#custom-formats-2}
 
-Custom formats score releases based on patterns matched against the release title and indexer flags. Unlike release profiles, which require or reject terms absolutely, custom formats assign a numeric score that accumulates across all matched formats. A quality profile can then set a **Minimum Custom Format Score** — releases below that threshold aren't grabbed.
+Custom formats score releases based on patterns matched against the release title and indexer flags. Unlike release profiles, which require or reject terms absolutely, custom formats assign a numeric score that accumulates across all matched formats. A quality profile can then set a **Minimum Custom Format Score**; releases below that threshold aren't grabbed.
 
 Click **Add (+)** to create a format, or **Import** to paste a JSON definition.
 
-> Like release profiles, custom formats apply at **grab/download time** — Lidarr computes scores against indexer release titles before sending anything to a download client. They don't influence which MusicBrainz release Lidarr matches an already-downloaded file to during import.
+> Like release profiles, custom formats apply at **grab/download time**: Lidarr computes scores against indexer release titles before sending anything to a download client. They don't influence which MusicBrainz release Lidarr matches an already-downloaded file to during import.
 {.is-info}
 
 ### Specifications
 
-Each custom format contains one or more specifications. A specification defines a single matching rule — for example, "release title contains `\bFLAC\b`," or "release is from indexer X." Specifications within a format combine with AND logic (all must match for the format to fire) unless you tick **Negate** (inverts the match) or adjust the **Required** flag.
+Each custom format contains one or more specifications. A specification defines a single matching rule, for example "release title contains `\bFLAC\b`" or "release is from indexer X." Specifications within a format combine with AND logic (all must match for the format to fire) unless you tick **Negate** (inverts the match) or adjust the **Required** flag.
 
 Common specification types for music:
 
@@ -218,7 +228,7 @@ Two ways to test how Lidarr will parse a release name before committing to a pro
 
 The Quality page defines size thresholds for each quality level. Lidarr uses these to check that a release's reported size is consistent with the claimed quality, catching mislabelled releases.
 
-For audio, size limits use **kilobits per second (kbps)** — Lidarr computes a bitrate from the file size and duration and compares it to the configured range.
+For audio, size limits use **kilobits per second (kbps)**; Lidarr computes a bitrate from the file size and duration and compares it to the configured range.
 
 | Column | Description |
 |---|---|
@@ -227,7 +237,7 @@ For audio, size limits use **kilobits per second (kbps)** — Lidarr computes a 
 | **Preferred** | The bitrate Lidarr aims for when scoring releases. Releases at this level receive a higher score than those at the minimum. |
 | **Max** | Maximum acceptable bitrate in kbps. Lidarr rejects releases above this. Set to `0` for no upper limit. |
 
-> FLAC is lossless and doesn't have a consistent bitrate — its effective bitrate varies by content. The FLAC entry in quality definitions serves primarily as a file-size sanity check rather than strict bitrate enforcement.
+> FLAC is lossless and doesn't have a consistent bitrate; its effective bitrate varies by content. The FLAC entry in quality definitions serves primarily as a file-size sanity check rather than strict bitrate enforcement.
 {.is-info}
 
 
@@ -240,7 +250,7 @@ For audio, size limits use **kilobits per second (kbps)** — Lidarr computes a 
 
 ## Overview
 
-Lidarr sends download requests to a configured client, monitors the client's queue via its API, and imports finished files into the library. The download client and Lidarr must both be able to read and write to the same filesystem path — mismatched paths are the most common cause of import failures.
+Lidarr sends download requests to a configured client, monitors the client's queue via its API, and imports finished files into the library. The download client and Lidarr must both be able to read and write to the same filesystem path; mismatched paths are the most common cause of import failures.
 
 ## How Downloading Works
 
@@ -255,7 +265,7 @@ Lidarr sends download requests to a configured client, monitors the client's que
 
 1. Lidarr sends a download request to the torrent client with a category label.
 2. Lidarr monitors the client's queue for items in that category.
-3. When the download completes, Lidarr imports the files. If the download folder and library folder are on the same filesystem, Lidarr creates a **hardlink** — the file appears in both locations without using extra disk space, and seeding continues uninterrupted.
+3. When the download completes, Lidarr imports the files. If the download folder and library folder are on the same filesystem, Lidarr creates a **hardlink**: the file appears in both locations without using extra disk space, and seeding continues uninterrupted.
 4. The torrent client retains the original files so seeding can continue. Lidarr requests removal only after seeding finishes (when you enable **Remove** and the client reaches its seed goal).
 
 > The download folder and library root folder must be on the **same filesystem** for hardlinks to work. In Docker, both must be mounted through the same volume or bind mount. See [Concepts — Hardlinks](/lidarr/concepts#hardlinks-and-completed-downloads) and [TRaSH's Hardlink Guide](https://trash-guides.info/hardlinks) for setup details.
@@ -276,7 +286,7 @@ Click **Add (+)**, choose a client type, and fill in the connection details.
 | **Use SSL** | Connect to the client over HTTPS. |
 | **(Advanced) URL Base** | Path prefix for the client, needed when behind a reverse proxy (for example, `/sabnzbd`). |
 | **Username / Password** | Credentials if the client requires authentication. |
-| **Category** | Category or label to apply to Lidarr's downloads. Lidarr only monitors items in this category — setting one is strongly recommended to avoid conflicts with other applications sharing the same client. |
+| **Category** | Category or label to apply to Lidarr's downloads. Lidarr only monitors items in this category; setting one is strongly recommended to avoid conflicts with other applications sharing the same client. |
 | **Recent Priority** | Priority level for recently released music. |
 | **Older Priority** | Priority level for back-catalogue music. |
 | **(Advanced) Client Priority** | Order among clients of the same type. `1` = highest priority; `50` = lowest. Lidarr uses round-robin among equal-priority clients. |
@@ -315,7 +325,7 @@ Lidarr can set seed ratio and time goals via the torrent client's API when you a
 
 | Setting | Description |
 |---|---|
-| **Enable** (Advanced, global) | Automatically import completed downloads from the download client. Disabling this means Lidarr will never import anything — leave enabled unless you have a specific reason to disable it. |
+| **Enable** (Advanced, global) | Automatically import completed downloads from the download client. Disabling this means Lidarr will never import anything, so leave it enabled unless you have a specific reason to disable it. |
 | **Remove** (per-client) | After import, ask the download client to remove the completed item. For torrents, removal only occurs when the client reports seeding is complete and the torrent is paused/stopped. |
 
 ### Failed Download Handling
@@ -331,7 +341,7 @@ When Lidarr detects a failure, it logs it, optionally removes the failed item, s
 
 ## Remote Path Mappings
 
-You need remote path mappings when Lidarr and the download client see the same files at different paths — for example, when they run on separate machines or in separate Docker containers with different volume mount paths.
+You need remote path mappings when Lidarr and the download client see the same files at different paths, for example when they run on separate machines or in separate Docker containers with different volume mount paths.
 
 A mapping translates a remote path (as reported by the download client) to a local path (as Lidarr accesses it). Add a mapping per client under **Settings → Download Clients → Remote Path Mappings**.
 
@@ -377,15 +387,7 @@ Tags link artists, indexers, delay profiles, and release profiles together. A ta
 
 Tags are particularly useful for:
 
-- Assigning a specific indexer to specific artists (for example, a private tracker that only carries jazz — tag it `jazz` and tag the relevant artists `jazz`).
+- Assigning a specific indexer to specific artists (for example, a private tracker that only carries jazz: tag it `jazz` and tag the relevant artists `jazz`).
 - Assigning a non-default delay profile to a subset of artists.
 - Restricting a release profile to certain artists.
 - Tracking which import list added an artist.
-
-> Tags don't affect quality profiles or metadata profiles. Assign those directly to each artist.
-{.is-info}
-
-
-# UI
-
-{#ui}
