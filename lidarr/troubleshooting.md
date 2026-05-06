@@ -2,17 +2,7 @@
 title: Lidarr Troubleshooting
 description: Common issues, error codes, and solutions for troubleshooting Lidarr installation, configuration, and operational problems
 published: true
-date: 2026-05-06T20:10:37.494Z
-tags: lidarr, troubleshooting, support, issues, debugging, errors
-editor: markdown
-dateCreated: 2021-06-14T21:36:46.193Z
----
-
----
-title: Lidarr Troubleshooting
-description: Common issues, error codes, and solutions for troubleshooting Lidarr installation, configuration, and operational problems
-published: true
-date: 2026-05-06T00:00:00.000Z
+date: 2026-05-06T20:10:56.699Z
 tags: lidarr, troubleshooting, support, issues, debugging, errors
 editor: markdown
 dateCreated: 2021-06-14T21:36:46.193Z
