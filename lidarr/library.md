@@ -2,7 +2,7 @@
 title: Lidarr Library
 description: Managing your music library in Lidarr including artist monitoring, album tracking, and metadata management
 published: true
-date: 2026-04-27T14:30:56.740Z
+date: 2026-05-06T20:10:03.885Z
 tags: lidarr, library, monitoring, albums, music, metadata, artists
 editor: markdown
 dateCreated: 2021-06-14T21:34:03.446Z
@@ -16,34 +16,34 @@ The Artists index is the main view of your library. Each row represents an artis
 
 The toolbar's **View** toggle switches between four display modes:
 
-- **Table** — a sortable list with configurable columns. Use **Options** to show or hide individual columns.
-- **Posters** — artist artwork in a grid, good for browsing a large library visually.
-- **Banners** — wide banner art, one artist per row.
-- **Overview** — artist art alongside a short biography and key stats.
+- **Table**: a sortable list with configurable columns. Use **Options** to show or hide individual columns.
+- **Posters**: artist artwork in a grid, good for browsing a large library visually.
+- **Banners**: wide banner art, one artist per row.
+- **Overview**: artist art alongside a short biography and key stats.
 
 ## Actions
 
 The toolbar above the artist list contains the following actions:
 
-- **Update All** — refreshes metadata for every artist from the Servarr metadata server and rescans all artist folders.
-- **RSS Sync** — polls your configured indexers' RSS feeds immediately, rather than waiting for the next scheduled sync.
-- **Search All** / **Search Filtered** / **Search Selected** — triggers an automatic search for all missing and cutoff-unmet albums across all artists, the current filtered view, or only the artists you have checked.
-- **Manual Import** — opens the manual import dialog to match files in any folder Lidarr can reach to artists and albums in your library. Use this when the automatic import pipeline hasn't picked up a download. See [Import Troubleshooting](/lidarr/import-troubleshooting) for when and how to use it.
-- **Artist Editor** — toggles mass-editor mode, letting you change the monitoring status, quality profile, metadata profile, root folder, or tags across multiple artists at once.
-- **Options** — shows or hides columns in Table view and adjusts poster/banner size in the grid views.
+- **Update All**: refreshes metadata for every artist from the Servarr metadata server and rescans all artist folders.
+- **RSS Sync**: polls your configured indexers' RSS feeds immediately, rather than waiting for the next scheduled sync.
+- **Search All** / **Search Filtered** / **Search Selected**: triggers an automatic search for all missing and cutoff-unmet albums across all artists, the current filtered view, or only the artists you have checked.
+- **Manual Import**: opens the manual import dialog to match files in any folder Lidarr can reach to artists and albums in your library. Use this when the automatic import pipeline hasn't picked up a download. See [Import Troubleshooting](/lidarr/import-troubleshooting) for when and how to use it.
+- **Artist Editor**: toggles mass-editor mode, letting you change the monitoring status, quality profile, metadata profile, root folder, or tags across multiple artists at once.
+- **Options**: shows or hides columns in Table view and adjusts poster/banner size in the grid views.
 
 ## Filters
 
 The **Filter** button narrows the artist list. Built-in filters:
 
-- **All** — every artist in the library, monitored or not.
-- **Monitored** — artists with monitoring enabled.
-- **Unmonitored** — artists with monitoring disabled. Lidarr won't search for new releases from these artists.
-- **Missing** — monitored artists that have at least one monitored album with no files on disk.
-- **Wanted** — monitored artists with at least one monitored album that's missing and past its release date.
-- **Cutoff Unmet** — artists where at least one album exists on disk but hasn't yet reached the quality target set in its Quality Profile.
-- **No Metadata Profile** — artists not assigned to any metadata profile.
-- **Custom Filters** — you can build and save your own filters against any combination of artist fields (monitored status, quality profile, metadata profile, path, tags, added date, and more).
+- **All**: every artist in the library, monitored or not.
+- **Monitored**: artists with monitoring enabled.
+- **Unmonitored**: artists with monitoring disabled. Lidarr won't search for new releases from these artists.
+- **Missing**: monitored artists that have at least one monitored album with no files on disk.
+- **Wanted**: monitored artists with at least one monitored album that's missing and past its release date.
+- **Cutoff Unmet**: artists where at least one album exists on disk but hasn't yet reached the quality target set in its Quality Profile.
+- **No Metadata Profile**: artists not assigned to any metadata profile.
+- **Custom Filters**: you can build and save your own filters against any combination of artist fields (monitored status, quality profile, metadata profile, path, tags, added date, and more).
 
 ## Artist detail
 
@@ -60,11 +60,11 @@ The Add New tab is where you search for and add artists to Lidarr. Search by nam
 
 When adding an artist you will set:
 
-- **Root Folder** — the parent directory under which Lidarr will create the artist's folder.
-- **Quality Profile** — the target quality and upgrade rules for this artist's files.
-- **Metadata Profile** — which release group types (Album, Single, EP, etc.) and statuses to include in the artist's library.
-- **Monitored** — whether Lidarr should actively search for missing albums.
-- **Start Search for Missing Albums** — triggers an immediate search after adding, rather than waiting for the next scheduled search.
+- **Root Folder**: the parent directory under which Lidarr will create the artist's folder.
+- **Quality Profile**: the target quality and upgrade rules for this artist's files.
+- **Metadata Profile**: which release group types (Album, Single, EP, etc.) and statuses to include in the artist's library.
+- **Monitored**: whether Lidarr should actively search for missing albums.
+- **Start Search for Missing Albums**: triggers an immediate search after adding, rather than waiting for the next scheduled search.
 
 # Library Import
 
