@@ -2,7 +2,7 @@
 title: Lidarr Settings
 description: Complete configuration guide for Lidarr settings including media management, profiles, quality definitions, and metadata preferences
 published: true
-date: 2026-05-03T14:25:38.438Z
+date: 2026-05-06T19:46:24.645Z
 tags: lidarr, settings, configuration, quality, profiles, metadata, media
 editor: markdown
 dateCreated: 2021-06-14T21:36:07.513Z
@@ -381,3 +381,11 @@ Tags are particularly useful for:
 - Assigning a non-default delay profile to a subset of artists.
 - Restricting a release profile to certain artists.
 - Tracking which import list added an artist.
+
+> Tags don't affect quality profiles or metadata profiles. Assign those directly to each artist.
+{.is-info}
+
+
+# UI
+
+{#ui}
