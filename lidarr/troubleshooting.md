@@ -2,7 +2,7 @@
 title: Lidarr Troubleshooting
 description: Common issues, error codes, and solutions for troubleshooting Lidarr installation, configuration, and operational problems
 published: true
-date: 2026-05-03T14:15:06.955Z
+date: 2026-05-06T20:06:21.422Z
 tags: lidarr, troubleshooting, support, issues, debugging, errors
 editor: markdown
 dateCreated: 2021-06-14T21:36:46.193Z
@@ -10,7 +10,7 @@ dateCreated: 2021-06-14T21:36:46.193Z
 
 # Asking for Help
 
-Need help? That's okay; everyone needs assistance sometimes. You can get real-time help via chat on Discord.
+Need help? That's okay; everyone needs help sometimes. You can get real-time help via chat on Discord.
 
 - [<i class="fab fa-discord"></i>&emsp;Discord *Official Lidarr Discord*](https://lidarr.audio/discord)
 {.links-list}
@@ -49,9 +49,9 @@ To provide good and useful logs for sharing:
 
 **Warnings:**
 
-- **Don't use [pastebin.com](https://pastebin.com) as their filters have a tendency to block the logs.
+- **Don't use [pastebin.com](https://pastebin.com) as their filters tend to block the logs.
 - Don't use [pastebin.pl](https://pastebin.pl) as their site is frequently not accessible.
-- Don't use [JustPasteIt](https://justpaste.it/) as their site doesn't facilitate reviewing logs.
+- Don't use [JustPasteIt](https://justpaste.it/) as their site doesn't support reviewing logs.
 - Don't upload your log as a file
 - Don't upload and share your logs via Google Drive, Dropbox, or any other site not noted above.
 - Don't archive (zip, tar (tarball), 7zip, etc.) your logs.
@@ -61,8 +61,8 @@ To provide good and useful logs for sharing:
 
 - When using [0bin](https://0bin.net/), be sure to disable colorization and don't burn after reading.
 
-- Alternatively If you're looking for a specific entry in an old log file but aren't sure which one you can use N++. You can use the Notepad++ "Find in Files" function to search old log files as needed.
-- **Unix Only:** Alternatively If you're looking for a specific entry in an old log file but aren't sure which one you can use grep. For example if you want to find information about the movie/show/book/song/indexer "Shooter" you can run the following command `grep -inr -C 100 -e 'Shooter' /path/to/logs/*.trace*.txt` If your [Appdata Directory](/lidarr/appdata-directory) is in your home folder then you'd run: `grep -inr -C 100 -e 'Shooter' /home/$User/.config/logs/*.trace*.txt`
+- Or if you're looking for a specific entry in an old log file but aren't sure which one you can use N++. You can use the Notepad++ "Find in Files" function to search old log files as needed.
+- **Unix Only:** Or if you're looking for a specific entry in an old log file but aren't sure which one you can use grep. For example if you want to find information about the movie/show/book/song/indexer "Shooter" you can run the following command `grep -inr -C 100 -e 'Shooter' /path/to/logs/*.trace*.txt` If your [Appdata Directory](/lidarr/appdata-directory) is in your home folder then you'd run: `grep -inr -C 100 -e 'Shooter' /home/$User/.config/logs/*.trace*.txt`
 
 ```none
 
@@ -112,9 +112,9 @@ You can clear log files and the logs database directly from the UI, under System
 
 Lidarr uses rolling log files limited to 1MB each. The current log file is always ,`lidarr.txt`, for the the other files `.0.txt` is the next newest (higher numbers are older). This log file contains `fatal`, `error`, `warn`, and `info` entries.
 
-With Debug log level enabled, additional `lidarr.debug.txt` rolling log files will be present. This log files contains `fatal`, `error`, `warn`, `info`, and `debug` entries. It usually covers a 40h period.
+With Debug log level enabled, extra `lidarr.debug.txt` rolling log files will be present. This log files contains `fatal`, `error`, `warn`, `info`, and `debug` entries. It usually covers a 40h period.
 
-With Trace log level enabled, additional `lidarr.trace.txt` rolling log files will be present. This log files contains `fatal`, `error`, `warn`, `info`, `debug`, and `trace` entries. Due to trace verbosity it only covers a couple of hours at most.
+With Trace log level enabled, extra `lidarr.trace.txt` rolling log files will be present. This log files contains `fatal`, `error`, `warn`, `info`, `debug`, and `trace` entries. Due to trace verbosity it only covers a couple of hours at most.
 
 # Recovering from a Failed Update
 
@@ -175,7 +175,7 @@ When you reach out for help, be sure to read [asking for help](#asking-for-help)
 
 ## Testing the Download Client
 
-Ensure your download clients are running. Start by testing the download client, if it doesn’t work you’ll be able to see details in the trace level logs. You should find a URL you can put into your browser and see if it works. It could be a connection problem, which could indicate a wrong ip, hostname, port or even a firewall blocking access. It might be obvious, like an authentication problem where you’ve gotten the username, password or apikey wrong.
+Ensure your download clients are running. Start by testing the download client, if it doesn’t work you’ll be able to see details in the trace level logs. You should find a URL you can put into your browser and see if it works. It could be a connection problem, which could mean a wrong ip, hostname, port or even a firewall blocking access. It might be obvious, like an authentication problem where you’ve gotten the username, password or apikey wrong.
 
 ## Testing a Download
 
@@ -209,7 +209,7 @@ While mapped network drives like `X:\` are convenient, they aren’t as reliable
 
 ### Docker and user, group, ownership, permissions and paths
 
-Docker adds another layer of complexity that's easy to get wrong, but still end up with a setup that functions, but has various problems. Instead of going over them here, read this wiki article [for these automation software and Docker](/docker-guide) which is all about user, group, ownership, permissions and paths. It isn’t specific to any Docker system, instead it goes over things at a high level so that you can implement them in your own environment.
+Docker adds another layer of complexity that's easy to get wrong, but still end up with a setup that functions, but has various problems. Instead of going over them here, read this wiki article [for these automation software and Docker](/docker-guide) which is all about user, group, ownership, permissions and paths. It isn’t specific to any Docker system, instead it goes over things at a high level so that you can apply them in your own environment.
 
 ### Remote Path Mapping
 
@@ -228,7 +228,7 @@ Thus `/volume3/data` doesn't exist within Lidarr's container or isn't accessible
 - Generally, you only need a remote path map if your download client is on Linux when \*Arr is on Windows or vice versa. A remote path map may also be necessary when mixing Docker and native clients or using a remote server.
 - A remote path map is a DUMB search/replace (where it finds the REMOTE value, replace it with LOCAL value for the specified Host).
 - If the error message about a bad path doesn't contain the REPLACED value, then the path mapping isn't working as you expect. The typical solution is to add and remove the mapping.
-- [See TRaSH's Tutorial for additional information regarding remote path mapping](https://trash-guides.info/Radarr/Radarr-remote-path-mapping/)
+- [See TRaSH's Tutorial for more information about remote path mapping](https://trash-guides.info/Radarr/Radarr-remote-path-mapping/)
 
 > If both \*Arr and your Download Client are Docker Containers, you rarely need a remote path map. Review the [Docker Guide](/docker-guide) and/or [follow TRaSH's Tutorial](https://trash-guides.info/hardlinks)
 {.is-info}
@@ -241,10 +241,10 @@ Thus `/volume3/data` doesn't exist within Lidarr's container or isn't accessible
   - You want to sync the incomplete and complete so that when the torrent client does the move, that's reflected locally and all the files are already "there" (even if they're still downloading). Then you want to use hard links because even if it imports before its done, they'll still finish.
   - This way the whole time it downloads, it's syncing, then torrent client moves to tv sub-folder and sync reflects that. That way downloads are mostly there when declared finished. And even if they're not totally done, having the hard link possible means that's still okay.
   - (Optional - if applicable and/or required (for example, remote usenet client)) Configure a custom script to run on import/download/upgrade to remove the remote file
-- Alternatively a remote mount rather than a remote sync setup is significantly less complicated to configure, but typically slowly.
+- Or use a remote mount rather than a remote sync setup — significantly less complicated to configure, but typically slower.
   - Mount your remote storage with sshfs or another network file system protocol
   - Ensure the user and group that \*Arr runs as has read or write access.
-  - Configure a remote path map to find the REMOTE path and replace it with the LOCAL equivalent
+  - Configure a remote path map to find the REMOTE path and replace it with the LOCAL path
 
 ### Permissions on the Library Folder
 
@@ -258,7 +258,7 @@ Don’t forget to check permissions and ownership of the *destination*. It's eas
 
 - For Windows Users this may be due to running as a service:
   - the Windows Service runs under the 'Local Service' account, by default this account doesn't have permissions to access your user's home directory unless you assign permissions manually. This is particularly relevant when using download clients configured to download to your home directory.
-  - 'Local Service' also generally has very limited permissions. It's therefore advisable to install the app as a system tray application if the user can remain logged in. The installer provides this option. See the FAQ for how to convert from a service to tray app.
+  - 'Local Service' also generally has very limited permissions. Install the app as a system tray application instead if the user can remain logged in. The installer provides this option. See the FAQ for how to convert from a service to tray app.
 
 - For Synology Users refer to [SynoCommunity's Permissions Article for their Packages](https://github.com/SynoCommunity/spksrc/wiki/Permission-Management)
 
@@ -277,7 +277,7 @@ Don’t forget to check permissions and ownership of the *source*. It's easy to 
 
 - For Windows Users this may be due to running as a service:
   - the Windows Service runs under the 'Local Service' account, by default this account doesn't have permissions to access your user's home directory unless you assign permissions manually. This is particularly relevant when using download clients configured to download to your home directory.
-  - 'Local Service' also generally has very limited permissions. It's therefore advisable to install the app as a system tray application if the user can remain logged in. The installer provides this option. See the FAQ for how to convert from a service to tray app.
+  - 'Local Service' also generally has very limited permissions. Install the app as a system tray application instead if the user can remain logged in. The installer provides this option. See the FAQ for how to convert from a service to tray app.
 
 - For Synology Users refer to [SynoCommunity's Permissions Article for their Packages](https://github.com/SynoCommunity/spksrc/wiki/Permission-Management)
 
@@ -303,7 +303,7 @@ Lidarr should be setup to use a category so that it only tries to process its ow
 
 ### Packed torrents
 
-Logs will indicate errors like
+Logs will show errors like
 
 ```none
 No files found are eligible for import
@@ -317,7 +317,7 @@ This error also appears if there's no valid media file in the folder.
 
 Repeated downloads have a few causes; one relates to the Indexer restriction in Release Profiles. Because the indexer *isn’t* stored with the data, any preferred word scores are *zero* for media in your library, *but* during “RSS” and search, Lidarr applies them. This gets you into a loop where you download the items again and again because it looks like an upgrade, then isn’t, then shows up again and looks like an upgrade, then isn’t. Don’t restrict your release profile to an indexer.
 
-This may also be due to the fact that the download never actually imports and then is missing from the queue, so a new download is perpetually grabbed and never imported. Please see the various other common problems and troubleshooting steps for this.
+This may also happen because the download never actually imports and then is missing from the queue, so a new download is perpetually grabbed and never imported. Please see the various other common problems and troubleshooting steps for this.
 
 ### Usenet download misses import
 
@@ -398,7 +398,7 @@ mv <foldername...> <foldername>
 
 # Searches Indexers and Trackers
 
-- If you use [Prowlarr](/prowlarr), then you can view the [History](/prowlarr/history) of all queries Prowlarr received and how Prowlarr sent them to the sites. Enable `Parameters` in Prowlarr History => Options. The (i) icon provides additional details.
+- If you use [Prowlarr](/prowlarr), then you can view the [History](/prowlarr/history) of all queries Prowlarr received and how Prowlarr sent them to the sites. Enable `Parameters` in Prowlarr History => Options. The (i) icon provides more details.
 
 ## Turn logging up to trace
 
@@ -454,7 +454,7 @@ The songs aren't monitored.
 
 - Lidarr is searching for `Kikis Delivery Service` but your tracker only has results for `Kiki's Delivery Service`
 - This is due to your tracker not supporting normal standardized searches.
-- The solution is that your tracker's definition's search capabilities need to be updates to indicate it requires and supports `RawSearch`
+- The solution is that your tracker's definition's search capabilities need to be updated to show it requires and supports `RawSearch`
 - Jackett supports the flag, but you need to update the capabilities per indexer. Open a feature request for Jackett to add this functionality for your indexer.
 - Prowlarr supports the flag, but you need to update the capabilities per indexer. Open a feature request for Prowlarr to add this functionality for your indexer.
 
@@ -468,7 +468,7 @@ Sometimes indexers will return completely unrelated results,  will feed in param
 
 ### Query Successful - No Results returned
 
-You receive a message similar to `Query successful, but no results were returned from your indexer. This may be an issue with the indexer or your indexer category settings.`
+You receive a message like `Query successful, but no results were returned from your indexer. This may be an issue with the indexer or your indexer category settings.`
 
 Your indexer returned no results within the categories you configured.
 
@@ -496,7 +496,7 @@ You can still add the album to Lidarr and it will appear in your library, but no
 1. Open the release on [MusicBrainz](https://musicbrainz.org) and edit the track list to add durations. If you don’t have a MusicBrainz account, [creating one](https://musicbrainz.org/register) is free.
 2. Wait for the Servarr metadata server to pick up the change (up to ~1 hour), or use the `!refresh` bot command in the [Lidarr Discord](https://lidarr.audio/discord) `#lidarr-music-requests` channel to force an early refresh.
 3. In Lidarr, go to the artist page and trigger **Artist → Refresh & Scan** to pull in the updated metadata.
-4. Retry the search — Lidarr can now validate sizes and will grab matching releases normally.
+4. Retry the search — Lidarr can now verify sizes and will grab matching releases normally.
 
 > If you can't edit MusicBrainz (for example, the release is locked pending a vote), the only workaround is **Manual Import** — download the files through other means and use Lidarr’s manual import flow to match and move them.
 {.is-info}
@@ -518,7 +518,7 @@ Similarly to rate limits, certain indexers - such as Nyaa - may outright ban an 
 {#jacketts-all-endpoint}
 {#jackett-all-endpoint}
 
-The Jackett `/all` endpoint is convenient, but that's its only benefit. Everything else is potential problems, so add each tracker individually. Alternatively, you may wish to check out the Jackett & NZBHydra2 alternative [Prowlarr](/prowlarr)
+The Jackett `/all` endpoint is convenient, but that's its only benefit. Everything else is potential problems, so add each tracker individually. Or check out the Jackett & NZBHydra2 alternative [Prowlarr](/prowlarr)
 
 [Even Jackett says /all should be avoided and shouldn't be used.](https://github.com/Jackett/Jackett#aggregate-indexers)
 
@@ -527,7 +527,7 @@ Using the all endpoint has no advantages (besides reduced management overhead), 
 - you lose control over indexer specific settings (categories, search modes, etc.)
 - mixing search modes (IMDB, query, etc.) might cause low-quality results
 - you can't use indexer-specific categories (>= 100000).
-- slow indexers will slow down the overall result
+- slow indexers will slow down the result
 - total results cap at 1000
 
 Adding each indexer separately It allows for fine tuning of categories on a per indexer basis, which can be a problem with the `/all` end point if using the wrong category causes errors on some trackers. In , each indexer caps at 1000 results with pagination or 100 without, which means as you add more trackers to Jackett, you’re more likely to clip results. Finally, if *one* of the trackers in `/all` returns an error,  will disable it and now you don’t get any results.
