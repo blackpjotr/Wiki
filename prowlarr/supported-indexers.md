@@ -2,15 +2,15 @@
 title: Prowlarr Supported Indexers
 description: Indexers currently named as supported in the current nightly build of Prowlarr. Other indexers may be available via either Generic Newznab or Generic Torznab.
 published: true
-date: 2026-05-05T02:39:54.251153
+date: 2026-05-08T02:51:06.520553
 tags: prowlarr, indexers, reference
 editor: markdown
-dateCreated: 2026-05-05T02:39:54.251153
+dateCreated: 2026-05-08T02:51:06.520553
 ---
 
 - Supported Trackers and Indexers as of
   - Prowlarr Build `2.3.7.5365` / [Commit: 18fe4ec4955f620013cd61daac8a760e033d8a67](https://github.com/Prowlarr/Prowlarr/commit/18fe4ec4955f620013cd61daac8a760e033d8a67)
-  - [Prowlarr Indexers Commit: c0606965e4963ace263d207afbd79ef1b32e285f](https://github.com/Prowlarr/Indexers/commit/c0606965e4963ace263d207afbd79ef1b32e285f)
+  - [Prowlarr Indexers Commit: 85975c2dadff22b6c85e9b99001c3780068cc487](https://github.com/Prowlarr/Indexers/commit/85975c2dadff22b6c85e9b99001c3780068cc487)
 
 ---
 
@@ -317,7 +317,7 @@ dateCreated: 2026-05-05T02:39:54.251153
 |[Explosiv-World](https://explosiv-world.biz/){#explosiv-world}|Explosiv-World (E-W) is a GERMAN Private Torrent Tracker for MOVIES / TV / GENERAL|German (Germany)|
 |[ExtremeBits](https://extremebits.net/){#extremebits}|ExtremeBits is a Private Torrent Tracker for EXTREME SPORTS|English (United States)|
 |[F1Carreras (API)](https://f1carreras.xyz/){#f1carreras-api}|F1Carreras is a SPANISH Private Torrent Tracker for Motor Racing TV Releases|Spanish (Mexico)|
-|[F1GP](https://f1gp.site/){#f1gp}|F1GP is a Private Torrent Tracker for F1, F2, F3, FE, F1 Academy Racing|English (United States)|
+|[F1GP](https://f1gp.xyz/){#f1gp}|F1GP is a Private Torrent Tracker for F1, F2, F3, FE, F1 Academy Racing|English (United States)|
 |[The Falling Angels](https://tfa.tf/){#thefallingangels}|The Falling Angels (TFA) is a GERMAN Private Torrent Tracker for MOVIES / TV / GENERAL|German (Germany)|
 |[FANO\.IN](https://www.fano.in/){#fanoin}|Fano\.in is a LATVIAN Private Torrent Tracker for 0DAY / GENERAL|Latvian (Latvia)|
 |[Fappaizuri](https://www.fappaizuri.me/){#fappaizuri}|Fappaizuri is a Private Torrent Tracker for HENTAI / JAV|English (United States)|
