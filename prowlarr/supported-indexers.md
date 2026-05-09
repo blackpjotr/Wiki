@@ -2,15 +2,15 @@
 title: Prowlarr Supported Indexers
 description: Indexers currently named as supported in the current nightly build of Prowlarr. Other indexers may be available via either Generic Newznab or Generic Torznab.
 published: true
-date: 2026-05-08T02:51:06.520553
+date: 2026-05-09T02:45:37.137506
 tags: prowlarr, indexers, reference
 editor: markdown
-dateCreated: 2026-05-08T02:51:06.520553
+dateCreated: 2026-05-09T02:45:37.137506
 ---
 
 - Supported Trackers and Indexers as of
   - Prowlarr Build `2.3.7.5365` / [Commit: 18fe4ec4955f620013cd61daac8a760e033d8a67](https://github.com/Prowlarr/Prowlarr/commit/18fe4ec4955f620013cd61daac8a760e033d8a67)
-  - [Prowlarr Indexers Commit: 85975c2dadff22b6c85e9b99001c3780068cc487](https://github.com/Prowlarr/Indexers/commit/85975c2dadff22b6c85e9b99001c3780068cc487)
+  - [Prowlarr Indexers Commit: 26812227b906d3062793398e5c97a4efe94d10e7](https://github.com/Prowlarr/Indexers/commit/26812227b906d3062793398e5c97a4efe94d10e7)
 
 ---
 
@@ -53,7 +53,6 @@ dateCreated: 2026-05-08T02:51:06.520553
 |[FileMood](https://filemood.com/){#filemood}|FileMood is a Public BitTorrent DHT search engine|English (United States)|
 |[Free JAV Torrent](https://www.freejavtorrent.com/){#freejavtorrent}|Free JAV Torrent is a Public tracker for Asian 3X (JAV)|English (United States)|
 |[GamesTorrents](https://www.gamestorrents.app/){#gamestorrents}|GamesTorrents is a SPANISH Public tracker for GAMES|Spanish (Spain)|
-|[ilCorSaRoNeRo](https://ilcorsaronero.link/){#ilcorsaronero}|ilCorSaRoNeRo is an ITALIAN Public site for MOVIES / TV / GENERAL|Italian (Italy)|
 |[Internet Archive](https://archive.org/){#internetarchive}|Internet Archive is a non-profit digital library offering free universal access to books, movies & music, as well as 406 billion archived web pages|English (United States)|
 |[kickasstorrents\.to](https://kickass.torrentbay.st/){#kickasstorrents-to}|kickasstorrents\.to is a Public KickAssTorrent clone for MOVIES / TV / GENERAL|English (United States)|
 |[kickasstorrents\.ws](https://kickass.ws/){#kickasstorrents-ws}|kickasstorrents\.ws is a Public KickAssTorrent clone for MOVIES / TV / GENERAL|English (United States)|
