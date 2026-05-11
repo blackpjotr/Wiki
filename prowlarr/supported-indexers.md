@@ -2,15 +2,15 @@
 title: Prowlarr Supported Indexers
 description: Indexers currently named as supported in the current nightly build of Prowlarr. Other indexers may be available via either Generic Newznab or Generic Torznab.
 published: true
-date: 2026-05-09T02:45:37.137506
+date: 2026-05-11T03:27:45.456415
 tags: prowlarr, indexers, reference
 editor: markdown
-dateCreated: 2026-05-09T02:45:37.137506
+dateCreated: 2026-05-11T03:27:45.456415
 ---
 
 - Supported Trackers and Indexers as of
-  - Prowlarr Build `2.3.7.5365` / [Commit: 18fe4ec4955f620013cd61daac8a760e033d8a67](https://github.com/Prowlarr/Prowlarr/commit/18fe4ec4955f620013cd61daac8a760e033d8a67)
-  - [Prowlarr Indexers Commit: 26812227b906d3062793398e5c97a4efe94d10e7](https://github.com/Prowlarr/Indexers/commit/26812227b906d3062793398e5c97a4efe94d10e7)
+  - Prowlarr Build `2.4.0.5368` / [Commit: 48648342832021707d14037474a5ec887f6b5348](https://github.com/Prowlarr/Prowlarr/commit/48648342832021707d14037474a5ec887f6b5348)
+  - [Prowlarr Indexers Commit: 4abbf8300ed31b548409dd9390a409dd7155a0d6](https://github.com/Prowlarr/Indexers/commit/4abbf8300ed31b548409dd9390a409dd7155a0d6)
 
 ---
 
@@ -291,6 +291,7 @@ dateCreated: 2026-05-09T02:45:37.137506
 |[CrnaBerza2FA](https://www.crnaberza.com/){#crnaberza2fa}|CrnaBerza is a BALKAN Private Torrent Tracker for MOVIES / TV / GENERAL\. This indexer uses cookie login for 2FA|Serbian (Serbia and Montenegro)|
 |[CRT2FA](https://www.cathode-ray.tube/){#crt2fa}|Cathode-Ray\.Tube (CRT) is a Private Torrent Tracker for CLASSIC MOVIES / TV\. This indexer uses cookie login for 2FA|English (United Kingdom)|
 |[cyanbug (大青虫)](https://cyanbug.net/){#cyanbug}|cyanbug (大青虫) is a CHINESE Private Torrent Tracker for MOVIES / TV / GENERAL|Chinese (China)|
+|[CZTeam (API)](https://czteam.me/){#czteam-api}|CZTeam (CZT) is a ROMANIAN Private Torrent Tracker for MOVIES / TV / GENERAL|Romanian (Romania)|
 |[Darkpeers (API)](https://darkpeers.org/){#darkpeers}|Darkpeers is a Private Torrent Tracker for MOVIES / TV / GENERAL|English (United States)|
 |[Das Unerwartete](https://dasunerwartete.biz/){#dasunerwartete}|Das Unerwartete (D-U) is a GERMAN Private Torrent Tracker for MOVIES / TV / GENERAL|German (Germany)|
 |[Das Unerwartete (API)](https://dasunerwartete.biz/){#dasunerwartete-api}|Das Unerwartete (D-U) is a GERMAN Private Torrent Tracker for MOVIES / TV / GENERAL\. This is the API version|German (Germany)|
@@ -562,6 +563,7 @@ dateCreated: 2026-05-09T02:45:37.137506
 |[SpeedCD](https://speed.cd/){#speedcd}|Your home now!|English (United States)|
 |[Speedmaster HD](https://speedmaster-hd.net/){#speedmasterhd}|Speedmaster HD is a GERMAN Time based Torrent Tracker for MOVIES / TV|German (Germany)|
 |[Spirit of Revolution](https://sor-next.org/){#spiritofrevolution}|Spirit of Revolution is a GERMAN Time based Torrent Tracker for 0DAY|German (Germany)|
+|[SportsCora (API)](https://sportscora.com/){#sportscora}|SportsCora is a Private Torrent Tracker for SPORTS|English (United States)|
 |[SportsCult](https://sportscult.org/){#sportscult}|SportsCult is a Private Torrent Tracker for SPORTS|English (United States)|
 |[SpringSunday](https://springsunday.net/){#springsunday}|SpringSunday (SSD) is a CHINESE Private Torrent Tracker for HD MOVIES / TV / GENERAL|Chinese (China)|
 |[SunnyPT](https://sunnypt.top/){#sunnypt}|SunnyPT is a CHINESE Private Torrent Tracker for MOVIES / TV|Chinese (China)|
