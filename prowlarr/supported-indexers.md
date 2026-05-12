@@ -2,15 +2,15 @@
 title: Prowlarr Supported Indexers
 description: Indexers currently named as supported in the current nightly build of Prowlarr. Other indexers may be available via either Generic Newznab or Generic Torznab.
 published: true
-date: 2026-05-11T03:27:45.456415
+date: 2026-05-12T02:53:09.018010
 tags: prowlarr, indexers, reference
 editor: markdown
-dateCreated: 2026-05-11T03:27:45.456415
+dateCreated: 2026-05-12T02:53:09.018010
 ---
 
 - Supported Trackers and Indexers as of
   - Prowlarr Build `2.4.0.5368` / [Commit: 48648342832021707d14037474a5ec887f6b5348](https://github.com/Prowlarr/Prowlarr/commit/48648342832021707d14037474a5ec887f6b5348)
-  - [Prowlarr Indexers Commit: 4abbf8300ed31b548409dd9390a409dd7155a0d6](https://github.com/Prowlarr/Indexers/commit/4abbf8300ed31b548409dd9390a409dd7155a0d6)
+  - [Prowlarr Indexers Commit: 48249dbac03e4149496ef26b48286e5c7868f81d](https://github.com/Prowlarr/Indexers/commit/48249dbac03e4149496ef26b48286e5c7868f81d)
 
 ---
 
@@ -99,7 +99,7 @@ dateCreated: 2026-05-11T03:27:45.456415
 |[Torrent Oyun indir](https://0.torrentoyunindir.com/){#torrentoyunindir}|Torrent Oyun indir is a TURKISH Public torrent site for GAMES|Turkish (Turkey)|
 |[torrent-pirat](http://www.torrent-pirat.com/){#torrent-pirat}|torrent-pirat is a RUSSIAN Public Torrent Tracker for 3X|Russian (Russia)|
 |Torrent RSS Feed{#torrent-rss-feed}|Generic RSS Feed containing torrents|English (United States)|
-|[Torrent9](https://www.torrent9.club/){#torrent9}|Torrent9 is a FRENCH Public site for MOVIES / TV / GENERAL|French (France)|
+|[Torrent9](https://www6.torrent9.to/){#torrent9}|Torrent9 is a FRENCH Public site for MOVIES / TV / GENERAL|French (France)|
 |[Torrent\[CORE\]](https://torrentcore.xyz/){#torrentcore}|Torrent\[CORE\] is a Public DHT Crawler|English (United States)|
 |[TorrentDownload](https://www.torrentdownload.info/){#torrentdownload}|TorrentDownload is a Public torrent meta-search engine|English (United States)|
 |[TorrentGalaxyClone](https://torrentgalaxy.one/){#torrentgalaxyclone}|TorrentGalaxyClone is a Public site for MOVIES / TV / GENERAL|English (United States)|
@@ -107,8 +107,8 @@ dateCreated: 2026-05-11T03:27:45.456415
 |[TorrentProject2](https://torrentproject2.net/){#torrentproject2}|TorrentProject2 is a Public torrent meta-search engine|English (United States)|
 |[TorrentQQ](https://torrentqq417.com/){#torrentqq}|TorrentQQ (토렌트큐큐) is a Public KOREAN tracker for Korean media|Korean (Korea)|
 |[TorrentsCSV](https://torrents-csv.com/){#torrentscsv}|Torrents\.csv is a self-hostable open source torrent search engine and database|English (United States)|
-|[Torrentsome](https://torrentsome242.com/){#torrentsome}|Torrentsome is a KOREAN Public tracker for Korean media|Korean (Korea)|
-|[Torrenttip](https://torrenttip223.top/){#torrenttip}|Torrenttip (토렌트팁) is a Public KOREAN tracker for Korean media|Korean (Korea)|
+|[Torrentsome](https://torrentsome244.com/){#torrentsome}|Torrentsome is a KOREAN Public tracker for Korean media|Korean (Korea)|
+|[Torrenttip](https://torrenttip225.top/){#torrenttip}|Torrenttip (토렌트팁) is a Public KOREAN tracker for Korean media|Korean (Korea)|
 |[U3C3](https://u3c3.com/){#u3c3}|U3C3 is a CHINESE Public tracker focused on 3X Eastern Asian media|Chinese (China)|
 |[Uindex](https://uindex.org/){#uindex}|Uindex is a Public Torrent Tracker for MOVIES / TV / MUSIC / GENERAL|English (United States)|
 |[UzTracker](https://uztracker.me/){#uztracker}|UzTracker is an UZBEK Public Torrent Tracker for MOVIES / TV / GENERAL|Russian (Russia)|
@@ -322,7 +322,6 @@ dateCreated: 2026-05-11T03:27:45.456415
 |[FANO\.IN](https://www.fano.in/){#fanoin}|Fano\.in is a LATVIAN Private Torrent Tracker for 0DAY / GENERAL|Latvian (Latvia)|
 |[Fappaizuri](https://www.fappaizuri.me/){#fappaizuri}|Fappaizuri is a Private Torrent Tracker for HENTAI / JAV|English (United States)|
 |[Fappaizuri2FA](https://www.fappaizuri.me/){#fappaizuri2fa}|Fappaizuri is a Private Torrent Tracker for HENTAI / JAV\. This indexer uses cookie login for 2FA|English (United States)|
-|[FearNoPeer](https://fearnopeer.com/){#fearnopeer}|FearNoPear is a Private Torrent Tracker for MOVIES / TV / GENERAL|English (United States)|
 |[Femdomcult](https://femdomcult.org/){#femdomcult}|Femdomcult is a Private Torrent Tracker for FETISH 3X|English (United States)|
 |[FileList\.io](https://filelist.io/){#filelist.io}|FileList (FL) is a ROMANIAN Private Torrent Tracker for 0DAY / GENERAL|English (United States)|
 |[FinElite](https://finelite.org/){#finelite}|FinElite (FE) is a FINNISH Private Torrent Tracker for MOVIES / TV / GENERAL|Finnish (Finland)|
