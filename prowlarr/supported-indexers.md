@@ -2,15 +2,15 @@
 title: Prowlarr Supported Indexers
 description: Indexers currently named as supported in the current nightly build of Prowlarr. Other indexers may be available via either Generic Newznab or Generic Torznab.
 published: true
-date: 2026-05-12T02:53:09.018010
+date: 2026-05-13T02:57:27.544708
 tags: prowlarr, indexers, reference
 editor: markdown
-dateCreated: 2026-05-12T02:53:09.018010
+dateCreated: 2026-05-13T02:57:27.544708
 ---
 
 - Supported Trackers and Indexers as of
   - Prowlarr Build `2.4.0.5368` / [Commit: 48648342832021707d14037474a5ec887f6b5348](https://github.com/Prowlarr/Prowlarr/commit/48648342832021707d14037474a5ec887f6b5348)
-  - [Prowlarr Indexers Commit: 48249dbac03e4149496ef26b48286e5c7868f81d](https://github.com/Prowlarr/Indexers/commit/48249dbac03e4149496ef26b48286e5c7868f81d)
+  - [Prowlarr Indexers Commit: 85a2554322eed6459c5e41970baf267f40147ab3](https://github.com/Prowlarr/Indexers/commit/85a2554322eed6459c5e41970baf267f40147ab3)
 
 ---
 
@@ -533,6 +533,7 @@ dateCreated: 2026-05-12T02:53:09.018010
 |[ReelFLiX (API)](https://reelflix.cc/){#reelflix-api}|ReelFLiX (HD4Free, LegacyHD) is a Private Torrent Tracker for HD MOVIES|English (United States)|
 |[RetroFlix](https://retroflix.club/){#retroflix}|RetroFlix (RFX) is a Private Torrent Tracker for Classic Movies / TV / General Releases|English (United States)|
 |[RetroMoviesClub (API)](https://retro-movies.club/){#retromoviesclub-api}|RetroMoviesClub (RMC) is a Private Torrent Tracker for Classic Movies|English (United States)|
+|[RetroToon](https://www.retrotoon.world/){#retrotoon}|RetroToon is a Private Torrent Tracker for ANIMATED MOVIES / TV|English (United States)|
 |[RevolutionTT](https://revott.me/){#revolutiontt}|The Revolution has begun|English (United States)|
 |[RocketHD (API)](https://rocket-hd.cc/){#rockethd}|RocketHD is a GERMAN Private Torrent Tracker for MOVIES / TV|German (Germany)|
 |[Romanian Metal Torrents](https://metal.iplay.ro/){#romanianmetaltorrents}|Romanian Metal Torrents (RMT) is a Private Torrent Tracker dedicated to METAL MUSIC\. This definition is for the English site|English (United States)|
