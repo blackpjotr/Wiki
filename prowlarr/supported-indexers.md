@@ -2,15 +2,15 @@
 title: Prowlarr Supported Indexers
 description: Indexers currently named as supported in the current nightly build of Prowlarr. Other indexers may be available via either Generic Newznab or Generic Torznab.
 published: true
-date: 2026-05-13T02:57:27.544708
+date: 2026-05-16T02:49:47.218005
 tags: prowlarr, indexers, reference
 editor: markdown
-dateCreated: 2026-05-13T02:57:27.544708
+dateCreated: 2026-05-16T02:49:47.218005
 ---
 
 - Supported Trackers and Indexers as of
   - Prowlarr Build `2.4.0.5368` / [Commit: 48648342832021707d14037474a5ec887f6b5348](https://github.com/Prowlarr/Prowlarr/commit/48648342832021707d14037474a5ec887f6b5348)
-  - [Prowlarr Indexers Commit: 85a2554322eed6459c5e41970baf267f40147ab3](https://github.com/Prowlarr/Indexers/commit/85a2554322eed6459c5e41970baf267f40147ab3)
+  - [Prowlarr Indexers Commit: 83c282f2dba9560dddd86deef4586b9954a39740](https://github.com/Prowlarr/Indexers/commit/83c282f2dba9560dddd86deef4586b9954a39740)
 
 ---
 
@@ -72,7 +72,6 @@ dateCreated: 2026-05-13T02:57:27.544708
 |[NewStudio](https://newstudio.tv/){#newstudio}|NewStudio is a RUSSIAN Public site for TV|Russian (Russia)|
 |[Nipponsei](https://nipponsei.minglong.org/){#nipponsei}|Nipponsei is a Public site for MUSIC fresh from JAPAN|English (United States)|
 |[NoNaMe Club](https://nnmclub.to/){#noname-club}|NoNaMe Club (NNM-Club) is a RUSSIAN Public Tracker for MOVIES / TV / MUSIC|Russian (Russia)|
-|[NorTorrent](https://www.torrent9.ml/){#nortorrent}|NorTorrent is a FRENCH Public tracker for MOVIES / TV / GENERAL|French (France)|
 |[Nyaa\.si](https://nyaa.si/){#nyaasi}|Nyaa is a Public torrent site focused on Eastern ASIAN media including anime, manga, literature and music|English (United States)|
 |[OneJAV](https://onejav.com/){#onejav}|OneJAV is a Public tracker for ASIAN 3X (JAV)|English (United States)|
 |[OpenSharing](https://opensharing.org/){#opensharing}|OpenSharing is a RUSSIAN Public Torrent Tracker for 3X|Russian (Russia)|
@@ -172,7 +171,7 @@ dateCreated: 2026-05-13T02:57:27.544708
 |[Rainbow Tracker](https://gaytracker.ru/){#rainbowtracker}|Rainbow Tracker is a RUSSIAN Semi-Private Torrent Tracker for LGBTQ MOVIES / TV|Russian (Russia)|
 |[RGFootball](http://rgfootball.net/){#rgfootball}|RGFootball is a RUSSIAN Sports torrent tracker|Russian (Russia)|
 |[RinTor](https://rintor.org/){#rintor}|RinTor is a Semi-Private Tracker for 3X|Russian (Russia)|
-|[RiperAM](https://riper.online/){#riperam}|RiperAM is a RUSSIAN Semi-Private Torrent Tracker for MOVIES / TV|Russian (Russia)|
+|[RiperAM](https://riperam.org/){#riperam}|RiperAM is a RUSSIAN Semi-Private Torrent Tracker for MOVIES / TV|Russian (Russia)|
 |[RockBox](https://rawkbawx.rocks/){#rockbox}|RockBox Semi-Private Torrent Tracker dedicated to HEAVY METAL/ROCK MUSIC\. This definition is for the English site|English (United States)|
 |[RUDUB](https://r2.rudub.world/){#rudub}|RUDUB (ex-BaibaKoTV) is a RUSSIAN Semi-Private Torrent Tracker for TV|Russian (Russia)|
 |[Rustorka](https://rustorka.com/){#rustorka}|Rustorka is a RUSSIAN Semi-Private Torrent Tracker for MOVIES / TV / GENERAL|Russian (Russia)|
@@ -291,6 +290,7 @@ dateCreated: 2026-05-13T02:57:27.544708
 |[CrnaBerza2FA](https://www.crnaberza.com/){#crnaberza2fa}|CrnaBerza is a BALKAN Private Torrent Tracker for MOVIES / TV / GENERAL\. This indexer uses cookie login for 2FA|Serbian (Serbia and Montenegro)|
 |[CRT2FA](https://www.cathode-ray.tube/){#crt2fa}|Cathode-Ray\.Tube (CRT) is a Private Torrent Tracker for CLASSIC MOVIES / TV\. This indexer uses cookie login for 2FA|English (United Kingdom)|
 |[cyanbug (大青虫)](https://cyanbug.net/){#cyanbug}|cyanbug (大青虫) is a CHINESE Private Torrent Tracker for MOVIES / TV / GENERAL|Chinese (China)|
+|[CyclingArchiveClub](https://cyclingarchive.club/){#cyclingarchiveclub}|CyclingArchiveClub is a Private tracker for Professional road and Cyclocross racing VIDEOS|English (United States)|
 |[CZTeam (API)](https://czteam.me/){#czteam-api}|CZTeam (CZT) is a ROMANIAN Private Torrent Tracker for MOVIES / TV / GENERAL|Romanian (Romania)|
 |[Darkpeers (API)](https://darkpeers.org/){#darkpeers}|Darkpeers is a Private Torrent Tracker for MOVIES / TV / GENERAL|English (United States)|
 |[Das Unerwartete](https://dasunerwartete.biz/){#dasunerwartete}|Das Unerwartete (D-U) is a GERMAN Private Torrent Tracker for MOVIES / TV / GENERAL|German (Germany)|
@@ -497,6 +497,7 @@ dateCreated: 2026-05-13T02:57:27.544708
 |[Polish Torrent (API)](https://polishtorrent.top/){#polishtorrent}|Polish Torrent (PTT) is a POLISH Private Torrent Tracker for MOVIES / TV / GENERAL|Polish (Poland)|
 |[PolishTracker (API)](https://pte.nu/){#polishtracker-api}|PolishTracker is a POLISH Private Torrent Tracker for 0DAY / MOVIES / GENERAL|Polish (Poland)|
 |[Pornbay](https://pornbay.org/){#pornbay}|Pornbay is a Private Torrent Tracker for 3X|English (United States)|
+|[PornBytes (API)](https://pornbytes.site/){#pornbytes-api}|PornBytes is a Private Torrent Tracker for 3X|English (United States)|
 |[Portugas (API)](https://portugas.org/){#portugas-api}|Portugas is a PORTUGUESE Private Torrent Tracker for 0DAY / GENERAL|Portuguese (Portugal)|
 |[PreToMe](https://pretome.info/){#pretome}|PreToMe is a ratioless 0Day/General tracker|English (United States)|
 |[PrivateHD](https://privatehd.to/){#privatehd}|PrivateHD (PHD) is a Private Torrent Tracker for HD MOVIES / TV and the sister-site of AvistaZ, CinemaZ, ExoticaZ, and AnimeZ|English (United States)|
@@ -566,6 +567,7 @@ dateCreated: 2026-05-13T02:57:27.544708
 |[SportsCora (API)](https://sportscora.com/){#sportscora}|SportsCora is a Private Torrent Tracker for SPORTS|English (United States)|
 |[SportsCult](https://sportscult.org/){#sportscult}|SportsCult is a Private Torrent Tracker for SPORTS|English (United States)|
 |[SpringSunday](https://springsunday.net/){#springsunday}|SpringSunday (SSD) is a CHINESE Private Torrent Tracker for HD MOVIES / TV / GENERAL|Chinese (China)|
+|[SugoiMusic](https://sugoimusic.me/){#sugoimusic}|SugoiMusic is a Private Torrent Tracker for ASIAN MUSIC / TV|English (United States)|
 |[SunnyPT](https://sunnypt.top/){#sunnypt}|SunnyPT is a CHINESE Private Torrent Tracker for MOVIES / TV|Chinese (China)|
 |[Superbits](https://superbits.org/){#superbits}|SuperBits (SBS) is a SWEDISH Private Torrent Tracker for MOVIES / TV / GENERAL|Swedish (Sweden)|
 |[Swarmazon (API)](https://swarmazon.club/){#swarmazon-api}|Swarmazon is a Private Torrent Tracker for MOVIES / TV / GENERAL|English (United States)|
@@ -627,6 +629,7 @@ dateCreated: 2026-05-13T02:57:27.544708
 |[WinterSakura](https://wintersakura.net/){#wintersakura}|WinterSakura is a CHINESE Private Torrent Tracker for MOVIES / TV / GENERAL|Chinese (China)|
 |[World-In-HD](https://world-in-hd.net/){#wihd}|World-In-HD is a Private Torrent Tracker\. Your world in HD|French (France)|
 |[World-of-Tomorrow](https://w-o-t.pro/){#world-of-tomorrow}|World-of-Tomorrow is a GERMAN Private tracker|German (Germany)|
+|[Xingtan (杏坛)](https://xingtan.one/){#xingtan}|Xingtan (杏坛) is a CHINESE Torrent Tracker focusing on Medical Resources EBOOKS|Chinese (China)|
 |[Xingwan (星湾)](https://xingwan.cc/){#xingwan}|Xingwan (星湾) is a CHINESE Private Torrent Tracker for MOVIES / TV / GENERAL|Chinese (China)|
 |[Xingyung (星陨阁)](https://pt.xingyungept.org/){#xingyung}|Xingyung (星陨阁) is a CHINESE Private Torrent Tracker for MOVIES / TV / GENERAL|Chinese (China)|
 |[xloli](https://mua.xloli.cc/){#xloli}|xloli (ilolicon PT) is a CHINESE Private Torrent Tracker for LOLICON / MOVIES / 3X|Chinese (China)|
